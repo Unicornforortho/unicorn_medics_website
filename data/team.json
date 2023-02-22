@@ -1,0 +1,102 @@
+{
+  "coreMembers": [
+    {
+      "id": 1,
+      "name": "Dr Vineet Batta",
+      "email": "",
+      "image": ""
+    },
+    {
+      "id": 1,
+      "name": "Dr Malathy C",
+      "email": "",
+      "image": ""
+    },
+    {
+      "id": 1,
+      "name": "Dr Gayathri M",
+      "email": "",
+      "image": ""
+    },
+    {
+      "id": 1,
+      "name": "Mr Soumya Snighdha Kundu",
+      "email": "",
+      "image": ""
+    },
+    {
+      "id": 1,
+      "name": "Dr Srinath K",
+      "email": "",
+      "image": ""
+    },
+    {
+      "id": 1,
+      "name": "Dr Kartik M Varadarajan",
+      "email": "",
+      "image": ""
+    },
+    {
+      "id": 1,
+      "name": "Ms Kiruthika M",
+      "email": "",
+      "image": ""
+    },
+    {
+      "id": 1,
+      "name": "Mr Ramanathan A",
+      "email": "",
+      "image": ""
+    }
+  ],
+  "interns": [
+    {
+      "id": 1,
+      "name": "Shaik Muskin Ali",
+      "email": "",
+      "image": ""
+    },
+    {
+      "id": 1,
+      "name": "Sahithi Nara",
+      "email": "",
+      "image": ""
+    },
+    {
+      "id": 1,
+      "name": "Sheel Patel",
+      "email": "",
+      "image": ""
+    },
+    {
+      "id": 1,
+      "name": "Shaswat Srivastava",
+      "email": "",
+      "image": ""
+    },
+    {
+      "id": 1,
+      "name": "Renu Madhuraj Jadhav",
+      "email": "",
+      "image": ""
+    },
+    {
+      "id": 1,
+      "name": "Tanvi Purwar",
+      "email": "",
+      "image": ""
+    },
+    {
+      "id": 1,
+      "name": "Aakriti Purwar",
+      "email": "",
+      "image": ""
+    },
+    {
+      "id": 1,
+      "name": "Ved Prakash Dubey",
+      "email": "",
+      "image": ""
+    }
+  ]
+}
