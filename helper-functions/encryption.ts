@@ -1,8 +1,8 @@
 import crypto from 'crypto';
 
-const ALGORITHM = 'aes-256-cbc';
-const ENCODING = 'hex';
 const IV_LENGTH = 16;
+const ENCODING = 'hex';
+const ALGORITHM = process.env.ENCRYPTION_ALGORITHM!;
 const KEY = process.env.ENCRYPTION_KEY!;
 
 export const encrypt = (data: string) => {

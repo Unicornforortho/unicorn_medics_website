@@ -40,8 +40,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 errorType: 'PrismaClientValidationError',
                 errorName: error.name,
                 errorMesaage: error.message,
-                errorCause: error.cause,
-                errorStack: error.stack,
               });
             } else if (error instanceof PrismaClientInitializationError) {
               res.status(404).json({
@@ -49,8 +47,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 errorType: 'PrismaClientInitializationError',
                 errorName: error.name,
                 errorMesaage: error.message,
-                errorCause: error.cause,
-                errorStack: error.stack,
               });
             } else if (error instanceof PrismaClientKnownRequestError) {
               res.status(404).json({
@@ -58,9 +54,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 errorType: 'PrismaClientKnownRequestError',
                 errorName: error.name,
                 errorMesaage: error.message,
-                errorCause: error.cause,
-                errorStack: error.stack,
-                errorMeta: error.meta,
               });
             } else {
               res.status(404).json({
@@ -68,8 +61,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 errorType: 'PrismaClientUnknownRequestError',
                 errorName: error.name,
                 errorMesaage: error.message,
-                errorCause: error.cause,
-                errorStack: error.stack,
               });
             }
           });
