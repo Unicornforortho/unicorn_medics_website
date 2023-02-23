@@ -10,8 +10,6 @@ import Layout from '../components/layout';
 
 const inter = Inter({ subsets: ['latin'] });
 
-// If loading a variable font, you don't need to specify the font weight
-
 export default function App(props: AppProps & { colorScheme: ColorScheme }) {
   const { Component, pageProps } = props;
   const [colorScheme, setColorScheme] = useState<ColorScheme>(props.colorScheme);

@@ -17,14 +17,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           },
         })
         .then((data: any) => {
-          res.status(200).json({
-            error: false,
-            response: {
-              name: `${data.firstname} ${data.lastname}`,
-              decryptedPassword: decrypt(data.password),
-            },
-            message: 'Decrypted password returned successfully',
-          });
+          const decryptedPassword = decrypt(data.password);
+          const enteredPassword = req.body.password;
+          if (decryptedPassword === enteredPassword) {
+            res.status(200).json({
+              error: false,
+              response: {
+                name: `${data.firstname} ${data.lastname}`,
+              },
+              message: 'Successfull login',
+            });
+          } else {
+            res.status(404).json({
+              error: true,
+              message: 'Wrong password',
+            });
+          }
         })
         .catch((error: any) => {
           if (error instanceof PrismaClientValidationError) {
