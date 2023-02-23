@@ -15,10 +15,7 @@ const customerSchema = z.object({
     .min(1, 'Email can not be empty')
     .max(128, 'Email can not be longer than 128 characters')
     .email(),
-  password: z
-    .string()
-    .min(8, 'Password should be at least 8 characters long')
-    .max(12, 'Password can not be longer than 12 characters'),
+  password: z.string().min(1, 'Password can not be empty'),
   country: z
     .string()
     .min(1, 'Country can not be empty')
@@ -52,7 +49,7 @@ const customerSchema = z.object({
             };
         }
       },
-    }
+    },
   ),
   phone: z.string().max(10, 'Mobile number can not exceed 10 digits').optional(),
   institution: z.string().max(64, 'Institution can not exceed 10 digits').optional(),

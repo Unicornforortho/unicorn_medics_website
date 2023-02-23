@@ -6,7 +6,6 @@ import {
 } from '@prisma/client/runtime';
 import customer from '../../../zod-schemas/customer';
 import prismaClient from '../../../prisma/client';
-import { encrypt } from '../../../helper-functions/encryption';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
@@ -19,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               firstname: validatedData.firstname,
               lastname: validatedData.lastname,
               email: validatedData.email,
-              password: encrypt(validatedData.password),
+              password: validatedData.password,
               country: validatedData.country,
               speciality: validatedData.speciality,
               phone: validatedData.phone,
@@ -58,8 +57,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             } else {
               res.status(404).json({
                 error: true,
-                errorType: 'PrismaClientUnknownRequestError',
-                errorName: error.name,
                 errorMesaage: error.message,
               });
             }

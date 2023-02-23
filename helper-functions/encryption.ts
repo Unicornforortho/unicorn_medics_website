@@ -2,8 +2,8 @@ import crypto from 'crypto';
 
 const IV_LENGTH = 16;
 const ENCODING = 'hex';
-const ALGORITHM = process.env.ENCRYPTION_ALGORITHM!;
-const KEY = process.env.ENCRYPTION_KEY!;
+const ALGORITHM = process.env.NEXT_PUBLIC_ENCRYPTION_ALGORITHM!;
+const KEY = process.env.NEXT_PUBLIC_ENCRYPTION_KEY!;
 
 export const encrypt = (data: string) => {
   const iv = crypto.randomBytes(IV_LENGTH);
