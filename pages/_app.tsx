@@ -2,9 +2,15 @@ import { useState } from 'react';
 import NextApp, { AppProps, AppContext } from 'next/app';
 import { getCookie, setCookie } from 'cookies-next';
 import Head from 'next/head';
+import { Inter } from '@next/font/google';
 import { MantineProvider, ColorScheme, ColorSchemeProvider, AppShell } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import HeaderMegaMenu from '../components/header';
+import Layout from '../components/layout';
+
+const inter = Inter({ subsets: ['latin'] });
+
+// If loading a variable font, you don't need to specify the font weight
 
 export default function App(props: AppProps & { colorScheme: ColorScheme }) {
   const { Component, pageProps } = props;
@@ -19,7 +25,7 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
   return (
     <>
       <Head>
-        <title>Mantine next example</title>
+        <title>Impro</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
         <link rel="shortcut icon" href="/favicon.svg" />
       </Head>
@@ -28,7 +34,11 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
         <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
           <NotificationsProvider>
             <AppShell header={<HeaderMegaMenu />}>
-            <Component {...pageProps} />
+              <Layout>
+                <main className={inter.className}>
+                  <Component {...pageProps} />
+                </main>
+              </Layout>
             </AppShell>
           </NotificationsProvider>
         </MantineProvider>

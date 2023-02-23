@@ -201,25 +201,25 @@ export default function HeaderMegaMenu() {
             <a href="#" className={classes.link}>
               Collaboators
             </a>
-            <a href="#" className={classes.link}>
+            <a href="/team" className={classes.link}>
               Team
             </a>
-            <a href="#" className={classes.link}>
+            <a href="/iimpro" className={classes.link}>
               IIMPRO
             </a>
-            <a href="#" className={classes.link}>
+            <a href="/research-interest" className={classes.link}>
               Research Interest
             </a>
-            <a href="#" className={classes.link}>
+            <a href="/publications" className={classes.link}>
               Publications
             </a>
-            <a href="#" className={classes.link}>
+            <a href="/join-us" className={classes.link}>
               Join Us
             </a>
-            <a href="#" className={classes.link}>
+            <a href="/gallery" className={classes.link}>
               Gallery
             </a>
-            <a href="#" className={classes.link}>
+            <a href="/contact-us" className={classes.link}>
               Contact Us
             </a>
           </Group>
