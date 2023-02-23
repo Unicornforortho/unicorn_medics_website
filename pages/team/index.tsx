@@ -6,12 +6,12 @@ export default function Collaborators() {
   return (
     <Stack>
       <Stack>
-        <Text fz={56} fw={700}>
+        <Text fz={48} fw={500} mb={15}>
           Core Members
         </Text>
         <Grid>
           {Team.coreMembers.map((coreMember: any) => (
-            <Grid.Col span={3}>
+            <Grid.Col lg={3} md={3} sm={1}>
               <UserInfoIcons
                 avatar="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
                 name={coreMember.name}
@@ -22,12 +22,12 @@ export default function Collaborators() {
         </Grid>
       </Stack>
       <Stack>
-        <Text fz={56} fw={700}>
+        <Text fz={48} fw={500} mb={15}>
           Interns
         </Text>
         <Grid>
           {Team.interns.map((coreMember: any) => (
-            <Grid.Col span={3}>
+            <Grid.Col lg={3} md={3} sm={1}>
               <UserInfoIcons
                 avatar="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
                 name={coreMember.name}

@@ -235,8 +235,8 @@ export default function HeaderMegaMenu() {
                 Register
               </Anchor>
             </Button>
+            <ColorSchemeToggle />
           </Group>
-
           <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />
         </Group>
       </Header>
@@ -275,9 +275,9 @@ export default function HeaderMegaMenu() {
           <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
 
           <Group position="center" grow pb="xl" px="md">
-            <ColorSchemeToggle />
             <Button variant="default">Log in</Button>
             <Button>Sign up</Button>
+            <ColorSchemeToggle />
           </Group>
         </ScrollArea>
       </Drawer>
