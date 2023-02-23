@@ -1,12 +1,10 @@
 import {
   TextInput,
-  Checkbox,
   Anchor,
   Paper,
   Title,
   Text,
   Container,
-  Group,
   Button,
   Progress,
   Popover,
@@ -85,6 +83,20 @@ function PasswordField() {
   );
 }
 
+function handleLogin() {
+  const loginURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`;
+  console.log(loginURL);
+  /*
+  Send Email to this endpoint
+  You will receive users name (can be used for personalized greeting)
+  Along with name, ull get decrypted password for password matching
+  *********************************************************************
+  Later on, we can integrate jwt token for authentication
+  At that time you will send password and email, ill check in the background
+  and send JWT token or error on success or failure respectively
+  */
+}
+
 export default function Login() {
   return (
     <Container size={420}>
@@ -102,15 +114,15 @@ export default function Login() {
       </Text>
 
       <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-        <TextInput label="Email" placeholder="you@mantine.dev" required />
+        <TextInput label="Email" placeholder="yourname@gmail.com" required />
         <PasswordField />
-        <Group position="apart" mt="lg">
+        {/* <Group position="apart" mt="lg">
           <Checkbox label="Remember me" sx={{ lineHeight: 1 }} />
           <Anchor<'a'> onClick={(event) => event.preventDefault()} href="#" size="sm">
             Forgot password?
           </Anchor>
-        </Group>
-        <Button fullWidth mt="xl">
+        </Group> */}
+        <Button fullWidth mt="xl" onClick={handleLogin}>
           Sign in
         </Button>
       </Paper>

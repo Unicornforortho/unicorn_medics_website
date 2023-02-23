@@ -1,12 +1,10 @@
 import {
   TextInput,
-  Checkbox,
   Anchor,
   Paper,
   Title,
   Text,
   Container,
-  Group,
   Button,
   Progress,
   Popover,
@@ -85,6 +83,27 @@ function PasswordField() {
   );
 }
 
+function handleRegister() {
+  const registerURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`;
+  console.log(registerURL);
+  /*
+  Fields required here,
+  fname, lname, email, password, country, speciality (enum)
+  speciality dropdown =>
+    HIP
+    KNEE
+    SHOULDER
+    ELBOW
+    FOOT_AND_ANKLE
+    WRIST
+    FINGER_JOINTS
+    UPPER_LIMB
+    LOWER_LIMB
+  phone and institution are optional
+  password, password2 are required on frontend only, send only password to backend
+  */
+}
+
 export default function Register() {
   return (
     <Container size={420}>
@@ -102,17 +121,11 @@ export default function Register() {
       </Text>
 
       <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-        <TextInput label="Email" placeholder="you@mantine.dev" required />
+        <TextInput label="Email" placeholder="yourname@example.com" required />
         <PasswordField />
         <PasswordField />
-        <Group position="apart" mt="lg">
-          <Checkbox label="Remember me" sx={{ lineHeight: 1 }} />
-          <Anchor<'a'> onClick={(event) => event.preventDefault()} href="#" size="sm">
-            Forgot password?
-          </Anchor>
-        </Group>
-        <Button fullWidth mt="xl">
-          Sign in
+        <Button fullWidth mt="xl" onClick={handleRegister}>
+          Register
         </Button>
       </Paper>
     </Container>
