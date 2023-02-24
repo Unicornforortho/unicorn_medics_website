@@ -12,7 +12,9 @@ import {
 } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
+import { useRouter } from 'next/router';
 import { ColorSchemeToggle } from '../color-scheme-toggle';
+import supabaseClient from '../../supabase';
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -78,10 +80,25 @@ export default function HeaderMegaMenu() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const { classes, theme } = useStyles();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setIsAuthenticated(Boolean(localStorage.getItem('isAuthenticated')));
   }, []);
+
+  const handleSignOut = async () => {
+    try {
+      const { error } = await supabaseClient.auth.signOut();
+      if (error) {
+        throw new Error(error.message);
+      } else {
+        localStorage.clear();
+        router.push('/login');
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <Box pb={120}>
@@ -94,7 +111,7 @@ export default function HeaderMegaMenu() {
             <a href="/iimpro" className={classes.link}>
               IIMPRO
             </a>
-            <a href="#" className={classes.link}>
+            <a href="/collaborators" className={classes.link}>
               Collaboators
             </a>
             <a href="/team" className={classes.link}>
@@ -135,7 +152,7 @@ export default function HeaderMegaMenu() {
                 </Button>
               </>
             ) : (
-              <Button onClick={() => console.log('Signed Out')}>
+              <Button onClick={() => handleSignOut()}>
                 <Anchor<'a'> variant="text" td="none" href="/register" size="sm">
                   Sign Out
                 </Anchor>
