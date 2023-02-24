@@ -10,6 +10,7 @@ import {
   Drawer,
   ScrollArea,
 } from '@mantine/core';
+import { useEffect, useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { ColorSchemeToggle } from '../color-scheme-toggle';
 
@@ -76,6 +77,11 @@ const useStyles = createStyles((theme) => ({
 export default function HeaderMegaMenu() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const { classes, theme } = useStyles();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    setIsAuthenticated(Boolean(localStorage.getItem('isAuthenticated')));
+  }, []);
 
   return (
     <Box pb={120}>
@@ -115,16 +121,26 @@ export default function HeaderMegaMenu() {
           </Group>
 
           <Group className={classes.hiddenMobile}>
-            <Button variant="default">
-              <Anchor<'a'> variant="text" href="/login" size="sm">
-                Log In
-              </Anchor>
-            </Button>
-            <Button>
-              <Anchor<'a'> variant="text" td="none" href="/register" size="sm">
-                Register
-              </Anchor>
-            </Button>
+            {!isAuthenticated ? (
+              <>
+                <Button variant="default">
+                  <Anchor<'a'> variant="text" href="/login" size="sm">
+                    Log In
+                  </Anchor>
+                </Button>
+                <Button>
+                  <Anchor<'a'> variant="text" td="none" href="/register" size="sm">
+                    Register
+                  </Anchor>
+                </Button>
+              </>
+            ) : (
+              <Button onClick={() => console.log('Signed Out')}>
+                <Anchor<'a'> variant="text" td="none" href="/register" size="sm">
+                  Sign Out
+                </Anchor>
+              </Button>
+            )}
             <ColorSchemeToggle />
           </Group>
           <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />

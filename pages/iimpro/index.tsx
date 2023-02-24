@@ -1,20 +1,29 @@
-import { Navbar, Group, Code, ScrollArea, createStyles, Text } from '@mantine/core';
+import { Navbar, Group, Code, ScrollArea, createStyles, Text, Stack } from '@mantine/core';
 import { IconNotes } from '@tabler/icons';
+import { useEffect, useState } from 'react';
 import { LinksGroup } from '../../components/NavbarLinksGroup';
 import { Logo } from '../../components/Logo';
+import useStore from '../../store/store';
+import DropzoneButton from '../../components/dropzone';
 
 const mockdata = [
   {
     label: 'Ankle',
     icon: IconNotes,
     initiallyOpened: false,
-    links: [{ label: 'Ankle I' }, { label: 'Ankle II' }],
+    links: [
+      { label: 'Ankle I', value: 'ANKLE_1' },
+      { label: 'Ankle II', value: 'ANKLE_2' },
+    ],
   },
   {
     label: 'Shoulder',
     icon: IconNotes,
     initiallyOpened: false,
-    links: [{ label: 'Shoulder I' }, { label: 'Shoulder II' }],
+    links: [
+      { label: 'Shoulder I', value: 'SHOULDER_1' },
+      { label: 'Shoulder II', value: 'SHOULDER_2' },
+    ],
   },
 ];
 
@@ -56,7 +65,15 @@ const useStyles = createStyles((theme) => ({
 
 function NavbarNested() {
   const { classes } = useStyles();
+  const store = useStore();
   const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    setIsAuthenticated(Boolean(localStorage.getItem('isAuthenticated')));
+  }, []);
+
+  if (!isAuthenticated) return <Text>Not authenticated</Text>;
 
   return (
     <>
@@ -72,7 +89,12 @@ function NavbarNested() {
           <div className={classes.linksInner}>{links}</div>
         </Navbar.Section>
       </Navbar>
-      <Text>Hello World</Text>
+      <Stack>
+        <Text fw={700} fz={48} mb="md">
+          {store.currentImplantTitle}
+        </Text>
+        <DropzoneButton />
+      </Stack>
     </>
   );
 }
