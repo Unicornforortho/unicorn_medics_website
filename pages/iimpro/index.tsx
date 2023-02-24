@@ -1,10 +1,23 @@
-import { Navbar, Group, Code, ScrollArea, createStyles, Text, Stack } from '@mantine/core';
+import {
+  Navbar,
+  Group,
+  Code,
+  ScrollArea,
+  createStyles,
+  Text,
+  Stack,
+  Loader,
+  Container,
+} from '@mantine/core';
 import { IconNotes } from '@tabler/icons';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { verify } from 'jsonwebtoken';
 import { LinksGroup } from '../../components/NavbarLinksGroup';
 import { Logo } from '../../components/Logo';
 import useStore from '../../store/store';
 import DropzoneButton from '../../components/dropzone';
+import getUserFromEmail from '../../helper-functions/getUserFromEmail';
 
 const mockdata = [
   {
@@ -66,14 +79,44 @@ const useStyles = createStyles((theme) => ({
 function NavbarNested() {
   const { classes } = useStyles();
   const store = useStore();
+  const router = useRouter();
   const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [customerId, setCustomerId] = useState(''); // Use this to save activity in DB
 
   useEffect(() => {
-    setIsAuthenticated(Boolean(localStorage.getItem('isAuthenticated')));
+    const access_token = localStorage.getItem('access_token');
+    if (access_token === null) {
+      localStorage.clear();
+      router.push('/login');
+    } else {
+      try {
+        if (process.env.NEXT_PUBLIC_JWT_SECRET === undefined) {
+          throw new Error('JWT_SECRET is undefined');
+        } else {
+          const SECRET = process.env.NEXT_PUBLIC_JWT_SECRET;
+          const decoded = verify(access_token, SECRET);
+          const { email } = JSON.parse(JSON.stringify(decoded));
+          getUserFromEmail(email).then((userId) => {
+            setCustomerId(userId);
+          });
+          console.log(customerId);
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        localStorage.clear();
+        router.push('/login');
+      }
+    }
   }, []);
 
-  if (!isAuthenticated) return <Text>Not authenticated</Text>;
+  if (!isAuthenticated) {
+    return (
+      <Container fluid>
+        <Loader mx="50%" my="50%" />
+      </Container>
+    );
+  }
 
   return (
     <>

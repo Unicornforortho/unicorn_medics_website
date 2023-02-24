@@ -1,11 +1,19 @@
 import { Text, Container } from '@mantine/core';
-import { useEffect, useState } from 'react';
-import supabaseClient from '../supabase';
+import { useEffect } from 'react';
 
 function Index() {
-  const [user, setUser] = useState(null);
-  const [session, setSession] = useState(null);
-  const [error, setError] = useState(null);
+  function greetByTime(): string {
+    const now = new Date();
+    const hour = now.getHours();
+
+    if (hour >= 6 && hour < 12) {
+      return 'Good morning researcher!';
+    }
+    if (hour >= 12 && hour < 18) {
+      return 'Good afternoon researcher!';
+    }
+    return 'Good evening researcher!';
+  }
 
   useEffect(() => {
     const access_token = localStorage.getItem('access_token');
@@ -22,30 +30,14 @@ function Index() {
         localStorage.setItem('isAuthenticated', 'true');
       }
     }
-    async function fetchSession() {
-      try {
-        const {
-          user: theUser,
-          session: theSession,
-          error: theError,
-        } = await supabaseClient.auth.session();
-        if (error) {
-          setError(theError.message);
-        } else {
-          setUser(theUser);
-          setSession(theSession);
-        }
-      } catch (e: any) {
-        setError(e.message);
-      }
-    }
-    fetchSession();
   });
 
   return (
     <Container fluid>
-      <Text>Hello Guest</Text>
-      <Text>
+      <Text fw={700} fz={48} mb="lg">
+        {greetByTime()}
+      </Text>
+      <Text fz={24}>
         Dr Vineet Batta, MBBS, MS(Orth), MRCS, Dip SEM, FRCS (Orth), MD (Biomed Eng. Research) UCL
         works as Senior Clinical Fellow, Orthopaedic & Trauma Surgeon, Luton & Dunstable University
         NHS Hospital Trust, UK, He is the principal investigator for the project “Automatic

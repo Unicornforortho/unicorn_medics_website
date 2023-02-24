@@ -43,7 +43,6 @@ export default function Login() {
           emailRedirectTo: 'http://localhost:3000/',
         },
       });
-      setLoading(false);
     }
   }
 
