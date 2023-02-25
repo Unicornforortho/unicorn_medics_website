@@ -1,0 +1,12 @@
+.mantine-13jfpqk {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  width: 100vw;
+  box-sizing: border-box;
+  min-height: auto !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  padding-left: calc(var(--mantine-navbar-width, 0px) + 16px);
+  padding-right: calc(var(--mantine-aside-width, 0px) + 16px);
+}

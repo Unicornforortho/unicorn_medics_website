@@ -84,8 +84,15 @@ function NavbarNested() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [customerId, setCustomerId] = useState(''); // Use this to save activity in DB
 
-  useEffect(() => {
-    const access_token = localStorage.getItem('access_token');
+  const testAuthentication = (access_token: any) => {
+    if (access_token === null) {
+      router.push('/login');
+    } else {
+      setIsAuthenticated(true);
+    }
+  };
+
+  const realAuthentication = (access_token: any) => {
     if (access_token === null) {
       localStorage.clear();
       router.push('/login');
@@ -108,6 +115,12 @@ function NavbarNested() {
         router.push('/login');
       }
     }
+  };
+
+  useEffect(() => {
+    const access_token = localStorage.getItem('access_token');
+    testAuthentication(access_token);
+    // realAuthentication(access_token);
   }, []);
 
   if (!isAuthenticated) {

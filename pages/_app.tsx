@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import '../style/xyz.css';
 import NextApp, { AppProps, AppContext } from 'next/app';
 import { getCookie, setCookie } from 'cookies-next';
 import Head from 'next/head';
@@ -31,7 +32,14 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
       <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
         <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
           <NotificationsProvider>
-            <AppShell header={<HeaderMegaMenu />}>
+            <AppShell
+              header={<HeaderMegaMenu />}
+              style={{
+                minHeight: 'auto',
+                paddingBottom: '0px',
+                paddingTop: '0px',
+              }}
+            >
               <Layout>
                 <main className={inter.className}>
                   <Component {...pageProps} />
