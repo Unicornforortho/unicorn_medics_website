@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import { useState } from 'react';
 import '../style/styles.css';
 import NextApp, { AppProps, AppContext } from 'next/app';
@@ -27,6 +28,7 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
         <title>Impro</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
         <link rel="shortcut icon" href="/favicon.svg" />
+        <script src="http://smtpjs.com/v3/smtp.js" />
       </Head>
 
       <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
