@@ -4,7 +4,7 @@ import { Illustration } from '../assets/404-asset';
 const useStyles = createStyles((theme) => ({
   root: {
     paddingTop: 80,
-    paddingBottom: 80,
+    paddingBottom: 40,
   },
 
   inner: {
