@@ -6,15 +6,12 @@ import {
   Text,
   Container,
   Button,
-  Progress,
-  Popover,
-  Box,
+  SimpleGrid,
   Select,
   PasswordInput,
   Loader,
 } from '@mantine/core';
 import { useState } from 'react';
-import { IconX, IconCheck } from '@tabler/icons';
 import { showNotification } from '@mantine/notifications';
 import { useRouter } from 'next/router';
 import { encrypt } from '../../helper-functions/encryption';
@@ -30,48 +27,7 @@ export default function Register() {
   const [phone, setPhone] = useState('');
   const [institution, setInstitution] = useState('');
   const [loading, setLoading] = useState(false);
-  const [popoverOpened, setPopoverOpened] = useState(false);
 
-  function PasswordRequirement({ meets, label }: { meets: boolean; label: string }) {
-    return (
-      <Text
-        color={meets ? 'teal' : 'red'}
-        sx={{ display: 'flex', alignItems: 'center' }}
-        mt={7}
-        size="sm"
-      >
-        {meets ? <IconCheck size={14} /> : <IconX size={14} />} <Box ml={10}>{label}</Box>
-      </Text>
-    );
-  }
-
-  const requirements = [
-    { re: /[0-9]/, label: 'Includes number' },
-    { re: /[a-z]/, label: 'Includes lowercase letter' },
-    { re: /[A-Z]/, label: 'Includes uppercase letter' },
-    { re: /[$&+,:;=?@#|'<>.^*()%!-]/, label: 'Includes special symbol' },
-  ];
-
-  function getStrength(pass: string) {
-    let multiplier = pass.length > 5 ? 0 : 1;
-    requirements.forEach((requirement) => {
-      if (!requirement.re.test(pass)) {
-        multiplier += 1;
-      }
-    });
-    return Math.max(100 - (100 / (requirements.length + 1)) * multiplier, 10);
-  }
-
-  const checks = requirements.map((requirement, index) => (
-    <PasswordRequirement
-      key={index}
-      label={requirement.label}
-      meets={requirement.re.test(password)}
-    />
-  ));
-
-  const strength = getStrength(password);
-  const color = strength === 100 ? 'teal' : strength > 50 ? 'yellow' : 'red';
   const router = useRouter();
 
   async function handleRegister() {
@@ -144,13 +100,8 @@ export default function Register() {
   }
 
   return (
-    <Container size={420}>
-      <Title
-        align="center"
-        sx={(theme) => ({ fontFamily: `Greycliff CF, ${theme.fontFamily}`, fontWeight: 900 })}
-      >
-        Welcome back!
-      </Title>
+    <Container size={520}>
+      <Title align="center">Welcome back!</Title>
       <Text color="dimmed" size="sm" align="center" mt={5}>
         Already have an account?{' '}
         <Anchor<'a'> href="/login" size="sm">
@@ -159,20 +110,22 @@ export default function Register() {
       </Text>
 
       <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-        <TextInput
-          label="FirstName"
-          placeholder="John"
-          required
-          value={fname}
-          onChange={(event: any) => setFname(event.currentTarget.value)}
-        />
-        <TextInput
-          label="LastName"
-          placeholder="Doe"
-          required
-          value={lname}
-          onChange={(event: any) => setLname(event.currentTarget.value)}
-        />
+        <SimpleGrid cols={2} spacing={10}>
+          <TextInput
+            label="FirstName"
+            placeholder="John"
+            required
+            value={fname}
+            onChange={(event: any) => setFname(event.currentTarget.value)}
+          />
+          <TextInput
+            label="LastName"
+            placeholder="Doe"
+            required
+            value={lname}
+            onChange={(event: any) => setLname(event.currentTarget.value)}
+          />
+        </SimpleGrid>
         <TextInput
           label="Email"
           placeholder="yourname@example.com"
@@ -188,7 +141,7 @@ export default function Register() {
           onChange={(event: any) => setCountry(event.currentTarget.value)}
         />
         <Select
-          label="Your favorite framework/library"
+          label="Speciality"
           placeholder="Mention your speciality"
           data={[
             { value: 'HIP', label: 'Hip' },
@@ -219,58 +172,22 @@ export default function Register() {
           value={institution}
           onChange={(event: any) => setInstitution(event.currentTarget.value)}
         />
-        <div style={{ maxWidth: 340, margin: 'auto' }}>
-          <Popover opened={popoverOpened} position="bottom" width="target" transition="pop">
-            <Popover.Target>
-              <div
-                onFocusCapture={() => setPopoverOpened(true)}
-                onBlurCapture={() => setPopoverOpened(false)}
-              >
-                <PasswordInput
-                  withAsterisk
-                  label="Your password"
-                  placeholder="Your password"
-                  value={password}
-                  onChange={(event: any) => setPassword(event.currentTarget.value)}
-                />
-              </div>
-            </Popover.Target>
-            <Popover.Dropdown>
-              <Progress color={color} value={strength} size={5} style={{ marginBottom: 10 }} />
-              <PasswordRequirement
-                label="Includes at least 8 characters"
-                meets={password.length > 7}
-              />
-              {checks}
-            </Popover.Dropdown>
-          </Popover>
-        </div>
-        <div style={{ maxWidth: 340, margin: 'auto' }}>
-          <Popover opened={popoverOpened} position="bottom" width="target" transition="pop">
-            <Popover.Target>
-              <div
-                onFocusCapture={() => setPopoverOpened(true)}
-                onBlurCapture={() => setPopoverOpened(false)}
-              >
-                <PasswordInput
-                  withAsterisk
-                  label="Your password"
-                  placeholder="Your password"
-                  value={password2}
-                  onChange={(event: any) => setPassword2(event.currentTarget.value)}
-                />
-              </div>
-            </Popover.Target>
-            <Popover.Dropdown>
-              <Progress color={color} value={strength} size={5} style={{ marginBottom: 10 }} />
-              <PasswordRequirement
-                label="Includes at least 8 characters"
-                meets={password2.length > 7}
-              />
-              {checks}
-            </Popover.Dropdown>
-          </Popover>
-        </div>
+        <SimpleGrid cols={2} spacing={10}>
+          <PasswordInput
+            withAsterisk
+            label="Your password"
+            placeholder="Your password"
+            value={password}
+            onChange={(event: any) => setPassword(event.currentTarget.value)}
+          />
+          <PasswordInput
+            withAsterisk
+            label="Confirm password"
+            placeholder="Your password"
+            value={password2}
+            onChange={(event: any) => setPassword2(event.currentTarget.value)}
+          />
+        </SimpleGrid>
         <Button fullWidth mt="xl" onClick={handleRegister}>
           {loading ? <Loader variant="dots" color="white" /> : 'Register'}
         </Button>

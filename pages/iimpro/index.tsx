@@ -7,8 +7,10 @@ import {
   Stack,
   Loader,
   Container,
+  Card,
   Button,
   Box,
+  SimpleGrid,
   Image,
 } from '@mantine/core';
 import { useEffect, useState, useRef } from 'react';
@@ -21,6 +23,7 @@ import { LinksGroup } from '../../components/NavbarLinksGroup';
 import { Logo } from '../../components/Logo';
 import useStore from '../../store/store';
 import getUserFromEmail from '../../helper-functions/get-user-from-email';
+import StatsRingCard from '../../components/prediction-output';
 
 const mockdata = [
   {
@@ -135,7 +138,6 @@ function NavbarNested() {
           getUserFromEmail(email).then((userId) => {
             setCustomerId(userId);
           });
-          console.log(customerId);
           setIsAuthenticated(true);
         }
       } catch (error) {
@@ -270,7 +272,7 @@ function NavbarNested() {
                 </Dropzone.Idle>
               </Group>
 
-              <Text align="center" weight={700} size="lg" mt="xl">
+              <Text align="center" weight={700} size="lg" mt="lg">
                 <Dropzone.Accept>Drop files here</Dropzone.Accept>
                 <Dropzone.Reject>Image file less than 30mb</Dropzone.Reject>
                 <Dropzone.Idle>Upload</Dropzone.Idle>
@@ -281,39 +283,47 @@ function NavbarNested() {
               </Text>
             </div>
           </Dropzone>
-
           <Button
             className={classes.control}
             size="md"
             radius="xl"
             onClick={() => openRef.current?.()}
           >
-            Select files
+            Select file
           </Button>
         </div>
-        {file && (
-          <Box mt={50}>
-            <div style={{ width: 240, marginLeft: 'auto', marginRight: 'auto' }}>
+        <SimpleGrid cols={2}>
+          {file ? (
+            <Card withBorder p="xl" radius="md">
               <Image
                 src={imageURL}
                 radius="md"
                 alt="Random unsplash image"
-                style={{ width: '100%' }}
+                height="150px"
+                width="150px"
+                ml="auto"
+                mr="auto"
               />
-            </div>
-          </Box>
-        )}
-        {prediction && confidence && (
-          <Box mt={50}>
-            <Text size="lg" align="center">
-              Predicted implant is <b>{labelToImplant[store.currentImplantValue][prediction]}</b>.
-            </Text>
-            <Text size="lg" align="center">
-              Confidence - {confidence} %
-            </Text>
-          </Box>
-        )}
-        <Button mx="calc(50% - 100px)" mt={50} uppercase onClick={() => handlePredict()}>
+            </Card>
+          ) : (
+            <Card withBorder p="xl" radius="md">
+              <h1>No image</h1>
+            </Card>
+          )}
+          {prediction && confidence ? (
+            <Box>
+              <Text size="lg" align="center">
+                Predicted implant is <b>{labelToImplant[store.currentImplantValue][prediction]}</b>.
+              </Text>
+              <Text size="lg" align="center">
+                Confidence - {confidence} %
+              </Text>
+            </Box>
+          ) : (
+            <StatsRingCard title="Test" completed={100} total={100} />
+          )}
+        </SimpleGrid>
+        <Button mx="calc(50% - 100px)" mt={10} uppercase onClick={() => handlePredict()}>
           predict
         </Button>
       </Stack>

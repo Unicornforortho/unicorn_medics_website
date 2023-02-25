@@ -13,6 +13,7 @@ import {
 import { useEffect, useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { ColorSchemeToggle } from '../color-scheme-toggle';
 import supabaseClient from '../../supabase';
 
@@ -105,36 +106,36 @@ export default function HeaderMegaMenu() {
       <Header height={60} px="md">
         <Group position="apart" sx={{ height: '100%' }}>
           <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
-            <a href="/" className={classes.link}>
+            <Link href="/" className={classes.link}>
               Home
-            </a>
-            <a href="/iimpro" className={classes.link}>
+            </Link>
+            <Link href="/iimpro" className={classes.link}>
               IIMPRO
-            </a>
-            <a href="/collaborators" className={classes.link}>
+            </Link>
+            <Link href="/collaborators" className={classes.link}>
               Collaboators
-            </a>
-            <a href="/team" className={classes.link}>
+            </Link>
+            <Link href="/team" className={classes.link}>
               Team
-            </a>
-            <a href="/impro" className={classes.link}>
+            </Link>
+            <Link href="/impro" className={classes.link}>
               Impro
-            </a>
-            <a href="/research-interest" className={classes.link}>
+            </Link>
+            <Link href="/research-interest" className={classes.link}>
               Research Interest
-            </a>
-            <a href="/publications" className={classes.link}>
+            </Link>
+            <Link href="/publications" className={classes.link}>
               Publications
-            </a>
-            <a href="/join-us" className={classes.link}>
+            </Link>
+            <Link href="/join-us" className={classes.link}>
               Join Us
-            </a>
-            <a href="/gallery" className={classes.link}>
+            </Link>
+            <Link href="/gallery" className={classes.link}>
               Gallery
-            </a>
-            <a href="/contact-us" className={classes.link}>
+            </Link>
+            <Link href="/contact-us" className={classes.link}>
               Contact Us
-            </a>
+            </Link>
           </Group>
 
           <Group className={classes.hiddenMobile}>
@@ -175,36 +176,36 @@ export default function HeaderMegaMenu() {
       >
         <ScrollArea sx={{ height: 'calc(100vh - 60px)' }} mx="-md">
           <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
-          <a href="/" className={classes.link}>
+          <Link href="/" className={classes.link}>
             Home
-          </a>
-          <a href="/iimpro" className={classes.link}>
+          </Link>
+          <Link href="/iimpro" className={classes.link}>
             IIMPRO
-          </a>
-          <a href="#" className={classes.link}>
+          </Link>
+          <Link href="#" className={classes.link}>
             Collaboators
-          </a>
-          <a href="/team" className={classes.link}>
+          </Link>
+          <Link href="/team" className={classes.link}>
             Team
-          </a>
-          <a href="/impro" className={classes.link}>
+          </Link>
+          <Link href="/impro" className={classes.link}>
             Impro
-          </a>
-          <a href="/research-interest" className={classes.link}>
+          </Link>
+          <Link href="/research-interest" className={classes.link}>
             Research Interest
-          </a>
-          <a href="/publications" className={classes.link}>
+          </Link>
+          <Link href="/publications" className={classes.link}>
             Publications
-          </a>
-          <a href="/join-us" className={classes.link}>
+          </Link>
+          <Link href="/join-us" className={classes.link}>
             Join Us
-          </a>
-          <a href="/gallery" className={classes.link}>
+          </Link>
+          <Link href="/gallery" className={classes.link}>
             Gallery
-          </a>
-          <a href="/contact-us" className={classes.link}>
+          </Link>
+          <Link href="/contact-us" className={classes.link}>
             Contact Us
-          </a>
+          </Link>
 
           <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
 
