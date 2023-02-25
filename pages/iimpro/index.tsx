@@ -9,7 +9,6 @@ import {
   Container,
   Card,
   Button,
-  Box,
   SimpleGrid,
   Image,
 } from '@mantine/core';
@@ -90,15 +89,30 @@ const useStyles = createStyles((theme) => ({
     paddingBottom: 50,
   },
 
-  icon: {
-    color: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[4],
-  },
-
   control: {
     position: 'absolute',
     width: 250,
     left: 'calc(50% - 125px)',
     bottom: -20,
+  },
+
+  card: {
+    position: 'relative',
+    overflow: 'visible',
+    padding: theme.spacing.xl,
+    paddingTop: theme.spacing.xl * 1.5 + 20,
+  },
+
+  icon: {
+    position: 'absolute',
+    top: -20,
+    left: 'calc(50% - 30px)',
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[4],
+  },
+
+  title: {
+    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+    lineHeight: 1,
   },
 }));
 
@@ -111,7 +125,9 @@ function NavbarNested() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [customerId, setCustomerId] = useState(''); // Use this to save activity in DB
   const [file, setFile] = useState<any>(null);
-  const [imageURL, setImageURL] = useState<any>(null);
+  const [imageURL, setImageURL] = useState<any>(
+    'https://nearfile.com/wp-content/uploads/2020/10/No-Image-Available.jpg',
+  );
   const [prediction, setPrediction] = useState<any>(null);
   const [confidence, setConfidence] = useState<any>(null);
 
@@ -155,7 +171,7 @@ function NavbarNested() {
       setImageURL(url);
     } else {
       setFile(null);
-      setImageURL(null);
+      setImageURL('https://nearfile.com/wp-content/uploads/2020/10/No-Image-Available.jpg');
     }
   };
 
@@ -176,6 +192,10 @@ function NavbarNested() {
         setConfidence(conf.toFixed(2));
       })
       .catch(() => {
+        setFile(null);
+        setPrediction(null);
+        setConfidence(null);
+        setImageURL('https://nearfile.com/wp-content/uploads/2020/10/No-Image-Available.jpg');
         showNotification({
           title: 'Internal Server Error',
           message: 'Please try again later',
@@ -293,37 +313,64 @@ function NavbarNested() {
           </Button>
         </div>
         <SimpleGrid cols={2}>
-          {file ? (
-            <Card withBorder p="xl" radius="md">
-              <Image
-                src={imageURL}
-                radius="md"
-                alt="Random unsplash image"
-                height="150px"
-                width="150px"
-                ml="auto"
-                mr="auto"
+          <Card
+            withBorder
+            p="xl"
+            radius="md"
+            style={{
+              height: '225px',
+            }}
+          >
+            <Image
+              src={imageURL}
+              radius="md"
+              alt="Random unsplash image"
+              height="175px"
+              width="175px"
+              ml="auto"
+              mr="auto"
+            />
+          </Card>
+          {prediction && confidence ? (
+            <Card
+              withBorder
+              p="xl"
+              radius="md"
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '225px',
+              }}
+            >
+              <StatsRingCard
+                title={labelToImplant[store.currentImplantValue][prediction]}
+                completed={parseFloat(confidence)}
+                total={100}
               />
             </Card>
           ) : (
-            <Card withBorder p="xl" radius="md">
-              <h1>No image</h1>
+            <Card
+              withBorder
+              p="xl"
+              radius="md"
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Text align="center">Upload an Image to make the prediction</Text>
             </Card>
           )}
-          {prediction && confidence ? (
-            <Box>
-              <Text size="lg" align="center">
-                Predicted implant is <b>{labelToImplant[store.currentImplantValue][prediction]}</b>.
-              </Text>
-              <Text size="lg" align="center">
-                Confidence - {confidence} %
-              </Text>
-            </Box>
-          ) : (
-            <StatsRingCard title="Test" completed={100} total={100} />
-          )}
         </SimpleGrid>
-        <Button mx="calc(50% - 100px)" mt={10} uppercase onClick={() => handlePredict()}>
+        <Button
+          disabled={file === null}
+          mx="calc(50% - 100px)"
+          mt={10}
+          uppercase
+          onClick={() => handlePredict()}
+        >
           predict
         </Button>
       </Stack>

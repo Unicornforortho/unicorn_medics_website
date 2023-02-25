@@ -40,11 +40,26 @@ export default function StatsRingCard({ title, completed, total }: StatsRingCard
   const { classes, theme } = useStyles();
 
   return (
-    <Card withBorder p="xl" radius="md" className={classes.card}>
+    <Card withBorder p="xl" radius="md" className={classes.card} w="100%">
       <SimpleGrid cols={2}>
-        <Text size="xl">{title}</Text>
+        <Text
+          size="xl"
+          align="center"
+          fz={24}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+          }}
+        >
+          {title}
+        </Text>
         <RingProgress
+          style={{
+            marginLeft: 'calc(50% - 75px)',
+          }}
           roundCaps
+          className={classes.ring}
           thickness={6}
           size={150}
           sections={[{ value: (completed / total) * 100, color: theme.primaryColor }]}
