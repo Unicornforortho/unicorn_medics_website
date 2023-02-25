@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import '../style/xyz.css';
+import '../style/styles.css';
 import NextApp, { AppProps, AppContext } from 'next/app';
 import { getCookie, setCookie } from 'cookies-next';
 import Head from 'next/head';
