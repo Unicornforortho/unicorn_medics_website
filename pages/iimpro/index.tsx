@@ -1,23 +1,26 @@
 import {
   Navbar,
   Group,
-  Code,
   ScrollArea,
   createStyles,
   Text,
   Stack,
   Loader,
   Container,
+  Button,
+  Box,
+  Image,
 } from '@mantine/core';
-import { IconNotes } from '@tabler/icons';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { verify } from 'jsonwebtoken';
+import { IconCloudUpload, IconX, IconDownload, IconNotes, IconAlertCircle } from '@tabler/icons';
+import { Dropzone, MIME_TYPES } from '@mantine/dropzone';
+import { showNotification } from '@mantine/notifications';
 import { LinksGroup } from '../../components/NavbarLinksGroup';
 import { Logo } from '../../components/Logo';
 import useStore from '../../store/store';
-import DropzoneButton from '../../components/dropzone';
-import getUserFromEmail from '../../helper-functions/getUserFromEmail';
+import getUserFromEmail from '../../helper-functions/get-user-from-email';
 
 const mockdata = [
   {
@@ -25,8 +28,8 @@ const mockdata = [
     icon: IconNotes,
     initiallyOpened: false,
     links: [
-      { label: 'Ankle I', value: 'ANKLE_1' },
-      { label: 'Ankle II', value: 'ANKLE_2' },
+      { label: 'Ankle I', value: 'ankle_one' },
+      { label: 'Ankle II', value: 'ankle_two' },
     ],
   },
   {
@@ -34,8 +37,8 @@ const mockdata = [
     icon: IconNotes,
     initiallyOpened: false,
     links: [
-      { label: 'Shoulder I', value: 'SHOULDER_1' },
-      { label: 'Shoulder II', value: 'SHOULDER_2' },
+      { label: 'Shoulder I', value: 'shoulder_one' },
+      { label: 'Shoulder II', value: 'shoulder_two' },
     ],
   },
 ];
@@ -74,15 +77,40 @@ const useStyles = createStyles((theme) => ({
       theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
     }`,
   },
+  wrapper: {
+    position: 'relative',
+    marginBottom: 30,
+  },
+
+  dropzone: {
+    borderWidth: 1,
+    paddingBottom: 50,
+  },
+
+  icon: {
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[4],
+  },
+
+  control: {
+    position: 'absolute',
+    width: 250,
+    left: 'calc(50% - 125px)',
+    bottom: -20,
+  },
 }));
 
 function NavbarNested() {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   const store = useStore();
   const router = useRouter();
+  const openRef = useRef<() => void>(null);
   const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [customerId, setCustomerId] = useState(''); // Use this to save activity in DB
+  const [file, setFile] = useState<any>(null);
+  const [imageURL, setImageURL] = useState<any>(null);
+  const [prediction, setPrediction] = useState<any>(null);
+  const [confidence, setConfidence] = useState<any>(null);
 
   const testAuthentication = (access_token: any) => {
     if (access_token === null) {
@@ -117,10 +145,62 @@ function NavbarNested() {
     }
   };
 
+  const uploadImage = (files: any) => {
+    setPrediction(null);
+    if (files.length > 0) {
+      setFile(files[0]);
+      const url = URL.createObjectURL(files[0]);
+      setImageURL(url);
+    } else {
+      setFile(null);
+      setImageURL(null);
+    }
+  };
+
+  const handlePredict = () => {
+    setPrediction(null);
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    const requestOptions = {
+      method: 'POST',
+      body: formData,
+    };
+    const url = 'http://localhost:8000/predict/';
+    fetch(url, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        setPrediction(data.result);
+        const conf = parseFloat(data.confidence) * 100;
+        setConfidence(conf.toFixed(2));
+      })
+      .catch(() => {
+        showNotification({
+          title: 'Internal Server Error',
+          message: 'Please try again later',
+          color: 'red',
+          autoClose: 5000,
+          icon: <IconAlertCircle />,
+        });
+      });
+  };
+
+  const labelToImplant: any = {
+    ankle_one: {
+      0: 'Depuy Mobility',
+      1: 'Stryker Star',
+      2: 'Wright Inbone II',
+      3: 'Zimmer Biomet Trabecular Model',
+    },
+  };
+
   useEffect(() => {
     const access_token = localStorage.getItem('access_token');
-    testAuthentication(access_token);
-    // realAuthentication(access_token);
+    const TESTING: boolean = true;
+    if (TESTING) {
+      testAuthentication(access_token);
+    } else {
+      realAuthentication(access_token);
+    }
   }, []);
 
   if (!isAuthenticated) {
@@ -137,7 +217,6 @@ function NavbarNested() {
         <Navbar.Section className={classes.header}>
           <Group position="apart">
             <Logo width={120} />
-            <Code sx={{ fontWeight: 700 }}>v3.1.2</Code>
           </Group>
         </Navbar.Section>
 
@@ -149,7 +228,94 @@ function NavbarNested() {
         <Text fw={700} fz={48} mb="md">
           {store.currentImplantTitle}
         </Text>
-        <DropzoneButton />
+        <div className={classes.wrapper}>
+          <Dropzone
+            openRef={openRef}
+            multiple={false}
+            onReject={() => {
+              showNotification({
+                title: 'Invalid file type',
+                message: 'Please upload a PNG or JPEG file',
+                color: 'red',
+                autoClose: 5000,
+                icon: <IconAlertCircle />,
+              });
+            }}
+            onDrop={(files) => {
+              uploadImage(files);
+            }}
+            className={classes.dropzone}
+            radius="md"
+            accept={[MIME_TYPES.png, MIME_TYPES.jpeg]}
+            maxSize={5 * 1024 ** 2}
+          >
+            <div style={{ pointerEvents: 'none' }}>
+              <Group position="center">
+                <Dropzone.Accept>
+                  <IconDownload
+                    size={50}
+                    color={theme.colors[theme.primaryColor][6]}
+                    stroke={1.5}
+                  />
+                </Dropzone.Accept>
+                <Dropzone.Reject>
+                  <IconX size={50} color={theme.colors.red[6]} stroke={1.5} />
+                </Dropzone.Reject>
+                <Dropzone.Idle>
+                  <IconCloudUpload
+                    size={50}
+                    color={theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black}
+                    stroke={1.5}
+                  />
+                </Dropzone.Idle>
+              </Group>
+
+              <Text align="center" weight={700} size="lg" mt="xl">
+                <Dropzone.Accept>Drop files here</Dropzone.Accept>
+                <Dropzone.Reject>Image file less than 30mb</Dropzone.Reject>
+                <Dropzone.Idle>Upload</Dropzone.Idle>
+              </Text>
+              <Text align="center" size="sm" mt="xs" color="dimmed">
+                Drag & drop files here to upload. We can accept only <i>.png, .jpeg</i> files that
+                are less than 5mb in size.
+              </Text>
+            </div>
+          </Dropzone>
+
+          <Button
+            className={classes.control}
+            size="md"
+            radius="xl"
+            onClick={() => openRef.current?.()}
+          >
+            Select files
+          </Button>
+        </div>
+        {file && (
+          <Box mt={50}>
+            <div style={{ width: 240, marginLeft: 'auto', marginRight: 'auto' }}>
+              <Image
+                src={imageURL}
+                radius="md"
+                alt="Random unsplash image"
+                style={{ width: '100%' }}
+              />
+            </div>
+          </Box>
+        )}
+        {prediction && confidence && (
+          <Box mt={50}>
+            <Text size="lg" align="center">
+              Predicted implant is <b>{labelToImplant[store.currentImplantValue][prediction]}</b>.
+            </Text>
+            <Text size="lg" align="center">
+              Confidence - {confidence} %
+            </Text>
+          </Box>
+        )}
+        <Button mx="calc(50% - 100px)" mt={50} uppercase onClick={() => handlePredict()}>
+          predict
+        </Button>
       </Stack>
     </>
   );

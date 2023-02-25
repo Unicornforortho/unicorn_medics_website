@@ -57,7 +57,9 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links }: LinksG
   const ChevronIcon = theme.dir === 'ltr' ? IconChevronRight : IconChevronLeft;
   const items = (hasLinks ? links : []).map((link) => (
     <Text
-      onClick={() => store.setCurrentImplant(link.value, link.label)}
+      onClick={() => {
+        store.setCurrentImplant(link.value, link.label);
+      }}
       className={classes.link}
       key={link.label}
     >

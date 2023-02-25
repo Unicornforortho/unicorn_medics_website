@@ -7,7 +7,7 @@ type Store = {
 };
 
 const useStore = create<Store>((set) => ({
-  currentImplantValue: 'ANKLE_1',
+  currentImplantValue: 'ankle_one',
   currentImplantTitle: 'Ankle 1',
   setCurrentImplant: (currentImplantValue, currentImplantTitle) =>
     set(() => ({ currentImplantValue, currentImplantTitle })),
