@@ -80,7 +80,7 @@ export default function Login() {
           Sign in
         </Button>
         {loading && (
-          <Text color="green" align="center" size="sm">
+          <Text color="green" align="center" size="sm" mt={10}>
             Magic Link sent. Check your Mail!
           </Text>
         )}

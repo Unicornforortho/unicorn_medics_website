@@ -1,5 +1,6 @@
 import { Text, Container } from '@mantine/core';
 import { useEffect } from 'react';
+import supabaseClient from '../supabase';
 
 function Index() {
   function greetByTime(): string {
@@ -16,21 +17,24 @@ function Index() {
   }
 
   useEffect(() => {
-    const access_token = localStorage.getItem('access_token');
-    const refresh_token = localStorage.getItem('refresh_token');
-    const isAuthenticated = Boolean(localStorage.getItem('isAuthenticated'));
-    if (!isAuthenticated && (access_token === null || refresh_token === null)) {
-      const queryString = window.location.hash.substring(1);
-      const params = new URLSearchParams(queryString);
-      const accessToken = params.get('access_token');
-      const refreshToken = params.get('refresh_token');
-      if (accessToken !== null) localStorage.setItem('access_token', accessToken);
-      if (refreshToken !== null) localStorage.setItem('refresh_token', refreshToken);
-      if (accessToken !== null && refreshToken !== null) {
+    supabaseClient.auth.getSession().then((session) => {
+      if (
+        session.data.session !== null &&
+        session.data.session.user.aud === 'authenticated' &&
+        session.data.session != null
+      ) {
         localStorage.setItem('isAuthenticated', 'true');
+        localStorage.setItem('access_token', session.data.session.access_token);
+        localStorage.setItem('refresh_token', session.data.session.refresh_token);
+        if (session.data.session.user.email !== undefined) {
+          localStorage.setItem('name', session.data.session.user.email);
+        }
+        localStorage.setItem('session', JSON.stringify(session.data.session));
+      } else {
+        localStorage.setItem('isAuthenticated', 'false');
       }
-    }
-  });
+    });
+  }, []);
 
   return (
     <Container fluid>

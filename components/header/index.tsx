@@ -84,8 +84,11 @@ export default function HeaderMegaMenu() {
   const router = useRouter();
 
   useEffect(() => {
-    setIsAuthenticated(Boolean(localStorage.getItem('isAuthenticated')));
-  }, []);
+    const auth = localStorage.getItem('isAuthenticated');
+    if (auth === 'true') {
+      setIsAuthenticated(true);
+    }
+  }, [isAuthenticated]);
 
   const handleSignOut = async () => {
     try {
@@ -94,10 +97,14 @@ export default function HeaderMegaMenu() {
         throw new Error(error.message);
       } else {
         localStorage.clear();
+        localStorage.setItem('isAuthenticated', 'false');
+        setIsAuthenticated(false);
         router.push('/login');
       }
     } catch (e) {
-      console.error(e);
+      localStorage.clear();
+      localStorage.setItem('isAuthenticated', 'false');
+      router.push('/login');
     }
   };
 
@@ -153,11 +160,7 @@ export default function HeaderMegaMenu() {
                 </Button>
               </>
             ) : (
-              <Button onClick={() => handleSignOut()}>
-                <Anchor<'a'> variant="text" td="none" href="/register" size="sm">
-                  Sign Out
-                </Anchor>
-              </Button>
+              <Button onClick={() => handleSignOut()}>Sign Out</Button>
             )}
             <ColorSchemeToggle />
           </Group>

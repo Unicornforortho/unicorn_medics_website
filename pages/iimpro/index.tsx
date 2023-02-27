@@ -170,7 +170,6 @@ function NavbarNested() {
   const store = useStore();
   const router = useRouter();
   const openRef = useRef<() => void>(null);
-  // const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [customerId, setCustomerId] = useState(''); // Use this to save activity in DB
   const [file, setFile] = useState<any>(null);
@@ -227,6 +226,7 @@ function NavbarNested() {
   const handlePredict = () => {
     setPrediction(null);
     const formData = new FormData();
+    formData.append('modelName', store.currentImplantValue);
     formData.append('file', file, file.name);
     const requestOptions = {
       method: 'POST',
@@ -236,6 +236,15 @@ function NavbarNested() {
     fetch(url, requestOptions)
       .then((response) => response.json())
       .then((data) => {
+        if (data.error) {
+          showNotification({
+            title: 'Internal Server Error',
+            message: 'The required model is not available. Please try again later',
+            color: 'red',
+            autoClose: 5000,
+            icon: <IconAlertCircle />,
+          });
+        }
         setPrediction(data.result);
         const conf = parseFloat(data.confidence) * 100;
         setConfidence(conf.toFixed(2));
