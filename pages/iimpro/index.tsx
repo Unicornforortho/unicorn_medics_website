@@ -161,6 +161,17 @@ const useStyles = createStyles((theme) => ({
       color: theme.colorScheme === 'dark' ? theme.white : theme.black,
     },
   },
+  hiddenMobile: {
+    [theme.fn.smallerThan('lg')]: {
+      display: 'none',
+    },
+  },
+
+  hiddenDesktop: {
+    [theme.fn.largerThan('lg')]: {
+      display: 'none',
+    },
+  },
 
   chevron: {
     transition: 'transform 200ms ease',
@@ -376,149 +387,154 @@ function NavbarNested() {
 
   return (
     <>
-      <Navbar height={800} width={{ sm: 300 }} p="md" className={classes.navbar}>
-        <Navbar.Section className={classes.header}>
-          <Group position="apart">
-            <Logo width={120} />
-          </Group>
-        </Navbar.Section>
+      <Box className={classes.hiddenMobile}>
+        <Navbar height={800} width={{ sm: 300 }} p="md" className={classes.navbar}>
+          <Navbar.Section className={classes.header}>
+            <Group position="apart">
+              <Logo width={120} />
+            </Group>
+          </Navbar.Section>
 
-        <Navbar.Section grow className={classes.links} component={ScrollArea}>
-          <div className={classes.linksInner}>
-            {mockdata.map((item) => (
-              <LinksGroup {...item} key={item.label} />
-            ))}
-          </div>
-        </Navbar.Section>
-      </Navbar>
-      <Stack>
-        <Text fw={700} fz={48} mb="md">
-          {store.currentImplantTitle}
-        </Text>
-        <div className={classes.wrapper}>
-          <Dropzone
-            openRef={openRef}
-            multiple={false}
-            onReject={() => {
-              showNotification({
-                title: 'Invalid file type',
-                message: 'Please upload a PNG or JPEG file',
-                color: 'red',
-                autoClose: 5000,
-                icon: <IconAlertCircle />,
-              });
-            }}
-            onDrop={(files) => {
-              uploadImage(files);
-            }}
-            className={classes.dropzone}
-            radius="md"
-            accept={[MIME_TYPES.png, MIME_TYPES.jpeg]}
-            maxSize={5 * 1024 ** 2}
-          >
-            <div style={{ pointerEvents: 'none' }}>
-              <Group position="center">
-                <Dropzone.Accept>
-                  <IconDownload
-                    size={50}
-                    color={theme.colors[theme.primaryColor][6]}
-                    stroke={1.5}
-                  />
-                </Dropzone.Accept>
-                <Dropzone.Reject>
-                  <IconX size={50} color={theme.colors.red[6]} stroke={1.5} />
-                </Dropzone.Reject>
-                <Dropzone.Idle>
-                  <IconCloudUpload
-                    size={50}
-                    color={theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black}
-                    stroke={1.5}
-                  />
-                </Dropzone.Idle>
-              </Group>
-
-              <Text align="center" weight={700} size="lg" mt="lg">
-                <Dropzone.Accept>Drop files here</Dropzone.Accept>
-                <Dropzone.Reject>Image file less than 30mb</Dropzone.Reject>
-                <Dropzone.Idle>Upload</Dropzone.Idle>
-              </Text>
-              <Text align="center" size="sm" mt="xs" color="dimmed">
-                Drag & drop files here to upload. We can accept only <i>.png, .jpeg</i> files that
-                are less than 5mb in size.
-              </Text>
+          <Navbar.Section grow className={classes.links} component={ScrollArea}>
+            <div className={classes.linksInner}>
+              {mockdata.map((item) => (
+                <LinksGroup {...item} key={item.label} />
+              ))}
             </div>
-          </Dropzone>
-          <Button
-            className={classes.control}
-            size="md"
-            radius="xl"
-            onClick={() => openRef.current?.()}
-          >
-            Select file
-          </Button>
-        </div>
-        <SimpleGrid cols={2}>
-          <Card
-            withBorder
-            p="xl"
-            radius="md"
-            style={{
-              height: '225px',
-            }}
-          >
-            <Image
-              src={imageURL}
+          </Navbar.Section>
+        </Navbar>
+        <Stack>
+          <Text fw={700} fz={48} mb="md">
+            {store.currentImplantTitle}
+          </Text>
+          <div className={classes.wrapper}>
+            <Dropzone
+              openRef={openRef}
+              multiple={false}
+              onReject={() => {
+                showNotification({
+                  title: 'Invalid file type',
+                  message: 'Please upload a PNG or JPEG file',
+                  color: 'red',
+                  autoClose: 5000,
+                  icon: <IconAlertCircle />,
+                });
+              }}
+              onDrop={(files) => {
+                uploadImage(files);
+              }}
+              className={classes.dropzone}
               radius="md"
-              alt="Random unsplash image"
-              height="175px"
-              width="175px"
-              ml="auto"
-              mr="auto"
-            />
-          </Card>
-          {prediction && confidence ? (
+              accept={[MIME_TYPES.png, MIME_TYPES.jpeg]}
+              maxSize={5 * 1024 ** 2}
+            >
+              <div style={{ pointerEvents: 'none' }}>
+                <Group position="center">
+                  <Dropzone.Accept>
+                    <IconDownload
+                      size={50}
+                      color={theme.colors[theme.primaryColor][6]}
+                      stroke={1.5}
+                    />
+                  </Dropzone.Accept>
+                  <Dropzone.Reject>
+                    <IconX size={50} color={theme.colors.red[6]} stroke={1.5} />
+                  </Dropzone.Reject>
+                  <Dropzone.Idle>
+                    <IconCloudUpload
+                      size={50}
+                      color={theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black}
+                      stroke={1.5}
+                    />
+                  </Dropzone.Idle>
+                </Group>
+
+                <Text align="center" weight={700} size="lg" mt="lg">
+                  <Dropzone.Accept>Drop files here</Dropzone.Accept>
+                  <Dropzone.Reject>Image file less than 30mb</Dropzone.Reject>
+                  <Dropzone.Idle>Upload</Dropzone.Idle>
+                </Text>
+                <Text align="center" size="sm" mt="xs" color="dimmed">
+                  Drag & drop files here to upload. We can accept only <i>.png, .jpeg</i> files that
+                  are less than 5mb in size.
+                </Text>
+              </div>
+            </Dropzone>
+            <Button
+              className={classes.control}
+              size="md"
+              radius="xl"
+              onClick={() => openRef.current?.()}
+            >
+              Select file
+            </Button>
+          </div>
+          <SimpleGrid cols={2}>
             <Card
               withBorder
               p="xl"
               radius="md"
               style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
                 height: '225px',
               }}
             >
-              <StatsRingCard
-                title={labelToImplant[store.currentImplantValue][prediction]}
-                completed={parseFloat(confidence)}
-                total={100}
+              <Image
+                src={imageURL}
+                radius="md"
+                alt="Random unsplash image"
+                height="175px"
+                width="175px"
+                ml="auto"
+                mr="auto"
               />
             </Card>
-          ) : (
-            <Card
-              withBorder
-              p="xl"
-              radius="md"
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <Text align="center">Upload an Image to make the prediction</Text>
-            </Card>
-          )}
-        </SimpleGrid>
-        <Button
-          disabled={file === null || isLoading}
-          mx="calc(50% - 100px)"
-          mt={10}
-          uppercase
-          onClick={() => handlePredict()}
-        >
-          predict
-        </Button>
-      </Stack>
+            {prediction && confidence ? (
+              <Card
+                withBorder
+                p="xl"
+                radius="md"
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '225px',
+                }}
+              >
+                <StatsRingCard
+                  title={labelToImplant[store.currentImplantValue][prediction]}
+                  completed={parseFloat(confidence)}
+                  total={100}
+                />
+              </Card>
+            ) : (
+              <Card
+                withBorder
+                p="xl"
+                radius="md"
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <Text align="center">Upload an Image to make the prediction</Text>
+              </Card>
+            )}
+          </SimpleGrid>
+          <Button
+            disabled={file === null || isLoading}
+            mx="calc(50% - 100px)"
+            mt={10}
+            uppercase
+            onClick={() => handlePredict()}
+          >
+            predict
+          </Button>
+        </Stack>
+      </Box>
+      <Box className={classes.hiddenDesktop}>
+        <Text>Screen size too small. Please try again with a larger display</Text>
+      </Box>
     </>
   );
 }
