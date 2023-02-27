@@ -35,6 +35,8 @@ import { Logo } from '../../components/Logo';
 import useStore from '../../store/store';
 import getUserFromEmail from '../../helper-functions/get-user-from-email';
 import StatsRingCard from '../../components/prediction-output';
+import uploadToBucket from '../../helper-functions/upload-to-bucket';
+import uploadUserActivity from '../../helper-functions/upload-user-activity';
 
 const mockdata = [
   {
@@ -171,45 +173,16 @@ function NavbarNested() {
   const router = useRouter();
   const openRef = useRef<() => void>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [customerId, setCustomerId] = useState(''); // Use this to save activity in DB
+  const [customerId, setCustomerId] = useState('');
+  const [customerEmail, setCustomerEmail] = useState('');
+  const [supabaseURL, setSupabaseURL] = useState<any>('');
   const [file, setFile] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [imageURL, setImageURL] = useState<any>(
     'https://nearfile.com/wp-content/uploads/2020/10/No-Image-Available.jpg',
   );
   const [prediction, setPrediction] = useState<any>(null);
   const [confidence, setConfidence] = useState<any>(null);
-
-  const testAuthentication = (access_token: any) => {
-    if (access_token === null) {
-      router.push('/login');
-    } else {
-      setIsAuthenticated(true);
-    }
-  };
-
-  const realAuthentication = (access_token: any) => {
-    if (access_token === null) {
-      localStorage.clear();
-      router.push('/login');
-    } else {
-      try {
-        if (process.env.NEXT_PUBLIC_JWT_SECRET === undefined) {
-          throw new Error('JWT_SECRET is undefined');
-        } else {
-          const SECRET = process.env.NEXT_PUBLIC_JWT_SECRET;
-          const decoded = verify(access_token, SECRET);
-          const { email } = JSON.parse(JSON.stringify(decoded));
-          getUserFromEmail(email).then((userId) => {
-            setCustomerId(userId);
-          });
-          setIsAuthenticated(true);
-        }
-      } catch (error) {
-        localStorage.clear();
-        router.push('/login');
-      }
-    }
-  };
 
   const uploadImage = (files: any) => {
     setPrediction(null);
@@ -223,45 +196,16 @@ function NavbarNested() {
     }
   };
 
-  const handlePredict = () => {
-    setPrediction(null);
-    const formData = new FormData();
-    formData.append('modelName', store.currentImplantValue);
-    formData.append('file', file, file.name);
-    const requestOptions = {
-      method: 'POST',
-      body: formData,
-    };
-    const url = 'http://localhost:8000/predict/';
-    fetch(url, requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.error) {
-          showNotification({
-            title: 'Internal Server Error',
-            message: 'The required model is not available. Please try again later',
-            color: 'red',
-            autoClose: 5000,
-            icon: <IconAlertCircle />,
-          });
-        }
-        setPrediction(data.result);
-        const conf = parseFloat(data.confidence) * 100;
-        setConfidence(conf.toFixed(2));
-      })
-      .catch(() => {
-        setFile(null);
-        setPrediction(null);
-        setConfidence(null);
-        setImageURL('https://nearfile.com/wp-content/uploads/2020/10/No-Image-Available.jpg');
-        showNotification({
-          title: 'Internal Server Error',
-          message: 'Please try again later',
-          color: 'red',
-          autoClose: 5000,
-          icon: <IconAlertCircle />,
-        });
-      });
+  const genUniqueId = () => {
+    const list = [12, 18, 24, 30, 36];
+    const base1 = list[Math.floor(Math.random() * list.length)];
+    const base2 = list[Math.floor(Math.random() * list.length)];
+
+    const dateStr = Date.now().toString(base1); // convert num to base 36 and stringify
+
+    const randomStr = Math.random().toString(base2).substring(2, 36);
+
+    return `${dateStr}-${randomStr}`;
   };
 
   const labelToImplant: any = {
@@ -271,6 +215,77 @@ function NavbarNested() {
       2: 'Wright Inbone II',
       3: 'Zimmer Biomet Trabecular Model',
     },
+  };
+
+  const handlePredict = async () => {
+    setIsLoading(true);
+    if (file !== null) {
+      setPrediction(null);
+      const fileName = genUniqueId();
+      const URL = await uploadToBucket(customerEmail, fileName, file);
+      if (URL === undefined) {
+        showNotification({
+          title: 'Error occured while uploading',
+          message: 'Can not upload to supabase bucket. Please try again later',
+          color: 'red',
+          autoClose: 5000,
+          icon: <IconAlertCircle />,
+        });
+        return;
+      }
+      setSupabaseURL(
+        `${process.env.NEXT_PUBLIC_SUPABASE_URL}storage/v1/object/public/user-uploads/${URL}`,
+      );
+      const formData = new FormData();
+      formData.append('modelName', store.currentImplantValue);
+      formData.append('file', file, file.name);
+      const requestOptions = {
+        method: 'POST',
+        body: formData,
+      };
+      const url = 'http://localhost:8000/predict/';
+      await fetch(url, requestOptions)
+        .then((response) => response.json())
+        .then(async (data) => {
+          if (data.error) {
+            showNotification({
+              title: 'Internal Server Error',
+              message: 'The required model is not available. Please try again later',
+              color: 'red',
+              autoClose: 5000,
+              icon: <IconAlertCircle />,
+            });
+          }
+          setPrediction(data.result);
+          const conf = parseFloat(data.confidence) * 100;
+          setConfidence(parseFloat(conf.toFixed(2)));
+          const resultObject = labelToImplant[store.currentImplantValue];
+          const predictionMade = resultObject[data.result];
+          await uploadUserActivity(customerId, supabaseURL, predictionMade, confidence);
+        })
+        .catch(() => {
+          setFile(null);
+          setPrediction(null);
+          setConfidence(null);
+          setImageURL('https://nearfile.com/wp-content/uploads/2020/10/No-Image-Available.jpg');
+          showNotification({
+            title: 'Internal Server Error',
+            message: 'Please try again later',
+            color: 'red',
+            autoClose: 5000,
+            icon: <IconAlertCircle />,
+          });
+        });
+    } else {
+      showNotification({
+        title: 'No Image Selected',
+        message: 'Please select an image to predict',
+        color: 'red',
+        autoClose: 5000,
+        icon: <IconAlertCircle />,
+      });
+    }
+    setIsLoading(false);
   };
 
   interface LinksGroupProps {
@@ -327,11 +342,27 @@ function NavbarNested() {
 
   useEffect(() => {
     const access_token = localStorage.getItem('access_token');
-    const TESTING: boolean = true;
-    if (TESTING) {
-      testAuthentication(access_token);
+    if (access_token === null) {
+      localStorage.clear();
+      router.push('/login');
     } else {
-      realAuthentication(access_token);
+      try {
+        if (process.env.NEXT_PUBLIC_JWT_SECRET === undefined) {
+          throw new Error('JWT_SECRET is undefined');
+        } else {
+          const SECRET = process.env.NEXT_PUBLIC_JWT_SECRET;
+          const decoded = verify(access_token, SECRET);
+          const { email } = JSON.parse(JSON.stringify(decoded));
+          setCustomerEmail(email);
+          getUserFromEmail(email).then((userId) => {
+            setCustomerId(userId);
+          });
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        localStorage.clear();
+        router.push('/login');
+      }
     }
   }, []);
 
@@ -479,7 +510,7 @@ function NavbarNested() {
           )}
         </SimpleGrid>
         <Button
-          disabled={file === null}
+          disabled={file === null || isLoading}
           mx="calc(50% - 100px)"
           mt={10}
           uppercase
