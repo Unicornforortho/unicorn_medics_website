@@ -16,6 +16,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { ColorSchemeToggle } from '../color-scheme-toggle';
 import supabaseClient from '../../supabase';
+import useStore from '../../store/store';
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -82,13 +83,13 @@ export default function HeaderMegaMenu() {
   const { classes, theme } = useStyles();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
+  const store = useStore();
 
   useEffect(() => {
-    const auth = localStorage.getItem('isAuthenticated');
-    if (auth === 'true') {
+    if (store.isAuthDone) {
       setIsAuthenticated(true);
     }
-  }, [isAuthenticated]);
+  }, [store]);
 
   const handleSignOut = async () => {
     try {
@@ -104,6 +105,7 @@ export default function HeaderMegaMenu() {
     } catch (e) {
       localStorage.clear();
       localStorage.setItem('isAuthenticated', 'false');
+      store.updateAuthDone(false);
       router.push('/login');
     }
   };

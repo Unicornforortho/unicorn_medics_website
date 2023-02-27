@@ -1,8 +1,11 @@
 import { Text, Container } from '@mantine/core';
 import { useEffect } from 'react';
 import supabaseClient from '../supabase';
+import useStore from '../store/store';
 
 function Index() {
+  const store = useStore();
+
   function greetByTime(): string {
     const now = new Date();
     const hour = now.getHours();
@@ -34,6 +37,7 @@ function Index() {
         localStorage.setItem('isAuthenticated', 'false');
       }
     });
+    store.updateAuthDone(true);
   }, []);
 
   return (
