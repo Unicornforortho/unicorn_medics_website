@@ -40,7 +40,7 @@ export default function Login() {
       await supabase.auth.signInWithOtp({
         email,
         options: {
-          emailRedirectTo: 'http://localhost:3000/',
+          emailRedirectTo: process.env.NEXT_PUBLIC_BASE_URL,
         },
       });
     }

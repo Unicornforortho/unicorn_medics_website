@@ -255,7 +255,12 @@ function NavbarNested() {
         method: 'POST',
         body: formData,
       };
-      const url = 'http://localhost:8000/predict/';
+      const AWS_BASE_URL =
+        process.env.NEXT_PUBLIC_AWS_BASE_URL === null ? '' : process.env.NEXT_PUBLIC_AWS_BASE_URL;
+      if (AWS_BASE_URL === '') {
+        throw new Error('AWS base URL is not defined');
+      }
+      const url = `${AWS_BASE_URL}/predict/`;
       await fetch(url, requestOptions)
         .then((response) => response.json())
         .then(async (data) => {
