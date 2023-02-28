@@ -37,6 +37,7 @@ import getUserFromEmail from '../../helper-functions/get-user-from-email';
 import StatsRingCard from '../../components/prediction-output';
 import uploadToBucket from '../../helper-functions/upload-to-bucket';
 import uploadUserActivity from '../../helper-functions/upload-user-activity';
+import InfoCard from '../../components/info-card';
 
 const mockdata = [
   {
@@ -408,6 +409,12 @@ function NavbarNested() {
           <Text fw={700} fz={48} mb="md">
             {store.currentImplantTitle}
           </Text>
+          {labelToImplant[store.currentImplantValue] && (
+            <InfoCard
+              title="Labels and respective implants"
+              body={labelToImplant[store.currentImplantValue]}
+            />
+          )}
           <div className={classes.wrapper}>
             <Dropzone
               openRef={openRef}
