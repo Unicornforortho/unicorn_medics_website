@@ -2,6 +2,7 @@ import { TextInput, Textarea, SimpleGrid, Group, Text, Button, Container } from 
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import { IconAlertCircle } from '@tabler/icons';
+import sendCustomerEmail from '../../helper-functions/send-mail';
 
 export default function GetInTouchSimple() {
   const form = useForm({
@@ -18,36 +19,43 @@ export default function GetInTouchSimple() {
     },
   });
 
-  const handleSumbit = () => {
-    Email.send({
-      Host: 'smtp.elasticemail.com',
-      Port: 2525,
-      Username: process.env.NEXT_PUBLIC_STMP_USERNAME,
-      Password: process.env.NEXT_PUBLIC_STMP_PASSWORD,
-      To: 'iimpro.contact.us@gmail.com',
-      From: process.env.NEXT_PUBLIC_STMP_USERNAME,
-      Subject: `${form.values.email} - ${form.values.subject}`,
-      Body: form.values.message,
-    })
-      .then(() => {
-        form.reset();
-        showNotification({
-          title: 'Message sent',
-          message: 'Thank you for contacting us, we will get back to you as soon as possible.',
-          color: 'teal',
-          autoClose: 5000,
-        });
-      })
-      .catch(() => {
-        form.reset();
-        showNotification({
-          title: 'Internal Server Error',
-          message: 'Your message could not be sent, please try again later.',
-          color: 'red',
-          autoClose: 5000,
-          icon: <IconAlertCircle />,
-        });
+  const handleSumbit = async () => {
+    try {
+      sendCustomerEmail(
+        form.values.email,
+        'iimpro.contact.us@gmail.com',
+        form.values.subject,
+        form.values.message,
+      ).then((response) => {
+        if (response.error) {
+          form.reset();
+          showNotification({
+            title: response.title,
+            message: response.message,
+            color: 'red',
+            autoClose: 5000,
+            icon: <IconAlertCircle />,
+          });
+        } else {
+          form.reset();
+          showNotification({
+            title: 'Message sent',
+            message: 'Thank you for contacting us, we will get back to you as soon as possible.',
+            color: 'teal',
+            autoClose: 5000,
+          });
+        }
       });
+    } catch (error) {
+      form.reset();
+      showNotification({
+        title: 'Message not sent',
+        message: 'Something went wrong, please try again later.',
+        color: 'red',
+        autoClose: 5000,
+        icon: <IconAlertCircle />,
+      });
+    }
   };
 
   return (

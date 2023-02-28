@@ -372,6 +372,7 @@ function NavbarNested() {
         }
       } catch (error) {
         localStorage.clear();
+        localStorage.setItem('isAuthenticated', 'false');
         router.push('/login');
       }
     }
