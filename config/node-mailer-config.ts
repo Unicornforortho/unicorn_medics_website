@@ -1,5 +1,8 @@
 import nodemailer from 'nodemailer';
 
+/*
+  Configuration of the SMTP server using node-mailer.
+*/
 const transporter = nodemailer.createTransport({
   host: 'smtp.elasticemail.com',
   port: 2525,

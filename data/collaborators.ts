@@ -1,3 +1,6 @@
+/*
+  Information of all the collaborators to the project
+*/
 const Collaborators = [
   {
     name: 'Luton and Dunstable University Hospital, UK.',

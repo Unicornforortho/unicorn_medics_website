@@ -18,6 +18,9 @@ import { ColorSchemeToggle } from '../color-scheme-toggle';
 import supabaseClient from '../../supabase';
 import useStore from '../../store/store';
 
+/*
+  Styling for the navbar.
+*/
 const useStyles = createStyles((theme) => ({
   link: {
     display: 'flex',
@@ -78,6 +81,11 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
+/*
+  Returns the navbar for the website with links to all the pages.
+  Also contains the toggle button for the light and dark mode.
+  This navbar also works for small pages.
+*/
 export default function HeaderMegaMenu() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const { classes, theme } = useStyles();

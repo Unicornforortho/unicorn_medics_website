@@ -1,6 +1,9 @@
 import { showNotification } from '@mantine/notifications';
 import supabaseClient from '../supabase';
 
+/*
+  Uploads the image to the bucket and returns the path to the image
+*/
 async function uploadToBucket(customerEmail: string, fileName: string, buffer: any) {
   const bucketName = process.env.NEXT_PUBLIC_SUPABASE_BUCKET;
   if (bucketName === undefined) {

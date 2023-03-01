@@ -1,5 +1,8 @@
 import { useMantineTheme } from '@mantine/core';
 
+/*
+  Returns the svg image for the 404 page.
+*/
 export function Illustration(props: React.ComponentPropsWithoutRef<'svg'>) {
   const theme = useMantineTheme();
   return (

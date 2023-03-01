@@ -1,6 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import transporter from '../../../config/node-mailer-config';
 
+/*
+  Sends mail with the help of node-mailer configuration
+  For more details visit : https://documenter.getpostman.com/view/16629391/2s93CRLBzC
+*/
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     try {

@@ -39,6 +39,9 @@ import uploadToBucket from '../../helper-functions/upload-to-bucket';
 import uploadUserActivity from '../../helper-functions/upload-user-activity';
 import InfoCard from '../../components/info-card';
 
+/*
+  Holds information of the implant detection models with value
+*/
 const mockdata = [
   {
     label: 'Ankle',
@@ -60,6 +63,9 @@ const mockdata = [
   },
 ];
 
+/*
+  Styling for the entire page
+*/
 const useStyles = createStyles((theme) => ({
   navbar: {
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
@@ -179,6 +185,9 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
+/*
+  Returns the content for /iimpro
+*/
 function NavbarNested() {
   const { classes, theme } = useStyles();
   const store = useStore();
@@ -196,6 +205,9 @@ function NavbarNested() {
   const [prediction, setPrediction] = useState<any>(null);
   const [confidence, setConfidence] = useState<any>(null);
 
+  /*
+    Saves the image to the local memory used to show the image in the UI
+  */
   const uploadImage = (files: any) => {
     setPrediction(null);
     if (files.length > 0) {
@@ -208,6 +220,9 @@ function NavbarNested() {
     }
   };
 
+  /*
+    Generates a unique ID for the image
+  */
   const genUniqueId = () => {
     const list = [12, 18, 24, 30, 36];
     const base1 = list[Math.floor(Math.random() * list.length)];
@@ -220,6 +235,9 @@ function NavbarNested() {
     return `${dateStr}-${randomStr}`;
   };
 
+  /*
+    Mapping for all the models output layer to the actual implant
+  */
   const labelToImplant: any = {
     ankle_one: {
       0: 'Depuy Mobility',
@@ -229,6 +247,9 @@ function NavbarNested() {
     },
   };
 
+  /*
+    Fetch output from ML model and store the result
+  */
   const handlePredict = async () => {
     setIsLoading(true);
     if (file !== null) {
@@ -300,6 +321,9 @@ function NavbarNested() {
     setIsLoading(false);
   };
 
+  /*
+    Interface for displaying the links in the sidebar
+  */
   interface LinksGroupProps {
     icon: TablerIcon;
     label: string;
@@ -307,6 +331,9 @@ function NavbarNested() {
     links?: { label: string; value: string }[];
   }
 
+  /*
+    Method for change of model from sidebar
+  */
   const handleClick = (link: any) => {
     setPrediction(null);
     setConfidence(null);
@@ -315,6 +342,9 @@ function NavbarNested() {
     store.setCurrentImplant(link.value, link.label);
   };
 
+  /*
+    Returns the sidebar with the links to change the model
+  */
   function LinksGroup({ icon: Icon, label, initiallyOpened, links }: LinksGroupProps) {
     const hasLinks = Array.isArray(links);
     const [opened, setOpened] = useState(initiallyOpened || false);
@@ -352,6 +382,9 @@ function NavbarNested() {
     );
   }
 
+  /*
+    Authentication code here
+  */
   useEffect(() => {
     const access_token = localStorage.getItem('access_token');
     if (access_token === null) {
@@ -379,6 +412,9 @@ function NavbarNested() {
     }
   }, []);
 
+  /*
+    Loader till the user gets authenticated
+  */
   if (!isAuthenticated) {
     return (
       <Container fluid>
@@ -387,6 +423,9 @@ function NavbarNested() {
     );
   }
 
+  /*
+    Playground for the model prediction
+  */
   return (
     <>
       <Box className={classes.hiddenMobile}>

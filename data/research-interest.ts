@@ -5,6 +5,9 @@ import {
   IconBuildingHospital,
 } from '@tabler/icons';
 
+/*
+  Information regarding research interested of the organization.
+*/
 const ResearchInterest = [
   {
     icon: IconBuildingHospital,
