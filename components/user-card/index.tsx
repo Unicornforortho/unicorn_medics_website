@@ -1,4 +1,7 @@
-import { createStyles, Avatar, Text, Group } from '@mantine/core';
+/* eslint-disable @next/next/link-passhref */
+import { createStyles, Avatar, Text, Group, ActionIcon } from '@mantine/core';
+import { IconBrandLinkedin } from '@tabler/icons';
+import Link from 'next/link';
 
 const useStyles = createStyles((theme) => ({
   icon: {
@@ -14,9 +17,10 @@ interface UserInfoIconsProps {
   avatar: string;
   name: string;
   title: string;
+  linkedin: string;
 }
 
-export function UserInfoIcons({ avatar, name, title }: UserInfoIconsProps) {
+export function UserInfoIcons({ avatar, name, title, linkedin }: UserInfoIconsProps) {
   const { classes } = useStyles();
   return (
     <div>
@@ -26,10 +30,14 @@ export function UserInfoIcons({ avatar, name, title }: UserInfoIconsProps) {
           <Text size="xs" sx={{ textTransform: 'uppercase' }} weight={700} color="dimmed">
             {title}
           </Text>
-
           <Text size="lg" weight={500} className={classes.name}>
             {name}
           </Text>
+          <Link href={linkedin}>
+            <ActionIcon variant="light" color="blue">
+              <IconBrandLinkedin size={32} />
+            </ActionIcon>
+          </Link>
         </div>
       </Group>
     </div>

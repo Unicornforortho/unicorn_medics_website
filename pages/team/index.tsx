@@ -13,9 +13,10 @@ export default function Collaborators() {
           {Team.coreMembers.map((coreMember: any) => (
             <Grid.Col lg={3} md={3} sm={1}>
               <UserInfoIcons
-                avatar="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
+                avatar={coreMember.image}
                 name={coreMember.name}
                 title="Core Member"
+                linkedin={coreMember.linkedin}
               />
             </Grid.Col>
           ))}
@@ -26,12 +27,13 @@ export default function Collaborators() {
           Interns
         </Text>
         <Grid>
-          {Team.interns.map((coreMember: any) => (
+          {Team.interns.map((intern: any) => (
             <Grid.Col lg={3} md={3} sm={1}>
               <UserInfoIcons
-                avatar="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
-                name={coreMember.name}
+                avatar={intern.image}
+                name={intern.name}
                 title="Interns"
+                linkedin={intern.linkedin}
               />
             </Grid.Col>
           ))}

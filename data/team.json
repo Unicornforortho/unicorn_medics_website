@@ -3,100 +3,112 @@
     {
       "id": 1,
       "name": "Dr Vineet Batta",
-      "email": "",
-      "image": ""
+      "linkedin": "https://uk.linkedin.com/in/vineet-batta-2864934",
+      "image": "../public/assets/team-photos/default_male.png"
     },
     {
-      "id": 1,
+      "id": 2,
       "name": "Dr Malathy C",
-      "email": "",
-      "image": ""
+      "linkedin": "https://in.linkedin.com/in/malathy-chidambaranathan-aa345064",
+      "image": "../public/assets/team-photos/default_female.jpg"
     },
     {
-      "id": 1,
+      "id": 3,
       "name": "Dr Gayathri M",
-      "email": "",
-      "image": ""
+      "linkedin": "https://www.srmist.edu.in/faculty/m-gayathri/",
+      "image": "../public/assets/team-photos/default_female.jpg"
     },
     {
-      "id": 1,
+      "id": 4,
       "name": "Mr Soumya Snighdha Kundu",
-      "email": "",
-      "image": ""
+      "linkedin": "https://in.linkedin.com/in/soumyaskundu",
+      "image": "../public/assets/team-photos/default_female.jpg"
     },
     {
-      "id": 1,
+      "id": 5,
       "name": "Dr Srinath K",
-      "email": "",
-      "image": ""
+      "linkedin": "https://srinathkamineni.com/",
+      "image": "../public/assets/team-photos/default_male.png"
     },
     {
-      "id": 1,
+      "id": 6,
       "name": "Dr Kartik M Varadarajan",
-      "email": "",
-      "image": ""
+      "linkedin": "https://www.linkedin.com/in/kartikmv",
+      "image": "../public/assets/team-photos/default_male.png"
     },
     {
-      "id": 1,
+      "id": 7,
       "name": "Ms Kiruthika M",
-      "email": "",
-      "image": ""
+      "linkedin": "https://in.linkedin.com/in/kiruthika-mohan-308971134",
+      "image": "../public/assets/team-photos/default_female.jpg"
     },
     {
-      "id": 1,
+      "id": 8,
       "name": "Mr Ramanathan A",
-      "email": "",
-      "image": ""
+      "linkedin": "https://in.linkedin.com/in/ramanathan-anandarama-krishnan-47b948144",
+      "image": "../public/assets/team-photos/default_male.png"
     }
   ],
   "interns": [
     {
-      "id": 1,
+      "id": 9,
+      "name": "Aditya Nagar",
+      "linkedin": "https://www.linkedin.com/in/adityanagar10/",
+      "image": "../public/assets/team-photos/aditya_nagar.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Darshil Mehta",
+      "linkedin": "https://www.linkedin.com/in/darshil-mehta-05/",
+      "image": "../public/assets/team-photos/darshil_mehta.png"
+    },
+    {
+      "id": 11,
       "name": "Shaik Muskin Ali",
-      "email": "",
-      "image": ""
+      "linkedin": "https://in.linkedin.com/in/s-mushkin-ali-9b453618b",
+      "image": "../public/assets/team-photos/default_male.png"
     },
     {
-      "id": 1,
+      "id": 12,
       "name": "Sahithi Nara",
-      "email": "",
-      "image": ""
+      "linkedin": "https://in.linkedin.com/in/sahithi-n-a675151a6?trk=public_profile_browsemap",
+      "image": "../public/assets/team-photos/default_female.jpg"
     },
     {
-      "id": 1,
+      "id": 13,
       "name": "Sheel Patel",
-      "email": "",
-      "image": ""
+      "linkedin": "https://in.linkedin.com/in/sheel1206",
+      "image": "../public/assets/team-photos/default_male.png"
     },
     {
-      "id": 1,
+      "id": 14,
       "name": "Shaswat Srivastava",
-      "email": "",
-      "image": ""
+      "linkedin": "https://in.linkedin.com/in/shaswat-srivastava-03a67118b",
+      "image": "../public/assets/team-photos/default_female.jpg"
     },
     {
-      "id": 1,
+      "id": 15,
       "name": "Renu Madhuraj Jadhav",
-      "email": "",
-      "image": ""
+      "linkedin": "https://in.linkedin.com/in/renu-jadhav-1215531b2",
+      "image": "../public/assets/team-photos/default_female.jpg"
     },
     {
-      "id": 1,
+      "id": 16,
       "name": "Tanvi Purwar",
-      "email": "",
-      "image": ""
+      "linkedin": "https://in.linkedin.com/in/tanvi-purwar-394b0b246",
+      "image": "../public/assets/team-photos/default_female.jpg"
     },
     {
-      "id": 1,
-      "name": "Aakriti Purwar",
-      "email": "",
-      "image": ""
+      "id": 17,
+      "name": "Aakriti Mishra",
+      "linkedin": "https://in.linkedin.com/in/aakriti-mishra",
+      "image": "../public/assets/team-photos/default_female.jpg"
     },
     {
-      "id": 1,
+      "id": 18,
       "name": "Ved Prakash Dubey",
-      "email": "",
-      "image": ""
+      "linkedin": "",
+      "image": "../public/assets/team-photos/default_male.png"
     }
   ]
 }

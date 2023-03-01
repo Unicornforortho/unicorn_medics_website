@@ -1,5 +1,5 @@
 import { createStyles, Container, Title, Text, Button, Group } from '@mantine/core';
-import { Illustration } from '../assets/404-asset';
+import { Illustration } from '../public/assets/404-asset';
 
 const useStyles = createStyles((theme) => ({
   root: {
