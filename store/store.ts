@@ -1,5 +1,8 @@
 import { create } from 'zustand';
 
+/*
+  Zustand store for global state management
+*/
 type Store = {
   currentImplantValue: string;
   currentImplantTitle: string;
@@ -8,6 +11,9 @@ type Store = {
   updateAuthDone: (isAuthDone: boolean) => void;
 };
 
+/*
+  Update state methods implementation
+*/
 const useStore = create<Store>((set) => ({
   currentImplantValue: 'ankle_one',
   currentImplantTitle: 'Ankle 1',

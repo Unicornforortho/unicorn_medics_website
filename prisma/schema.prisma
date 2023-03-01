@@ -8,6 +8,7 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
+// Customer Model
 model Customers {
   customerId       String             @id @default(uuid())
   firstname        String
@@ -21,6 +22,7 @@ model Customers {
   CustomerActivity CustomerActivity[]
 }
 
+// Customer Activity Model
 model CustomerActivity {
   activityId       String    @id @default(uuid())
   createdAt        DateTime  @default(now())
@@ -31,6 +33,7 @@ model CustomerActivity {
   customerId       String
 }
 
+// Speciality Enum
 enum SpecialityEnum {
   HIP
   KNEE

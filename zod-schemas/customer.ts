@@ -1,5 +1,8 @@
 import { z } from 'zod';
 
+/*
+  Zod schema for customer validation
+*/
 const customerSchema = z.object({
   customerId: z.string().uuid().optional(),
   firstname: z

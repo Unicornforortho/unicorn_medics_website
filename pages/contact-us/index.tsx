@@ -4,6 +4,14 @@ import { showNotification } from '@mantine/notifications';
 import { IconAlertCircle } from '@tabler/icons';
 import sendCustomerEmail from '../../helper-functions/send-mail';
 
+/*
+  State for the contact us form
+  - name: string
+  - email: string
+  - subject: string
+  - message: string
+  Name Email and subject are required fields and are validated here.
+*/
 export default function GetInTouchSimple() {
   const form = useForm({
     initialValues: {
@@ -19,6 +27,9 @@ export default function GetInTouchSimple() {
     },
   });
 
+  /*
+    Function to handle the submit for the contact us form
+  */
   const handleSumbit = async () => {
     try {
       sendCustomerEmail(

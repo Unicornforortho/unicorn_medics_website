@@ -1,5 +1,8 @@
 import { z } from 'zod';
 
+/*
+  Zod schema for customer activity validation
+*/
 const customerActivitySchema = z.object({
   activityId: z.string().uuid().optional(),
   createdAt: z.date().default(() => new Date()),

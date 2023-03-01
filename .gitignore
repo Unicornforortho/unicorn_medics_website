@@ -39,3 +39,6 @@ storybook-static
 
 # env
 .env
+
+# txt
+*.txt

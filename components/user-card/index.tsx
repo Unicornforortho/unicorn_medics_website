@@ -14,18 +14,18 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface UserInfoIconsProps {
-  avatar: string;
+  image: string;
   name: string;
   title: string;
   linkedin: string;
 }
 
-export function UserInfoIcons({ avatar, name, title, linkedin }: UserInfoIconsProps) {
+export function UserInfoIcons({ image, name, title, linkedin }: UserInfoIconsProps) {
   const { classes } = useStyles();
   return (
     <div>
       <Group noWrap>
-        <Avatar src={avatar} size={94} radius="md" />
+        <Avatar src={image} size={94} radius="md" />
         <div>
           <Text size="xs" sx={{ textTransform: 'uppercase' }} weight={700} color="dimmed">
             {title}

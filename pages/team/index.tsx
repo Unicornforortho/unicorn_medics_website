@@ -1,6 +1,6 @@
 import { Grid, Text, Stack } from '@mantine/core';
 import { UserInfoIcons } from '../../components/user-card';
-import Team from '../../data/team.json';
+import Team from '../../data/team';
 
 export default function Collaborators() {
   return (
@@ -13,7 +13,7 @@ export default function Collaborators() {
           {Team.coreMembers.map((coreMember: any) => (
             <Grid.Col lg={3} md={3} sm={1}>
               <UserInfoIcons
-                avatar={coreMember.image}
+                image={coreMember.image}
                 name={coreMember.name}
                 title="Core Member"
                 linkedin={coreMember.linkedin}
@@ -30,7 +30,7 @@ export default function Collaborators() {
           {Team.interns.map((intern: any) => (
             <Grid.Col lg={3} md={3} sm={1}>
               <UserInfoIcons
-                avatar={intern.image}
+                image={intern.image}
                 name={intern.name}
                 title="Interns"
                 linkedin={intern.linkedin}

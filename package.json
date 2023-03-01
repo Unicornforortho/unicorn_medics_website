@@ -47,6 +47,7 @@
     "jsonwebtoken": "8.5.1",
     "nanoid": "^4.0.1",
     "next": "^13.1.6",
+    "next-images": "^1.8.4",
     "nodemailer": "^6.9.1",
     "prisma": "^4.10.1",
     "react": "18.2.0",

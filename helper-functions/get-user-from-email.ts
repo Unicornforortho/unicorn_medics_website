@@ -1,3 +1,6 @@
+/*
+  Returns user object from email
+*/
 const getUserFromEmail = async (email: string) => {
   const URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/customer-activity/get-customer-by-email`;
   const response = await fetch(URL, {

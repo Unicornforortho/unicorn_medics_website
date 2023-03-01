@@ -7,6 +7,10 @@ import {
 import prismaClient from '../../../prisma/client';
 import { decrypt } from '../../../helper-functions/encryption';
 
+/*
+  Login API
+  For more details visit : https://documenter.getpostman.com/view/16629391/2s93CRLBzC
+*/
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     try {

@@ -1,3 +1,6 @@
+/*
+  Uploads user activity to the database including the image URL, prediction made and confidence.
+*/
 const uploadUserActivity = async (
   customerId: string,
   supabaseURL: string,

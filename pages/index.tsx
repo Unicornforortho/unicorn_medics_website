@@ -45,7 +45,7 @@ function Index() {
       <Text fw={700} fz={48} mb="lg">
         {greetByTime()}
       </Text>
-      <Text fz={24}>
+      <Text fz={18}>
         Dr Vineet Batta, MBBS, MS(Orth), MRCS, Dip SEM, FRCS (Orth), MD (Biomed Eng. Research) UCL
         works as Senior Clinical Fellow, Orthopaedic & Trauma Surgeon, Luton & Dunstable University
         NHS Hospital Trust, UK, He is the principal investigator for the project “Automatic

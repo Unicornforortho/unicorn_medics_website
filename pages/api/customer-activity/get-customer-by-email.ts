@@ -6,6 +6,10 @@ import {
 } from '@prisma/client/runtime';
 import prismaClient from '../../../prisma/client';
 
+/*
+  Returns customer object from the email
+  For more details visit : https://documenter.getpostman.com/view/16629391/2s93CRLBzC
+*/
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     try {
