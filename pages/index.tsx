@@ -11,12 +11,12 @@ function Index() {
     const hour = now.getHours();
 
     if (hour >= 6 && hour < 12) {
-      return 'Good morning researcher!';
+      return 'Good morning. Thanks for your Interest in visiting our website!';
     }
     if (hour >= 12 && hour < 18) {
-      return 'Good afternoon researcher!';
+      return 'Good Afternoon. Thanks for your Interest in visiting our website!';
     }
-    return 'Good evening researcher!';
+    return 'Good Evening. Thanks for your Interest in visiting our website!';
   }
 
   useEffect(() => {
@@ -42,22 +42,33 @@ function Index() {
 
   return (
     <Container fluid>
-      <Text fw={700} fz={48} mb="lg">
+      <Text fw={700} fz={36} mb="lg" align="center">
         {greetByTime()}
       </Text>
-      <Text fz={18}>
-        Dr Vineet Batta, MBBS, MS(Orth), MRCS, Dip SEM, FRCS (Orth), MD (Biomed Eng. Research) UCL
+      <Text fz={18} align="justify">
+        Dr Vineet Batta, MBBS, MS(Orth), MRCS, Dip SEM, FRCS (Orth), MD (Biomed Eng. Research)UCL ,
         works as Senior Clinical Fellow, Orthopaedic & Trauma Surgeon, Luton & Dunstable University
-        NHS Hospital Trust, UK, He is the principal investigator for the project “Automatic
-        Identification of Orthopaedic Implants Using Image Processing and Artificial Intelligence-
-        IMPRO” and is also the founder and CEO of Unicorn Medics Ltd. Dr Vineet has proven interest
-        and experience both as an Orthopedic surgeon and also as an avid Researcher. He has numerous
-        publications that showcase his research interest and expertise. He has given guest lectures
-        across the globe and has secured various grants as a part of his research. Dr Vineet Batta
-        continuously works with a social vision both as a doctor and as a researcher and often
-        encourages others to take up challenging roles and responsibilities that benefit the society
-        at large. People who are willing to collaborate or share their valuable knowledge or require
-        any general guidance can always feel free to contact him.
+        NHS Hospital Trust, United Kingdom.
+      </Text>
+      <br />
+      <Text fz={18} align="justify">
+        He is the principal investigator for the project “Automatic Identification of Orthopaedic
+        Implants Using Image Processing and Artificial Intelligence- IMPRO” and is also the founder
+        and CEO of Unicorn Medics Ltd.
+      </Text>
+      <br />
+      <Text fz={18} align="justify">
+        Dr Vineet has proven interest and experience both as an Orthopedic surgeon and also as an
+        avid Researcher. He has numerous publications that showcase his research interest and
+        expertise.
+      </Text>
+      <br />
+      <Text fz={18} align="justify">
+        He has given guest lectures across the globe and has secured various grants as a part of his
+        research. Dr Vineet Batta continuously works with a social vision both as a doctor and as a
+        researcher and often encourages others to take up challenging roles and responsibilities
+        that benefit the society at large. People who are willing to collaborate or share their
+        valuable knowledge or require any general guidance can always feel free to contact him.
       </Text>
     </Container>
   );

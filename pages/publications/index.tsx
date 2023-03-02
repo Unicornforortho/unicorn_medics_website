@@ -8,12 +8,13 @@ import {
   Anchor,
 } from '@mantine/core';
 import { TablerIcon } from '@tabler/icons';
+import Link from 'next/link';
 import ResearchInterestData from '../../data/publications';
 
 interface FeatureProps {
   icon: TablerIcon;
   title: React.ReactNode;
-  link: React.ReactNode;
+  link: string | null;
   authors: React.ReactNode;
 }
 
@@ -24,9 +25,13 @@ export function ResearchInterest({ icon: Icon, title, link, authors }: FeaturePr
       <ThemeIcon variant="light" size={40} radius={40}>
         <Icon size={20} stroke={1.5} />
       </ThemeIcon>
-      <Anchor<'a'> type="text" href={link}>
+      {link !== null ? (
+        <Anchor<'a'> type="text" href={link}>
+          <Text style={{ marginTop: theme.spacing.sm, marginBottom: 7 }}>{title}</Text>
+        </Anchor>
+      ) : (
         <Text style={{ marginTop: theme.spacing.sm, marginBottom: 7 }}>{title}</Text>
-      </Anchor>
+      )}
       <Text size="sm" color="dimmed" style={{ lineHeight: 1.6 }}>
         {authors}
       </Text>
@@ -72,8 +77,11 @@ export default function ResearchInterestGrid({ data = ResearchInterestData }: Fe
 
       <Container size={560} p={0}>
         <Text size="sm" className={classes.description}>
-          Every once in a while, you’ll see a Golbat that’s missing some fangs. This happens when
-          hunger drives it to try biting a Steel-type Pokémon
+          For a complete list of publications you can refer to his{' '}
+          <Link target="_blank" href="https://scholar.google.com/citations?user=RQPKzTkAAAAJ&hl=en">
+            google scholar profile
+          </Link>
+          .
         </Text>
       </Container>
 

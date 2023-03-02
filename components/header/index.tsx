@@ -135,14 +135,17 @@ export default function HeaderMegaMenu() {
             <Link href="/team" className={classes.link}>
               Team
             </Link>
-            <Link href="/impro" className={classes.link}>
-              Impro
-            </Link>
             <Link href="/research-interest" className={classes.link}>
               Research Interest
             </Link>
             <Link href="/publications" className={classes.link}>
               Publications
+            </Link>
+            <Link href="/achievements" className={classes.link}>
+              Achievements
+            </Link>
+            <Link href="/impro" className={classes.link}>
+              Impro
             </Link>
             <Link href="/join-us" className={classes.link}>
               Join Us
@@ -183,7 +186,7 @@ export default function HeaderMegaMenu() {
         onClose={closeDrawer}
         size="100%"
         padding="md"
-        title="Navigation"
+        title="Menu"
         className={classes.hiddenDesktop}
         zIndex={1000000}
       >
@@ -195,20 +198,23 @@ export default function HeaderMegaMenu() {
           <Link href="/iimpro" className={classes.link}>
             IIMPRO
           </Link>
-          <Link href="#" className={classes.link}>
+          <Link href="/collaborators" className={classes.link}>
             Collaboators
           </Link>
           <Link href="/team" className={classes.link}>
             Team
-          </Link>
-          <Link href="/impro" className={classes.link}>
-            Impro
           </Link>
           <Link href="/research-interest" className={classes.link}>
             Research Interest
           </Link>
           <Link href="/publications" className={classes.link}>
             Publications
+          </Link>
+          <Link href="/achievements" className={classes.link}>
+            News and Achievements
+          </Link>
+          <Link href="/impro" className={classes.link}>
+            Impro
           </Link>
           <Link href="/join-us" className={classes.link}>
             Join Us

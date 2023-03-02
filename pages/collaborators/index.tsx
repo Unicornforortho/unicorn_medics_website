@@ -5,7 +5,7 @@ import CollaboratorData from '../../data/collaborators';
 
 interface Collaborator {
   name: string;
-  link: string;
+  link: string | null;
   city: string;
 }
 
@@ -13,9 +13,13 @@ const CollaboratorsDetails: React.FC<Collaborator> = ({ name, link, city }) => (
   <Group>
     <IconBuilding />
     <div>
-      <Anchor<'a'> href={link} target="_blank">
-        {name}
-      </Anchor>
+      {link !== null ? (
+        <Anchor<'a'> href={link} target="_blank">
+          {name}
+        </Anchor>
+      ) : (
+        <Text>{name}</Text>
+      )}
       <Text>{city}</Text>
     </div>
   </Group>

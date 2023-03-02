@@ -13,13 +13,13 @@ const Collaborators = [
     city: 'Chennai',
   },
   {
-    name: 'Symbiosis University, Pune, India',
-    link: 'https://www.symbiosis.ac.in/',
+    name: 'Symbiosis Center for Medical Image Analysis, Pune, India',
+    link: 'https://scmia.edu.in/',
     city: 'Pune',
   },
   {
-    name: 'Nepal Academy of Science and Technology, Nepal',
-    link: 'https://www.nast.edu.np/',
+    name: 'Nepal Applied Mathematics and Informatics Institute for Research (NAAMII), Nepal',
+    link: 'https://www.naamii.org.np/',
     city: 'Kathmandu',
   },
   {
@@ -28,8 +28,8 @@ const Collaborators = [
     city: 'Lexington',
   },
   {
-    name: 'Visionary Health Inc, USA',
-    link: 'https://www.visionaryhealth.com/',
+    name: 'Pictus AI, USA',
+    link: null,
     city: 'New York',
   },
   {
