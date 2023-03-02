@@ -94,7 +94,6 @@ export default function HeaderMegaMenu() {
   const store = useStore();
 
   useEffect(() => {
-    console.log('store.isAuthDone', store.isAuthDone);
     if (store.isAuthDone) {
       setIsAuthenticated(true);
     } else {
