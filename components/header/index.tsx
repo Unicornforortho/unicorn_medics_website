@@ -94,8 +94,11 @@ export default function HeaderMegaMenu() {
   const store = useStore();
 
   useEffect(() => {
+    console.log('store.isAuthDone', store.isAuthDone);
     if (store.isAuthDone) {
       setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
     }
   }, [store]);
 
@@ -108,6 +111,7 @@ export default function HeaderMegaMenu() {
         localStorage.clear();
         localStorage.setItem('isAuthenticated', 'false');
         setIsAuthenticated(false);
+        store.updateAuthDone(false);
         router.push('/login');
       }
     } catch (e) {

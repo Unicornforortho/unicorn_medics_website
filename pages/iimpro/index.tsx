@@ -389,6 +389,7 @@ function NavbarNested() {
     const access_token = localStorage.getItem('access_token');
     if (access_token === null) {
       localStorage.clear();
+      store.updateAuthDone(false);
       router.push('/login');
     } else {
       try {
