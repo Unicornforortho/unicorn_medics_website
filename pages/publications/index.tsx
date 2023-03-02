@@ -1,3 +1,11 @@
+// This is a TypeScript React component that renders a grid of research interests. It imports several components from the "@mantine/core" and "@tabler/icons" packages, as well as some data from a "publications" file.
+
+// The "ResearchInterest" component renders a single research interest, with an icon, title, and author(s). If a link is provided, the title will be rendered as a hyperlink.
+
+// The "ResearchInterestGrid" component is the main component that renders the grid of research interests. It takes in a title and description as props, and defaults to using the "ResearchInterestData" if no data is provided. It also sets up a SimpleGrid from "@mantine/core" that will render each research interest as a grid item. The SimpleGrid is responsive and will adjust the number of columns based on the screen size.
+
+// Overall, this component is designed to render a grid of research interests, with a focus on responsive design.
+
 import {
   ThemeIcon,
   Text,

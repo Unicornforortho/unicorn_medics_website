@@ -1,3 +1,7 @@
+// This is a code snippet of a React component for a registration form. The component is used to register users on a website, and it contains fields for inputting personal information such as first name, last name, email, password, country, speciality, phone, and institution. The component also makes use of the Mantine UI library for styling, and it contains validation checks to ensure that all required fields are filled in and that the passwords match.
+
+// The component also uses local storage to check whether the user is already authenticated and redirects them to the homepage if they are. Finally, the component encrypts the user's password before sending it to the server for added security.
+
 import {
   TextInput,
   Anchor,
@@ -11,7 +15,7 @@ import {
   PasswordInput,
   Loader,
 } from '@mantine/core';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { showNotification } from '@mantine/notifications';
 import { useRouter } from 'next/router';
 import { encrypt } from '../../helper-functions/encryption';
@@ -29,6 +33,11 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
+
+  useEffect(() => {
+    const authentication = localStorage.getItem('isAuthenticated');
+    authentication === 'true' && router.push('/');
+  }, []);
 
   async function handleRegister() {
     setLoading(true);

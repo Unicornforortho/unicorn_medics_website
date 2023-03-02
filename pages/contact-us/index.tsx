@@ -1,3 +1,5 @@
+// This code exports a React functional component that creates a contact form with fields for the user's name, email, subject, and message. The form uses the useForm hook from the @mantine/form library to handle form submission and validation. The handleSumbit function is called when the form is submitted, which sends an email to the specified address using the sendCustomerEmail function. If the email is sent successfully, a success notification is shown using the showNotification function from the @mantine/notifications library. If there is an error with sending the email, an error notification is shown instead. The form layout is created using the SimpleGrid, Group, Text, Button, and Container components from the @mantine/core library.
+
 import { TextInput, Textarea, SimpleGrid, Group, Text, Button, Container } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';

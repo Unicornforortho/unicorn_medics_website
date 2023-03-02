@@ -1,3 +1,9 @@
+// This is a React component that provides a login page for users to sign in to the website. It imports several components from the Mantine UI library, as well as hooks from React and Next.js.
+
+// The component uses state to manage the user's email and password inputs, as well as a loading state when the user clicks the sign-in button. It also uses the useEffect hook to check if the user is already authenticated and redirect them to the homepage if they are.
+
+// The handleLogin function is called when the user clicks the sign-in button. It sends a POST request to an authentication endpoint with the user's email and password. If the credentials are invalid, it displays a notification to the user. Otherwise, it sets the loading state to true and calls the signInWithOtp method from the supabase authentication library to send a magic link to the user's email. If the authentication is successful, the user will be redirected to the homepage.
+
 import {
   TextInput,
   Anchor,
@@ -8,14 +14,21 @@ import {
   Button,
   PasswordInput,
 } from '@mantine/core';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { showNotification } from '@mantine/notifications';
+import { useRouter } from 'next/router';
 import supabase from '../../supabase';
 
 export default function Login() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const authentication = localStorage.getItem('isAuthenticated');
+    authentication === 'true' && router.push('/');
+  }, []);
 
   async function handleLogin() {
     const loginURL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`;

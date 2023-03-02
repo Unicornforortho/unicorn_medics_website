@@ -1,3 +1,7 @@
+// This is a React component that displays a grid of research interests. The component imports various components and styles from the "@mantine/core" and "@tabler/icons" libraries. It then defines a "ResearchInterest" component that renders an icon, a title, and a description for a given research interest. It also defines a "ResearchInterestGrid" component that renders a title, a description, and a grid of "ResearchInterest" components, using data from the "ResearchInterestData" module by default.
+
+// The "ResearchInterestGrid" component also uses the "useStyles" hook from "@mantine/core" to define styles for the title and description. It then renders a container with the title "Research Interest", a description, and a grid of "ResearchInterest" components. The grid has 3 columns by default, but changes to 2 columns and 1 column for smaller screen sizes. The number of columns and the spacing b
+
 import {
   ThemeIcon,
   Text,

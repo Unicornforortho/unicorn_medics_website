@@ -1,3 +1,5 @@
+// The Achievement component displays a timeline of news and achievements related to research papers presented and accepted at different conferences in the year 2023. The timeline is created using the Mantine UI library's Timeline and Timeline.Item components, and the bullet points on the timeline are customized using Tabler Icons. The component also uses the Text, Center, and Box components from the Mantine UI library to format the text and center the timeline.
+
 import { Timeline, Text, Center, Box } from '@mantine/core';
 import {
   IconCircleNumber1,
@@ -6,7 +8,7 @@ import {
   IconCircleNumber4,
 } from '@tabler/icons';
 
-function Demo() {
+function Achievements() {
   return (
     <>
       <Text fz={48} align="center">
@@ -67,4 +69,4 @@ function Demo() {
   );
 }
 
-export default Demo;
+export default Achievements;
