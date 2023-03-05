@@ -580,8 +580,21 @@ function NavbarNested() {
           </Button>
         </Stack>
       </Box>
-      <Box className={classes.hiddenDesktop}>
-        <Text>Screen size too small. Please try again with a larger display</Text>
+      <Box
+        className={classes.hiddenDesktop}
+        style={{
+          height: '70vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+        }}
+      >
+        <Text fw={600} fz={20} align="center">
+          Screen size too small.
+        </Text>
+        <Text fw={600} fz={20} align="center">
+          Try again with a larger display.
+        </Text>
       </Box>
     </>
   );
