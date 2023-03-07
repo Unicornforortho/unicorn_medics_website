@@ -4,7 +4,7 @@
 
 // The Collaborators component itself renders the page title, "Collaborators," and a grid of collaborators using the Grid component from the Mantine UI library. The CollaboratorData array is mapped over and each collaborator is rendered as a CollaboratorsDetails component within a Grid.Col component. The Grid.Col component determines the width of each collaborator card based on the screen size (large, medium, or small).
 
-import { Group, Text, Grid, Anchor } from '@mantine/core';
+import { Group, Text, Anchor, Stack } from '@mantine/core';
 import { IconBuilding } from '@tabler/icons';
 import React from 'react';
 import CollaboratorData from '../../data/collaborators';
@@ -37,17 +37,15 @@ export default function Collaborators() {
       <Text fz={48} fw={500} mb={30}>
         Collaborators
       </Text>
-      <Grid>
+      <Stack>
         {CollaboratorData.map((collaborator: Collaborator) => (
-          <Grid.Col lg={4} md={3} sm={1}>
-            <CollaboratorsDetails
-              name={collaborator.name}
-              link={collaborator.link}
-              city={collaborator.city}
-            />
-          </Grid.Col>
+          <CollaboratorsDetails
+            name={collaborator.name}
+            link={collaborator.link}
+            city={collaborator.city}
+          />
         ))}
-      </Grid>
+      </Stack>
     </>
   );
 }

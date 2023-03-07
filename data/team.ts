@@ -22,7 +22,7 @@ const team = {
       id: 4,
       name: 'Mr Soumya Snighdha Kundu',
       linkedin: 'https://in.linkedin.com/in/soumyaskundu',
-      image: '/static/team-photos/default_female.jpg',
+      image: '/static/team-photos/default_male.png',
     },
     {
       id: 5,

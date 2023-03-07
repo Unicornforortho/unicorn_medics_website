@@ -50,13 +50,6 @@ const publications = [
   {
     icon: IconBook,
     title:
-      'Ghose, S., Datta, S., Batta, V., Malathy, C. and Gayathri, M., 2020, December. Artificial Intelligence based identification of Total Knee Arthroplasty Implants. In 2020 3rd International Conference on Intelligent Sustainable Systems (ICISS) (pp. 302-307). IEEE.',
-    link: 'https://ieeexplore.ieee.org/abstract/document/9315956',
-    authors: 'Ghose, S., Datta, S., Batta, V., Malathy, C. and Gayathri, M.',
-  },
-  {
-    icon: IconBook,
-    title:
       'Sharma, S., Batta, V., Chidambaranathan, M., Mathialagan, P., Mani, G., Kiruthika, M., Datta, B., Kamineni, S., Reddy, G., Masilamani, S. and Vijayan, S., 2021. Knee Implant Identification by Fine-Tuning Deep Learning Models. Indian Journal of Orthopaedics, pp.1-11.',
     link: 'https://pubmed.ncbi.nlm.nih.gov/34824729/',
     authors:
