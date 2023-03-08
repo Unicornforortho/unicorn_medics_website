@@ -47,18 +47,15 @@ const mockdata = [
     label: 'Ankle',
     icon: IconNotes,
     initiallyOpened: false,
-    links: [
-      { label: 'Ankle I', value: 'ankle_one' },
-      { label: 'Ankle II', value: 'ankle_two' },
-    ],
+    links: [{ label: 'Ankle I', value: 'ankle_one' }],
   },
   {
     label: 'Shoulder',
     icon: IconNotes,
     initiallyOpened: false,
     links: [
-      { label: 'Shoulder I', value: 'shoulder_one' },
-      { label: 'Shoulder II', value: 'shoulder_two' },
+      { label: 'Shoulder Reverse', value: 'shoulder_reverse' },
+      { label: 'Shoulder Total', value: 'shoulder_total' },
     ],
   },
 ];
@@ -168,14 +165,15 @@ const useStyles = createStyles((theme) => ({
       color: theme.colorScheme === 'dark' ? theme.white : theme.black,
     },
   },
+
   hiddenMobile: {
-    [theme.fn.smallerThan('lg')]: {
+    [theme.fn.smallerThan('sm')]: {
       display: 'none',
     },
   },
 
   hiddenDesktop: {
-    [theme.fn.largerThan('lg')]: {
+    [theme.fn.largerThan('md')]: {
       display: 'none',
     },
   },
@@ -244,6 +242,10 @@ function NavbarNested() {
       1: 'Stryker Star',
       2: 'Wright Inbone II',
       3: 'Zimmer Biomet Trabecular Model',
+    },
+    shoulder_reverse: {
+      0: 'Depuy Delta',
+      1: 'Evolutis Unic',
     },
   };
 
