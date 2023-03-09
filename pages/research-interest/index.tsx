@@ -16,10 +16,9 @@ import ResearchInterestData from '../../data/research-interest';
 interface FeatureProps {
   icon: TablerIcon;
   title: React.ReactNode;
-  description: React.ReactNode;
 }
 
-export function ResearchInterest({ icon: Icon, title, description }: FeatureProps) {
+export function ResearchInterest({ icon: Icon, title }: FeatureProps) {
   const theme = useMantineTheme();
   return (
     <div>
@@ -27,9 +26,6 @@ export function ResearchInterest({ icon: Icon, title, description }: FeatureProp
         <Icon size={20} stroke={1.5} />
       </ThemeIcon>
       <Text style={{ marginTop: theme.spacing.sm, marginBottom: 7 }}>{title}</Text>
-      <Text size="sm" color="dimmed" style={{ lineHeight: 1.6 }}>
-        {description}
-      </Text>
     </div>
   );
 }
@@ -61,7 +57,7 @@ interface FeaturesGridProps {
 }
 
 export default function ResearchInterestGrid({ data = ResearchInterestData }: FeaturesGridProps) {
-  const { classes, theme } = useStyles();
+  const { theme } = useStyles();
   const features = data.map((feature, index) => <ResearchInterest {...feature} key={index} />);
 
   return (
@@ -69,14 +65,6 @@ export default function ResearchInterestGrid({ data = ResearchInterestData }: Fe
       <Text fz={48} fw={500} mb={15}>
         Research Interest
       </Text>
-
-      <Container size={560} p={0}>
-        <Text size="sm" className={classes.description}>
-          Every once in a while, you’ll see a Golbat that’s missing some fangs. This happens when
-          hunger drives it to try biting a Steel-type Pokémon
-        </Text>
-      </Container>
-
       <SimpleGrid
         mt={60}
         cols={3}

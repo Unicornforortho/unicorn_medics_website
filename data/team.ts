@@ -4,19 +4,19 @@ const team = {
       id: 1,
       name: 'Dr Vineet Batta',
       linkedin: 'https://uk.linkedin.com/in/vineet-batta-2864934',
-      image: '/static/team-photos/default_male.png',
+      image: '/static/team-photos/dr_vineet_batta.jpg',
     },
     {
       id: 2,
       name: 'Dr Malathy C',
       linkedin: 'https://in.linkedin.com/in/malathy-chidambaranathan-aa345064',
-      image: '/static/team-photos/default_female.jpg',
+      image: '/static/team-photos/c_malathy.jpeg',
     },
     {
       id: 3,
       name: 'Dr Gayathri M',
       linkedin: 'https://www.srmist.edu.in/faculty/m-gayathri/',
-      image: '/static/team-photos/default_female.jpg',
+      image: '/static/team-photos/gayathri_m.jpeg',
     },
     {
       id: 4,
@@ -28,13 +28,13 @@ const team = {
       id: 5,
       name: 'Dr Srinath K',
       linkedin: 'https://srinathkamineni.com/',
-      image: '/static/team-photos/default_male.png',
+      image: '/static/team-photos/srinath.jpg',
     },
     {
       id: 6,
       name: 'Dr Kartik M Varadarajan',
       linkedin: 'https://www.linkedin.com/in/kartikmv',
-      image: '/static/team-photos/default_male.png',
+      image: '/static/team-photos/kartik.jpg',
     },
     {
       id: 7,
