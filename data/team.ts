@@ -78,7 +78,7 @@ const team = {
       id: 13,
       name: 'Sheel Patel',
       linkedin: 'https://in.linkedin.com/in/sheel1206',
-      image: '/static/team-photos/default_male.png',
+      image: '/static/team-photos/sheel_patel.png',
     },
     {
       id: 14,
