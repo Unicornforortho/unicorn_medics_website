@@ -1,5 +1,5 @@
 /*
-  Sends a mail to `iimpro.contact.us@gmail.com` from the customer's email address.
+  Sends a mail to the customer from the `iimpro.smtp@gmail.com`.
 */
 const sendOTPToCustomer = async (from: string, to: string, subject: string, message: string) => {
   const URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/customer-activity/send-password-change-otp`;

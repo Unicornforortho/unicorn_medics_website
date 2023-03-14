@@ -16,6 +16,9 @@ import sendOTPToCustomer from '../../helper-functions/send-otp-mail';
 import changePassword from '../../helper-functions/update-new-password';
 
 export default function Login() {
+  /*
+    State Variables for password reset
+  */
   const [disableSetEmail, setDisableSetEmail] = useState(false);
   const [email, setEmail] = useState('');
   const [otp, setOTP] = useState('');
@@ -31,6 +34,9 @@ export default function Login() {
     authentication === 'true' && router.push('/');
   }, []);
 
+  /*
+    Validate email method
+  */
   const validateEmail: () => boolean = () => {
     try {
       forgotPasswordSchema.parse({ email });
@@ -40,6 +46,9 @@ export default function Login() {
     }
   };
 
+  /*
+    Generate Random OTP and send it to the customer
+  */
   const handleSendOTP = async () => {
     if (validateEmail()) {
       setLoading(true);
@@ -96,6 +105,9 @@ export default function Login() {
     }
   };
 
+  /*
+    Allow user to update the password if otp matches
+  */
   const handleMatchOTP = async () => {
     if (otp === userEnteredOTP) {
       // disable form for OTP details
@@ -112,6 +124,9 @@ export default function Login() {
     }
   };
 
+  /*
+    Update customer password
+  */
   const handleChangePassword = async () => {
     try {
       const updatedPassword = await changePassword(email, newPassword);
