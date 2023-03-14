@@ -12,9 +12,13 @@
 Documentation of the frontend application is provided within the code itself. All the functions and files are documented with the functionality they provide.
 
 ## API Documentation
-### [Postman Documentation](https://documenter.getpostman.com/view/16629391/2s93CRLBzC) 
+### API Documentation for the frontend of the application can be found at : [Click Here](https://documenter.getpostman.com/view/16629391/2s93CRLBzC) 
+#### Note: This documentation includes all the APIs required for Authentication and User Activity with Supabase Database.
+##### Note : This is a documentation generated using Postman Documenter.
+
 ### FAST API Documentation
 URL: http://localhost:8000/predict/
+
 Payload Parameters: 
 - file `DataType = File`
 - modelName `DataType = string` 
