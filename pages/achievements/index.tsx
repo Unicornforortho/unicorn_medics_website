@@ -11,7 +11,7 @@ import {
 function Achievements() {
   return (
     <>
-      <Text fz={48} align="center">
+      <Text fz={48} fw={500} mb={15} align="center">
         News and Achievements
       </Text>
       <br />
@@ -34,7 +34,7 @@ function Achievements() {
 
             <Timeline.Item
               bullet={<IconCircleNumber2 />}
-              title="Research Paper Accepted for presentation at Efort congress"
+              title="Abstract Paper Accepted for presentation at Efort congress"
             >
               <Text color="dimmed" size="sm">
                 Abstract titled “Review of Knee Implant Identification techniques from X ray Images
@@ -44,7 +44,7 @@ function Achievements() {
 
             <Timeline.Item
               bullet={<IconCircleNumber3 />}
-              title="Research Paper Presented at TNOACON"
+              title="Abstract Paper Presented at TNOACON"
             >
               <Text color="dimmed" size="sm">
                 Abstract titled “Automated Implant Identification using 2D Templates” was presented
@@ -54,7 +54,7 @@ function Achievements() {
 
             <Timeline.Item
               bullet={<IconCircleNumber4 />}
-              title="Research Paper Accepted for presentation at ISBI"
+              title="Abstract Paper Accepted for presentation at ISBI"
             >
               <Text color="dimmed" size="sm">
                 Abstract titled “DATA CONSTRAINED DEEP LEARNING TO IMPROVE SCENARIOS IN REVISION

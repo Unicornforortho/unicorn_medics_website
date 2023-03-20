@@ -5,7 +5,7 @@ import { Text } from '@mantine/core';
 function Gallery() {
   return (
     <>
-      <Text fz={48} align="center">
+      <Text fz={48} fw={500} mb={15} align="center">
         Gallery
       </Text>
       <Text fz={24} align="center">

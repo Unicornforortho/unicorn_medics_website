@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const forgotPasswordSchema = z.object({
+const emailSchema = z.object({
   email: z
     .string()
     .min(1, 'Email can not be empty')
@@ -8,4 +8,4 @@ const forgotPasswordSchema = z.object({
     .email(),
 });
 
-export default forgotPasswordSchema;
+export default emailSchema;

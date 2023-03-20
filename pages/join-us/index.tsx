@@ -13,7 +13,7 @@ import { Text, Anchor, Box } from '@mantine/core';
 export default function JoinUs() {
   return (
     <Box>
-      <Text fz={48} fw={700} align="center">
+      <Text fz={48} fw={500} mb={15} align="center">
         We are full right now :(
       </Text>
       <br />

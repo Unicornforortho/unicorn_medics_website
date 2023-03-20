@@ -11,7 +11,8 @@ import {
 import { useState, useEffect } from 'react';
 import { showNotification } from '@mantine/notifications';
 import { useRouter } from 'next/router';
-import forgotPasswordSchema from '../../zod-schemas/forgot-password';
+import emailSchema from '../../zod-schemas/email';
+import passwordSchema from '../../zod-schemas/password';
 import sendOTPToCustomer from '../../helper-functions/send-otp-mail';
 import changePassword from '../../helper-functions/update-new-password';
 
@@ -39,7 +40,19 @@ export default function Login() {
   */
   const validateEmail: () => boolean = () => {
     try {
-      forgotPasswordSchema.parse({ email });
+      emailSchema.parse({ email });
+      return true;
+    } catch (err: any) {
+      return false;
+    }
+  };
+
+  /*
+    Validate password method
+  */
+  const validatePassword: () => boolean = () => {
+    try {
+      passwordSchema.parse({ password: newPassword });
       return true;
     } catch (err: any) {
       return false;
@@ -80,7 +93,7 @@ export default function Login() {
             autoClose: 5000,
           });
         } else {
-          setLoading(false);
+          // setLoading(false);
           setDisableSetNewPassword(true);
         }
       } catch (error: any) {
@@ -128,28 +141,37 @@ export default function Login() {
     Update customer password
   */
   const handleChangePassword = async () => {
-    try {
-      const updatedPassword = await changePassword(email, newPassword);
-      if (updatedPassword.error) {
+    if (validatePassword()) {
+      try {
+        const updatedPassword = await changePassword(email, newPassword);
+        if (updatedPassword.error) {
+          showNotification({
+            title: 'Internal Server Error',
+            message: 'Unable to update the password, try again later.',
+            color: 'red',
+            autoClose: 5000,
+          });
+        } else {
+          showNotification({
+            title: 'Success',
+            message: 'Password has been updated successfully!',
+            color: 'green',
+            autoClose: 5000,
+          });
+          router.push('/login');
+        }
+      } catch (error: any) {
         showNotification({
           title: 'Internal Server Error',
           message: 'Unable to update the password, try again later.',
           color: 'red',
           autoClose: 5000,
         });
-      } else {
-        showNotification({
-          title: 'Success',
-          message: 'Password has been updated successfully!',
-          color: 'green',
-          autoClose: 5000,
-        });
-        router.push('/login');
       }
-    } catch (error: any) {
+    } else {
       showNotification({
-        title: 'Internal Server Error',
-        message: 'Unable to update the password, try again later.',
+        title: 'Invalid Password',
+        message: 'Please provide a valid password with minimum 6 characters.',
         color: 'red',
         autoClose: 5000,
       });
@@ -185,9 +207,14 @@ export default function Login() {
             Send OTP
           </Button>
           {loading && (
-            <Text color="green" align="center" size="sm" mt={10}>
-              One Time Password for password reset has been sent to your email.
-            </Text>
+            <>
+              <Text color="green" align="center" size="sm" mt={10}>
+                OTP for password reset has been sent to your email.
+              </Text>
+              <Text color="green" align="center" size="xs" mt={2}>
+                Check the spam folder if you don&apos;t see it in your inbox.
+              </Text>
+            </>
           )}
         </Paper>
       </>

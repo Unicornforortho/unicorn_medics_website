@@ -116,9 +116,14 @@ export default function Login() {
           Sign in
         </Button>
         {loading && (
-          <Text color="green" align="center" size="sm" mt={10}>
-            Magic Link sent. Check your Mail!
-          </Text>
+          <>
+            <Text color="green" align="center" size="sm" mt={10}>
+              Magic Link Sent. Please check your email.
+            </Text>
+            <Text color="green" align="center" size="xs" mt={2}>
+              Check the spam folder if you don&apos;t see it in your inbox.
+            </Text>
+          </>
         )}
       </Paper>
     </Container>

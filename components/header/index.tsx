@@ -147,9 +147,6 @@ export default function HeaderMegaMenu() {
             <Link href="/achievements" className={classes.link}>
               Achievements
             </Link>
-            <Link href="/impro" className={classes.link}>
-              Impro
-            </Link>
             <Link href="/join-us" className={classes.link}>
               Join Us
             </Link>
@@ -215,9 +212,6 @@ export default function HeaderMegaMenu() {
           </Link>
           <Link href="/achievements" className={classes.link}>
             News and Achievements
-          </Link>
-          <Link href="/impro" className={classes.link}>
-            Impro
           </Link>
           <Link href="/join-us" className={classes.link}>
             Join Us

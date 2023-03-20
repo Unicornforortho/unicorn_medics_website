@@ -34,7 +34,7 @@ const CollaboratorsDetails: React.FC<Collaborator> = ({ name, link, city }) => (
 export default function Collaborators() {
   return (
     <>
-      <Text fz={48} fw={500} mb={30}>
+      <Text fz={48} fw={500} mb={15}>
         Collaborators
       </Text>
       <Stack>
