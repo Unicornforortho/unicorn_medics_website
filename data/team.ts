@@ -84,7 +84,7 @@ const team = {
       id: 14,
       name: 'Shaswat Srivastava',
       linkedin: 'https://in.linkedin.com/in/shaswat-srivastava-03a67118b',
-      image: '/static/team-photos/default_female.jpg',
+      image: '/static/team-photos/default_male.png',
     },
     {
       id: 15,
