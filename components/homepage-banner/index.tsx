@@ -6,7 +6,6 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     padding: `calc(${theme.spacing.xl} * 2)`,
     borderRadius: theme.radius.md,
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
     [theme.fn.smallerThan('xl')]: {
       flexDirection: 'column-reverse',
       padding: theme.spacing.xl,
@@ -97,7 +96,7 @@ export default function EmailBanner({ imageURL, text }: EmailBannerProps) {
           contact him.
         </Text>
       </div>
-      <Image src={imageURL} className={classes.image} alt={text} />
+      <Image radius="50%" src={imageURL} className={classes.image} alt={text} />
     </div>
   );
 }

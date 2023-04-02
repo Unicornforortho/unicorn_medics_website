@@ -14,7 +14,6 @@ import { useEffect, useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { ColorSchemeToggle } from '../color-scheme-toggle';
 import supabaseClient from '../../supabase';
 import useStore from '../../store/store';
 
@@ -129,11 +128,11 @@ export default function HeaderMegaMenu() {
             <Link href="/" className={classes.link}>
               Home
             </Link>
-            <Link href="/iimpro" className={classes.link}>
-              IIMPRO
+            <Link href="/implant-identification" className={classes.link}>
+              Implant Identification
             </Link>
             <Link href="/collaborators" className={classes.link}>
-              Collaboators
+              Collaborators
             </Link>
             <Link href="/team" className={classes.link}>
               Team
@@ -175,7 +174,6 @@ export default function HeaderMegaMenu() {
             ) : (
               <Button onClick={() => handleSignOut()}>Sign Out</Button>
             )}
-            <ColorSchemeToggle />
           </Group>
           <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />
         </Group>
@@ -242,7 +240,6 @@ export default function HeaderMegaMenu() {
             ) : (
               <Button onClick={() => handleSignOut()}>Sign Out</Button>
             )}
-            <ColorSchemeToggle />
           </Group>
         </ScrollArea>
       </Drawer>

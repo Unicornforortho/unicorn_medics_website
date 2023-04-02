@@ -165,7 +165,6 @@ const useStyles = createStyles((theme) => ({
       color: theme.colorScheme === 'dark' ? theme.white : theme.black,
     },
   },
-
   hiddenMobile: {
     [theme.fn.smallerThan('lg')]: {
       display: 'none',
@@ -174,7 +173,7 @@ const useStyles = createStyles((theme) => ({
 
   hiddenDesktop: {
     [theme.fn.largerThan('lg')]: {
-      display: 'none',
+      display: 'none !important',
     },
   },
 
@@ -244,7 +243,7 @@ function NavbarNested() {
       3: 'Zimmer Biomet Trabecular Model',
     },
     shoulder_reverse: {
-      0: 'Depuy Delta',
+      0: 'Depuy Delta Xtend',
       1: 'Evolutis Unic',
     },
   };
