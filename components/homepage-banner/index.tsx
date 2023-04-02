@@ -96,7 +96,7 @@ export default function EmailBanner({ imageURL, text }: EmailBannerProps) {
           contact him.
         </Text>
       </div>
-      <Image radius="50%" src={imageURL} className={classes.image} alt={text} />
+      <Image radius={50} src={imageURL} className={classes.image} alt={text} />
     </div>
   );
 }
