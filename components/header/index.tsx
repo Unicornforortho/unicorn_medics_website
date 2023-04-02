@@ -193,8 +193,8 @@ export default function HeaderMegaMenu() {
           <Link href="/" className={classes.link}>
             Home
           </Link>
-          <Link href="/iimpro" className={classes.link}>
-            IIMPRO
+          <Link href="/implant-identification" className={classes.link}>
+            Implant Identification
           </Link>
           <Link href="/collaborators" className={classes.link}>
             Collaboators
