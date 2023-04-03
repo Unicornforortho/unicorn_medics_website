@@ -66,6 +66,7 @@ export default function Register() {
         color: 'red',
         autoClose: 5000,
       });
+      return;
     }
     const data = {
       firstname: fname,

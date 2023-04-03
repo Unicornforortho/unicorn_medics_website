@@ -15,6 +15,7 @@ import emailSchema from '../../zod-schemas/email';
 import passwordSchema from '../../zod-schemas/password';
 import sendOTPToCustomer from '../../helper-functions/send-otp-mail';
 import changePassword from '../../helper-functions/update-new-password';
+import doesCustomerExists from '../../helper-functions/check-if-customer-exists';
 
 export default function Login() {
   /*
@@ -64,49 +65,58 @@ export default function Login() {
   */
   const handleSendOTP = async () => {
     if (validateEmail()) {
-      setLoading(true);
-      setDisableSetEmail(true);
-      const generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-      setOTP(generatedOTP);
-      try {
-        // send mail
-        const data = await sendOTPToCustomer(
-          'iimpro.smtp@gmail.com',
-          email,
-          'OTP for password reset',
-          `<p>Dear Customer,</p>
-          <p>We have received a request to reset your password for your account with us.</p>
-          <p>Your One Time Password for password reset is <strong>${generatedOTP}</strong></p>
-          <p>If you did not initiate this password reset request, please ignore this email and contact our support team immediately.</p>
-          <p>Thank you for using our services.</p>
-          <p>Best regards,</p>
-          <p>Team Impro</p>`,
-        );
-
-        if (data.error) {
-          setLoading(false);
-          setDisableSetNewPassword(true);
-          showNotification({
-            title: data.title,
-            message: data.message,
-            color: 'red',
-            autoClose: 5000,
-          });
-        } else {
-          // setLoading(false);
-          setDisableSetNewPassword(true);
-        }
-      } catch (error: any) {
-        // handle error
-        setDisableSetEmail(false);
-        setLoading(false);
-        setOTP('');
+      const customerDoesNotExists = await doesCustomerExists(email);
+      if (!customerDoesNotExists) {
         showNotification({
-          title: 'Internal Server Error',
-          message: 'Please try again later.',
+          title: 'Email not found',
+          message: 'This email does not exists, try registering first.',
           color: 'red',
           autoClose: 5000,
         });
+      } else {
+        setLoading(true);
+        setDisableSetEmail(true);
+        const generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+        setOTP(generatedOTP);
+        try {
+          // send mail
+          const data = await sendOTPToCustomer(
+            'iimpro.smtp@gmail.com',
+            email,
+            'OTP for password reset',
+            `<p>Dear Customer,</p>
+              <p>We have received a request to reset your password for your account with us.</p>
+              <p>Your One Time Password for password reset is <strong>${generatedOTP}</strong></p>
+              <p>If you did not initiate this password reset request, please ignore this email and contact our support team immediately.</p>
+              <p>Thank you for using our services.</p>
+              <p>Best regards,</p>
+              <p>Team Impro</p>`,
+          );
+          if (data.error) {
+            setLoading(false);
+            setDisableSetNewPassword(true);
+            showNotification({
+              title: data.title,
+              message: data.message,
+              color: 'red',
+              autoClose: 5000,
+            });
+          } else {
+            // setLoading(false);
+            setDisableSetNewPassword(true);
+          }
+        } catch (error: any) {
+          // handle error
+          setDisableSetEmail(false);
+          setLoading(false);
+          setOTP('');
+          showNotification({
+            title: 'Internal Server Error',
+            message: 'Please try again later.',
+            color: 'red',
+            autoClose: 5000,
+          });
+        }
       }
     } else {
       showNotification({
