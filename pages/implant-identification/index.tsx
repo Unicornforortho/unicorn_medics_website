@@ -199,7 +199,6 @@ function NavbarNested() {
     'https://nearfile.com/wp-content/uploads/2020/10/No-Image-Available.jpg',
   );
   const [prediction, setPrediction] = useState<any>(null);
-  const [confidence, setConfidence] = useState<any>(null);
 
   /*
     Saves the image to the local memory used to show the image in the UI
@@ -298,7 +297,6 @@ function NavbarNested() {
         .catch(() => {
           setFile(null);
           setPrediction(null);
-          setConfidence(null);
           setImageURL('https://nearfile.com/wp-content/uploads/2020/10/No-Image-Available.jpg');
           showNotification({
             title: 'Internal Server Error',
@@ -335,7 +333,6 @@ function NavbarNested() {
   */
   const handleClick = (link: any) => {
     setPrediction(null);
-    setConfidence(null);
     setFile(null);
     setImageURL('https://nearfile.com/wp-content/uploads/2020/10/No-Image-Available.jpg');
     store.setCurrentImplant(link.value, link.label);
@@ -535,7 +532,7 @@ function NavbarNested() {
                 mr="auto"
               />
             </Card>
-            {prediction && confidence ? (
+            {prediction ? (
               <Card
                 withBorder
                 p="xl"
