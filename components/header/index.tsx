@@ -16,6 +16,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import supabaseClient from '../../supabase';
 import useStore from '../../store/store';
+import { ColorSchemeToggle } from '../color-scheme-toggle';
 
 /*
   Styling for the navbar.
@@ -174,6 +175,7 @@ export default function HeaderMegaMenu() {
             ) : (
               <Button onClick={() => handleSignOut()}>Sign Out</Button>
             )}
+            <ColorSchemeToggle />
           </Group>
           <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />
         </Group>
@@ -190,34 +192,34 @@ export default function HeaderMegaMenu() {
       >
         <ScrollArea sx={{ height: 'calc(100vh - 60px)' }} mx="-md">
           <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
-          <Link href="/" className={classes.link}>
+          <Link href="/" className={classes.link} onClick={toggleDrawer}>
             Home
           </Link>
-          <Link href="/implant-identification" className={classes.link}>
+          <Link href="/implant-identification" className={classes.link} onClick={toggleDrawer}>
             Implant Identification
           </Link>
-          <Link href="/collaborators" className={classes.link}>
+          <Link href="/collaborators" className={classes.link} onClick={toggleDrawer}>
             Collaboators
           </Link>
-          <Link href="/team" className={classes.link}>
+          <Link href="/team" className={classes.link} onClick={toggleDrawer}>
             Team
           </Link>
-          <Link href="/research-interest" className={classes.link}>
+          <Link href="/research-interest" className={classes.link} onClick={toggleDrawer}>
             Research Interest
           </Link>
-          <Link href="/publications" className={classes.link}>
+          <Link href="/publications" className={classes.link} onClick={toggleDrawer}>
             Publications
           </Link>
-          <Link href="/achievements" className={classes.link}>
+          <Link href="/achievements" className={classes.link} onClick={toggleDrawer}>
             News and Achievements
           </Link>
-          <Link href="/join-us" className={classes.link}>
+          <Link href="/join-us" className={classes.link} onClick={toggleDrawer}>
             Join Us
           </Link>
-          <Link href="/gallery" className={classes.link}>
+          <Link href="/gallery" className={classes.link} onClick={toggleDrawer}>
             Gallery
           </Link>
-          <Link href="/contact-us" className={classes.link}>
+          <Link href="/contact-us" className={classes.link} onClick={toggleDrawer}>
             Contact Us
           </Link>
 
@@ -241,6 +243,7 @@ export default function HeaderMegaMenu() {
               <Button onClick={() => handleSignOut()}>Sign Out</Button>
             )}
           </Group>
+          <ColorSchemeToggle />
         </ScrollArea>
       </Drawer>
     </Box>

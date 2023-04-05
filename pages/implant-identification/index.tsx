@@ -549,11 +549,7 @@ function NavbarNested() {
                   height: '225px',
                 }}
               >
-                <StatsRingCard
-                  title={labelToImplant[store.currentImplantValue][prediction]}
-                  completed={parseFloat(confidence)}
-                  total={100}
-                />
+                <StatsRingCard title={labelToImplant[store.currentImplantValue][prediction]} />
               </Card>
             ) : (
               <Card

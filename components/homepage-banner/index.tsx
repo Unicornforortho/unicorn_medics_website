@@ -8,7 +8,6 @@ const useStyles = createStyles((theme) => ({
     borderRadius: theme.radius.md,
     [theme.fn.smallerThan('xl')]: {
       flexDirection: 'column-reverse',
-      padding: theme.spacing.xl,
     },
   },
 
@@ -21,7 +20,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   body: {
-    paddingRight: `calc(${theme.spacing.xl} * 4)`,
+    paddingRight: `calc(${theme.spacing.xl} * 8)`,
 
     [theme.fn.smallerThan('sm')]: {
       paddingRight: 0,
@@ -96,7 +95,14 @@ export default function EmailBanner({ imageURL, text }: EmailBannerProps) {
           contact him.
         </Text>
       </div>
-      <Image radius={50} src={imageURL} className={classes.image} alt={text} />
+      <Image
+        width={250}
+        height={250}
+        radius={50}
+        src={imageURL}
+        className={classes.image}
+        alt={text}
+      />
     </div>
   );
 }

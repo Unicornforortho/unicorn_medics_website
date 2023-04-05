@@ -28,7 +28,7 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
   const [colorScheme, setColorScheme] = useState<ColorScheme>(props.colorScheme);
 
   const toggleColorScheme = (value?: ColorScheme) => {
-    const nextColorScheme = value || (colorScheme === 'dark' ? 'dark' : 'dark');
+    const nextColorScheme = value || (colorScheme === 'dark' ? 'light' : 'dark');
     setColorScheme(nextColorScheme);
     setCookie('mantine-color-scheme', nextColorScheme, { maxAge: 60 * 60 * 24 * 30 });
   };
@@ -36,8 +36,9 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
   return (
     <>
       <Head>
-        <title>Impro</title>
+        <title>Unicorn Medic</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+        <meta name="description" content="Unicorn Medic" />
         <link rel="shortcut icon" href="/favicon.svg" />
       </Head>
 
