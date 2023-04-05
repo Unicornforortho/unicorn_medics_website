@@ -26,15 +26,15 @@ model Customers {
 model CustomerActivity {
   activityId       String    @id @default(uuid())
   createdAt        DateTime  @default(now())
-  uploadedImageURL String
+  uploadedImageURL String?
   predictionMade   String
-  confidence       Float
   customer         Customers @relation(fields: [customerId], references: [customerId])
   customerId       String
 }
 
 // Speciality Enum
 enum SpecialityEnum {
+  RESEARCHER
   HIP
   KNEE
   SHOULDER

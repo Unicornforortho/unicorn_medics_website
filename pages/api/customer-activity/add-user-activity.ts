@@ -22,7 +22,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               createdAt: new Date(),
               uploadedImageURL: validatedData.uploadedImageURL,
               predictionMade: validatedData.predictionMade,
-              confidence: validatedData.confidence,
               customerId: validatedData.customerId,
             },
           })

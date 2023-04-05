@@ -7,9 +7,13 @@ import { useEffect, useState } from 'react';
 import supabaseClient from '../supabase';
 import useStore from '../store/store';
 import EmailBanner from '../components/homepage-banner/index';
+import getRegisteredUsers from '../helper-functions/get-registered-users';
+import getNumberOfUserUploads from '../helper-functions/get-total-predictions';
 
 function Index() {
   const store = useStore();
+  const [numberOfUsers, setNumberOfUsers] = useState<number>(-1);
+  const [numberOfUserUploads, setNumberOfUserUploads] = useState<number>(-1);
   const [width, setWidth] = useState(0);
   const [text, setText] = useState('Knee');
   const breakpoint = 768;
@@ -26,6 +30,18 @@ function Index() {
     }
     return 'Good Evening. Thanks for your Interest in visiting our website!';
   }
+
+  async function getAllData() {
+    const userData = await getRegisteredUsers();
+    setNumberOfUsers(userData);
+
+    const uploadsData = await getNumberOfUserUploads();
+    setNumberOfUserUploads(uploadsData);
+  }
+
+  useEffect(() => {
+    getAllData();
+  }, []);
 
   useEffect(() => {
     const handleResizeWindow = () => setWidth(window.innerWidth);
@@ -94,6 +110,21 @@ function Index() {
       >
         Detect {text} Implants
       </h1>
+      {numberOfUserUploads === -1 ? (
+        <h1>Loading...</h1>
+      ) : numberOfUserUploads === 0 ? (
+        <h1>No Uploads</h1>
+      ) : (
+        <h1>{numberOfUserUploads} Uploads</h1>
+      )}
+
+      {numberOfUsers === -1 ? (
+        <h1>Loading...</h1>
+      ) : numberOfUsers === 0 ? (
+        <h1>No Users</h1>
+      ) : (
+        <h1>{numberOfUsers} Users</h1>
+      )}
       <EmailBanner imageURL="/static/home-page/dr-vineet-batta.jpg" text="Dr. Vineet Batta" />
     </Container>
   );

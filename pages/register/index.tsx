@@ -154,6 +154,7 @@ export default function Register() {
           label="Speciality"
           placeholder="Mention your speciality"
           data={[
+            { value: 'RESEARCHER', label: 'Researcher' },
             { value: 'HIP', label: 'Hip' },
             { value: 'KNEE', label: 'Knee' },
             { value: 'SHOULDER', label: 'Shoulder' },

@@ -193,7 +193,6 @@ function NavbarNested() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [customerId, setCustomerId] = useState('');
   const [customerEmail, setCustomerEmail] = useState('');
-  const [supabaseURL, setSupabaseURL] = useState<any>('');
   const [file, setFile] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [imageURL, setImageURL] = useState<any>(
@@ -267,9 +266,6 @@ function NavbarNested() {
         });
         return;
       }
-      setSupabaseURL(
-        `${process.env.NEXT_PUBLIC_SUPABASE_URL}storage/v1/object/public/user-uploads/${URL}`,
-      );
       const formData = new FormData();
       formData.append('modelName', store.currentImplantValue);
       formData.append('file', file, file.name);
@@ -291,11 +287,13 @@ function NavbarNested() {
             });
           }
           setPrediction(data.result);
-          const conf = parseFloat(data.confidence) * 100;
-          setConfidence(parseFloat(conf.toFixed(2)));
           const resultObject = labelToImplant[store.currentImplantValue];
-          const predictionMade = resultObject[data.result];
-          await uploadUserActivity(customerId, supabaseURL, predictionMade, confidence);
+          const predictionMade: any = resultObject[data.result];
+          await uploadUserActivity(
+            customerId,
+            `${process.env.NEXT_PUBLIC_SUPABASE_URL}storage/v1/object/public/user-uploads/${URL}`,
+            predictionMade,
+          );
         })
         .catch(() => {
           setFile(null);
