@@ -15,6 +15,7 @@ import {
   Collapse,
   ThemeIcon,
   UnstyledButton,
+  Paper,
 } from '@mantine/core';
 import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
@@ -34,7 +35,6 @@ import { showNotification } from '@mantine/notifications';
 import { Logo } from '../../components/Logo';
 import useStore from '../../store/store';
 import getUserFromEmail from '../../helper-functions/get-user-from-email';
-import StatsRingCard from '../../components/prediction-output';
 import uploadToBucket from '../../helper-functions/upload-to-bucket';
 import uploadUserActivity from '../../helper-functions/upload-user-activity';
 import InfoCard from '../../components/info-card';
@@ -549,7 +549,11 @@ function NavbarNested() {
                   height: '225px',
                 }}
               >
-                <StatsRingCard title={labelToImplant[store.currentImplantValue][prediction]} />
+                <Paper>
+                  <Text align="center" fw={700} fz={24}>
+                    {labelToImplant[store.currentImplantValue][prediction]}
+                  </Text>
+                </Paper>
               </Card>
             ) : (
               <Card
