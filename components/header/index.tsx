@@ -101,6 +101,17 @@ export default function HeaderMegaMenu() {
     }
   }, [store]);
 
+  useEffect(() => {
+    const authentication = localStorage.getItem('isAuthenticated');
+    if (authentication === 'true') {
+      store.updateAuthDone(true);
+      setIsAuthenticated(true);
+    } else {
+      store.updateAuthDone(false);
+      setIsAuthenticated(false);
+    }
+  }, []);
+
   const handleSignOut = async () => {
     try {
       const { error } = await supabaseClient.auth.signOut();

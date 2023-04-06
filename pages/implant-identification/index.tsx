@@ -16,6 +16,7 @@ import {
   ThemeIcon,
   UnstyledButton,
   Paper,
+  Flex,
 } from '@mantine/core';
 import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
@@ -27,11 +28,13 @@ import {
   IconCloudUpload,
   IconX,
   IconDownload,
-  IconNotes,
+  IconCircleNumber1,
+  IconCircleNumber2,
   IconAlertCircle,
 } from '@tabler/icons';
 import { Dropzone, MIME_TYPES } from '@mantine/dropzone';
 import { showNotification } from '@mantine/notifications';
+import Link from 'next/link';
 import { Logo } from '../../components/Logo';
 import useStore from '../../store/store';
 import getUserFromEmail from '../../helper-functions/get-user-from-email';
@@ -45,18 +48,15 @@ import InfoCard from '../../components/info-card';
 const mockdata = [
   {
     label: 'Ankle',
-    icon: IconNotes,
+    icon: IconCircleNumber1,
     initiallyOpened: false,
     links: [{ label: 'Ankle I', value: 'ankle_one' }],
   },
   {
     label: 'Shoulder',
-    icon: IconNotes,
+    icon: IconCircleNumber2,
     initiallyOpened: false,
-    links: [
-      { label: 'Shoulder Reverse', value: 'shoulder_reverse' },
-      { label: 'Shoulder Total', value: 'shoulder_total' },
-    ],
+    links: [{ label: 'Shoulder Reverse', value: 'shoulder_reverse' }],
   },
 ];
 
@@ -182,6 +182,10 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
+function getTitleForAlert(modelTitle: string) {
+  return `'${modelTitle}' can be used for the following implants:`;
+}
+
 /*
   Returns the content for /iimpro
 */
@@ -195,23 +199,23 @@ function NavbarNested() {
   const [customerEmail, setCustomerEmail] = useState('');
   const [file, setFile] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [imageURL, setImageURL] = useState<any>(
-    'https://nearfile.com/wp-content/uploads/2020/10/No-Image-Available.jpg',
-  );
+  const [imageURL, setImageURL] = useState<any>('/static/default-images/no-img-uploaded.jpg');
   const [prediction, setPrediction] = useState<any>(null);
+  const [implantLink, setImplantLink] = useState<any>(null);
 
   /*
     Saves the image to the local memory used to show the image in the UI
   */
   const uploadImage = (files: any) => {
     setPrediction(null);
+    setImplantLink(null);
     if (files.length > 0) {
       setFile(files[0]);
       const url = URL.createObjectURL(files[0]);
       setImageURL(url);
     } else {
       setFile(null);
-      setImageURL('https://nearfile.com/wp-content/uploads/2020/10/No-Image-Available.jpg');
+      setImageURL('/static/default-images/no-img-uploaded.jpg');
     }
   };
 
@@ -239,6 +243,9 @@ function NavbarNested() {
       1: 'Stryker Star',
       2: 'Wright Inbone II',
       3: 'Zimmer Biomet Trabecular Model',
+      // 4: 'Stryker Star',
+      // 5: 'Wright Inbone II',
+      // 6: 'Zimmer Biomet Trabecular Model',
     },
     shoulder_reverse: {
       0: 'Depuy Delta Xtend',
@@ -253,6 +260,7 @@ function NavbarNested() {
     setIsLoading(true);
     if (file !== null) {
       setPrediction(null);
+      setImplantLink(null);
       const fileName = genUniqueId();
       const URL = await uploadToBucket(customerEmail, fileName, file);
       if (URL === undefined) {
@@ -285,7 +293,8 @@ function NavbarNested() {
               icon: <IconAlertCircle />,
             });
           }
-          setPrediction(data.result);
+          setPrediction(data.implantName);
+          setImplantLink(data.implantLink);
           const resultObject = labelToImplant[store.currentImplantValue];
           const predictionMade: any = resultObject[data.result];
           await uploadUserActivity(
@@ -297,7 +306,8 @@ function NavbarNested() {
         .catch(() => {
           setFile(null);
           setPrediction(null);
-          setImageURL('https://nearfile.com/wp-content/uploads/2020/10/No-Image-Available.jpg');
+          setImplantLink(null);
+          setImageURL('/static/default-images/no-img-uploaded.jpg');
           showNotification({
             title: 'Internal Server Error',
             message: 'Please try again later',
@@ -333,8 +343,9 @@ function NavbarNested() {
   */
   const handleClick = (link: any) => {
     setPrediction(null);
+    setImplantLink(null);
     setFile(null);
-    setImageURL('https://nearfile.com/wp-content/uploads/2020/10/No-Image-Available.jpg');
+    setImageURL('/static/default-images/no-img-uploaded.jpg');
     store.setCurrentImplant(link.value, link.label);
   };
 
@@ -442,15 +453,32 @@ function NavbarNested() {
           </Navbar.Section>
         </Navbar>
         <Stack>
-          <Text fw={700} fz={48} mb="md">
-            {store.currentImplantTitle}
-          </Text>
-          {labelToImplant[store.currentImplantValue] && (
-            <InfoCard
-              title="Labels and respective implants"
-              body={labelToImplant[store.currentImplantValue]}
-            />
-          )}
+          <Flex
+            mih={50}
+            bg="transparent"
+            gap="md"
+            justify="space-around"
+            align="center"
+            direction="row"
+            wrap="wrap-reverse"
+          >
+            <Text
+              fw={700}
+              fz={48}
+              mb="md"
+              style={{
+                width: '35%',
+              }}
+            >
+              {store.currentImplantTitle}
+            </Text>
+            {labelToImplant[store.currentImplantValue] && (
+              <InfoCard
+                title={getTitleForAlert(store.currentImplantTitle)}
+                body={labelToImplant[store.currentImplantValue]}
+              />
+            )}
+          </Flex>
           <div className={classes.wrapper}>
             <Dropzone
               openRef={openRef}
@@ -532,7 +560,7 @@ function NavbarNested() {
                 mr="auto"
               />
             </Card>
-            {prediction ? (
+            {prediction && implantLink ? (
               <Card
                 withBorder
                 p="xl"
@@ -544,10 +572,15 @@ function NavbarNested() {
                   height: '225px',
                 }}
               >
-                <Paper>
+                <Paper
+                  style={{
+                    backgroundColor: 'transparent',
+                  }}
+                >
                   <Text align="center" fw={700} fz={24}>
-                    {labelToImplant[store.currentImplantValue][prediction]}
+                    {prediction}
                   </Text>
+                  <Link href={implantLink}>Click here to know more about {prediction}</Link>
                 </Paper>
               </Card>
             ) : (
