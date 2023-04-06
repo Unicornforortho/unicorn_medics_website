@@ -9,6 +9,7 @@ import useStore from '../store/store';
 import EmailBanner from '../components/homepage-banner/index';
 import getRegisteredUsers from '../helper-functions/get-registered-users';
 import getNumberOfUserUploads from '../helper-functions/get-total-predictions';
+import StatsGroup from '../components/stats-card';
 
 function Index() {
   const store = useStore();
@@ -110,21 +111,20 @@ function Index() {
       >
         Detect {text} Implants
       </h1>
-      {numberOfUserUploads === -1 ? (
-        <h1>Loading...</h1>
-      ) : numberOfUserUploads === 0 ? (
-        <h1>No Uploads</h1>
-      ) : (
-        <h1>{numberOfUserUploads} Uploads</h1>
-      )}
-
-      {numberOfUsers === -1 ? (
-        <h1>Loading...</h1>
-      ) : numberOfUsers === 0 ? (
-        <h1>No Users</h1>
-      ) : (
-        <h1>{numberOfUsers} Users</h1>
-      )}
+      <StatsGroup
+        statistics={[
+          {
+            title: 'Users',
+            stats: numberOfUsers,
+            description: 'Total registed users on our platform',
+          },
+          {
+            title: 'Total Uploads',
+            stats: numberOfUserUploads,
+            description: 'Total Predictions made',
+          },
+        ]}
+      />
       <EmailBanner imageURL="/static/home-page/dr-vineet-batta.jpg" text="Dr. Vineet Batta" />
     </Container>
   );
