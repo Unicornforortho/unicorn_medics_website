@@ -30,6 +30,7 @@ import {
   IconDownload,
   IconCircleNumber1,
   IconCircleNumber2,
+  IconCircleNumber3,
   IconAlertCircle,
 } from '@tabler/icons';
 import { Dropzone, MIME_TYPES } from '@mantine/dropzone';
@@ -50,13 +51,19 @@ const mockdata = [
     label: 'Ankle',
     icon: IconCircleNumber1,
     initiallyOpened: false,
-    links: [{ label: 'Ankle I', value: 'ankle_one' }],
+    links: [{ label: 'Ankle', value: 'ankle' }],
   },
   {
     label: 'Shoulder',
     icon: IconCircleNumber2,
     initiallyOpened: false,
     links: [{ label: 'Shoulder Reverse', value: 'shoulder_reverse' }],
+  },
+  {
+    label: 'Knee',
+    icon: IconCircleNumber3,
+    initiallyOpened: false,
+    links: [{ label: 'Knee', value: 'knee' }],
   },
 ];
 
@@ -238,18 +245,22 @@ function NavbarNested() {
     Mapping for all the models output layer to the actual implant
   */
   const labelToImplant: any = {
-    ankle_one: {
+    ankle: {
       0: 'Depuy Mobility',
       1: 'Stryker Star',
       2: 'Wright Inbone II',
       3: 'Zimmer Biomet Trabecular Model',
-      // 4: 'Stryker Star',
-      // 5: 'Wright Inbone II',
-      // 6: 'Zimmer Biomet Trabecular Model',
     },
     shoulder_reverse: {
       0: 'Depuy Delta Xtend',
       1: 'Evolutis Unic',
+    },
+    knee: {
+      0: 'Depuy Attune',
+      1: 'DJO 3D Knee',
+      2: 'Link Gemini SL',
+      3: 'Microport Medialpivot',
+      4: 'Zimmer LPS Flex Knee GSF',
     },
   };
 

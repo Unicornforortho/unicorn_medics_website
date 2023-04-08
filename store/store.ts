@@ -15,8 +15,8 @@ type Store = {
   Update state methods implementation
 */
 const useStore = create<Store>((set) => ({
-  currentImplantValue: 'ankle_one',
-  currentImplantTitle: 'Ankle 1',
+  currentImplantValue: 'ankle',
+  currentImplantTitle: 'Ankle',
   isAuthDone: false,
   setCurrentImplant: (currentImplantValue, currentImplantTitle) =>
     set((state: any) => ({ ...state, currentImplantValue, currentImplantTitle })),
