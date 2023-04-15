@@ -3,7 +3,9 @@ import { createStyles, Text } from '@mantine/core';
 const useStyles = createStyles((theme) => ({
   root: {
     display: 'flex',
-    width: 'fit-content',
+    width: '100%',
+    textAlign: 'center',
+    justifyContent: 'space-evenly',
     backgroundImage: `linear-gradient(-60deg, ${theme.colors[theme.primaryColor][4]} 0%, ${
       theme.colors[theme.primaryColor][7]
     } 100%)`,
@@ -35,13 +37,13 @@ const useStyles = createStyles((theme) => ({
   description: {
     color: theme.colors[theme.primaryColor][0],
     fontSize: theme.fontSizes.sm,
-    marginTop: 5,
+    marginTop: 2,
   },
 
   stat: {
     '& + &': {
       paddingLeft: theme.spacing.xl,
-      marginLeft: theme.spacing.xl,
+      // marginLeft: theme.spacing.xl,
       borderLeft: `1 solid ${theme.colors[theme.primaryColor][0]}`,
 
       [theme.fn.smallerThan('sm')]: {

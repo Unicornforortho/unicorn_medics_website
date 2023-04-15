@@ -16,7 +16,7 @@ function Index() {
   const [numberOfUsers, setNumberOfUsers] = useState<number>(-1);
   const [numberOfUserUploads, setNumberOfUserUploads] = useState<number>(-1);
   const [width, setWidth] = useState(0);
-  const [text, setText] = useState('Knee');
+  const [text, setText] = useState('knee');
   const breakpoint = 768;
 
   function greetByTime(): string {
@@ -24,12 +24,12 @@ function Index() {
     const hour = now.getHours();
 
     if (hour >= 6 && hour < 12) {
-      return 'Good morning. Thanks for your Interest in visiting our website!';
+      return 'Good morning. We appreciate your interest in visiting our website!';
     }
     if (hour >= 12 && hour < 18) {
-      return 'Good Afternoon. Thanks for your Interest in visiting our website!';
+      return 'Good Afternoon. We appreciate your interest in visiting our website!';
     }
-    return 'Good Evening. Thanks for your Interest in visiting our website!';
+    return 'Good Evening. We appreciate your interest in visiting our website!';
   }
 
   async function getAllData() {
@@ -76,7 +76,7 @@ function Index() {
   }, []);
 
   useEffect(() => {
-    const textArray = ['Shoulder', 'Ankle', 'Knee'];
+    const textArray = ['shoulder', 'ankle', 'knee'];
     let index = 0;
 
     const intervalId = setInterval(() => {
@@ -109,7 +109,7 @@ function Index() {
           textAlign: 'center',
         }}
       >
-        Detect {text} Implants
+        We detect {text} implants
       </h1>
       <StatsGroup
         statistics={[
