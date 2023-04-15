@@ -57,7 +57,10 @@ const mockdata = [
     label: 'Shoulder',
     icon: IconCircleNumber2,
     initiallyOpened: false,
-    links: [{ label: 'Shoulder Reverse', value: 'shoulder_reverse' }],
+    links: [
+      { label: 'Shoulder Reverse', value: 'shoulder_reverse' },
+      { label: 'Shoulder Total', value: 'shoulder_total' },
+    ],
   },
   {
     label: 'Knee',
@@ -254,6 +257,15 @@ function NavbarNested() {
     shoulder_reverse: {
       0: 'Depuy Delta Xtend',
       1: 'Evolutis Unic',
+    },
+    shoulder_total: {
+      0: 'Class 0',
+      1: 'Class 1',
+      2: 'Class 2',
+      3: 'Class 3',
+      4: 'Class 4',
+      5: 'Class 5',
+      6: 'Class 6',
     },
     knee: {
       0: 'Depuy Attune',
