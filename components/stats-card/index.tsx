@@ -43,7 +43,6 @@ const useStyles = createStyles((theme) => ({
   stat: {
     '& + &': {
       paddingLeft: theme.spacing.xl,
-      // marginLeft: theme.spacing.xl,
       borderLeft: `1 solid ${theme.colors[theme.primaryColor][0]}`,
 
       [theme.fn.smallerThan('sm')]: {
@@ -71,7 +70,7 @@ export default function StatsGroup({ statistics }: StatsGroupProps) {
       </div>
     ) : (
       <div key={stat.title} className={classes.stat}>
-        <Text className={classes.count}>{stat.stats}</Text>
+        <Text className={classes.count}>{stat.stats}+</Text>
         <Text className={classes.title}>{stat.title}</Text>
         <Text className={classes.description}>{stat.description}</Text>
       </div>

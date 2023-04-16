@@ -35,10 +35,12 @@ export default function GetInTouchSimple() {
   const handleSumbit = async () => {
     try {
       sendCustomerEmail(
-        form.values.email,
+        'iimpro.smtp@gmail.com',
         'iimpro.contact.us@gmail.com',
         form.values.subject,
         form.values.message,
+        form.values.email,
+        form.values.name,
       ).then((response) => {
         if (response.error) {
           form.reset();

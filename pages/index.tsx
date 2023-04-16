@@ -11,10 +11,21 @@ import getRegisteredUsers from '../helper-functions/get-registered-users';
 import getNumberOfUserUploads from '../helper-functions/get-total-predictions';
 import StatsGroup from '../components/stats-card';
 
-function Index() {
+export const getServerSideProps = async () => {
+  const userData: any = await getRegisteredUsers();
+
+  const uploadsData: any = await getNumberOfUserUploads();
+
+  return {
+    props: {
+      userData,
+      uploadsData,
+    },
+  };
+};
+
+const Index = ({ userData, uploadsData }: { userData: any; uploadsData: any }) => {
   const store = useStore();
-  const [numberOfUsers, setNumberOfUsers] = useState<number>(-1);
-  const [numberOfUserUploads, setNumberOfUserUploads] = useState<number>(-1);
   const [width, setWidth] = useState(0);
   const [text, setText] = useState('knee');
   const breakpoint = 768;
@@ -31,18 +42,6 @@ function Index() {
     }
     return 'Good Evening. We appreciate your interest in visiting our website!';
   }
-
-  async function getAllData() {
-    const userData = await getRegisteredUsers();
-    setNumberOfUsers(userData);
-
-    const uploadsData = await getNumberOfUserUploads();
-    setNumberOfUserUploads(uploadsData);
-  }
-
-  useEffect(() => {
-    getAllData();
-  }, []);
 
   useEffect(() => {
     const handleResizeWindow = () => setWidth(window.innerWidth);
@@ -115,12 +114,12 @@ function Index() {
         statistics={[
           {
             title: 'Users',
-            stats: numberOfUsers,
+            stats: userData,
             description: 'Total registed users on our platform',
           },
           {
             title: 'Total Uploads',
-            stats: numberOfUserUploads,
+            stats: uploadsData,
             description: 'Total Predictions made',
           },
         ]}
@@ -128,6 +127,6 @@ function Index() {
       <EmailBanner imageURL="/static/home-page/dr-vineet-batta.jpg" text="Dr. Vineet Batta" />
     </Container>
   );
-}
+};
 
 export default Index;
