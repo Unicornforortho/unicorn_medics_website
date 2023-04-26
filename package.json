@@ -1,7 +1,11 @@
 {
   "name": "impro-website",
   "version": "1.0.0",
-  "description": "Impro Website",
+  "description": "Detect and prevent orthopaedic injuries with the world's first smart orthopaedic brace. The Unicorn Medics",
+  "author": {
+    "name": "Unicorn Medics",
+    "email": "unicornforortho@gmail.com"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev",

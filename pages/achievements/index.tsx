@@ -6,6 +6,7 @@ import {
   IconCircleNumber2,
   IconCircleNumber3,
   IconCircleNumber4,
+  IconCircleNumber5,
 } from '@tabler/icons';
 
 function Achievements() {
@@ -51,7 +52,6 @@ function Achievements() {
                 at TNOACON, 2023.
               </Text>
             </Timeline.Item>
-
             <Timeline.Item
               bullet={<IconCircleNumber4 />}
               title="Abstract Paper Accepted for presentation at ISBI"
@@ -60,6 +60,16 @@ function Achievements() {
                 Abstract titled “DATA CONSTRAINED DEEP LEARNING TO IMPROVE SCENARIOS IN REVISION
                 ARTHROPLASTY WHERE PREOPERATIVE IDENTIFICATION OF THE MAKE AND MODEL OF THE PRIMARY
                 (IN-SITU) IMPLANT IS CRITICAL” accepted for presentation at ISBI, 2023
+              </Text>
+            </Timeline.Item>
+            <Timeline.Item
+              bullet={<IconCircleNumber5 />}
+              title="Abstract Paper Accepted for presentation at ISBI"
+            >
+              <Text color="dimmed" size="sm">
+              Research paper titled “Harnessing the Potential of Deep Learning for Total
+              Shoulder Implant Classification: A Comparative Study” submitted for
+              review to MIUA, 2023.
               </Text>
             </Timeline.Item>
           </Timeline>

@@ -9,6 +9,7 @@ import {
   Burger,
   Drawer,
   ScrollArea,
+  Image,
 } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
@@ -137,6 +138,7 @@ export default function HeaderMegaMenu() {
       <Header height={60} px="md">
         <Group position="apart" sx={{ height: '100%' }}>
           <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
+            <Image src="/static/UNICORN_Logo.jpg" alt="Logo" width={30} height={30} radius={15} />
             <Link href="/" className={classes.link}>
               Home
             </Link>

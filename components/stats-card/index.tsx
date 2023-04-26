@@ -3,8 +3,8 @@ import { createStyles, Text } from '@mantine/core';
 const useStyles = createStyles((theme) => ({
   root: {
     display: 'flex',
-    width: '100%',
-    textAlign: 'center',
+    textAlign: 'left',
+    width: 'max-content',
     justifyContent: 'space-evenly',
     backgroundImage: `linear-gradient(-60deg, ${theme.colors[theme.primaryColor][4]} 0%, ${
       theme.colors[theme.primaryColor][7]
