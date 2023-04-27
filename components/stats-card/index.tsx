@@ -9,7 +9,7 @@ const useStyles = createStyles((theme) => ({
     backgroundImage: `linear-gradient(-60deg, ${theme.colors[theme.primaryColor][4]} 0%, ${
       theme.colors[theme.primaryColor][7]
     } 100%)`,
-    padding: 15,
+    padding: 10,
     margin: '20px 0px',
     borderRadius: theme.radius.md,
 
@@ -27,7 +27,7 @@ const useStyles = createStyles((theme) => ({
 
   count: {
     color: theme.white,
-    fontSize: 32,
+    fontSize: 24,
     lineHeight: 1,
     fontWeight: 700,
     marginBottom: theme.spacing.md,

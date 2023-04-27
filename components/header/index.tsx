@@ -138,7 +138,6 @@ export default function HeaderMegaMenu() {
       <Header height={60} px="md">
         <Group position="apart" sx={{ height: '100%' }}>
           <Group sx={{ height: '100%' }} spacing={0} className={classes.hiddenMobile}>
-            <Image src="/static/UNICORN_Logo.jpg" alt="Logo" width={30} height={30} radius={15} />
             <Link href="/" className={classes.link}>
               Home
             </Link>
@@ -169,6 +168,7 @@ export default function HeaderMegaMenu() {
             <Link href="/contact-us" className={classes.link}>
               Contact Us
             </Link>
+            <Image src="/static/UNICORN_Logo.jpg" alt="Logo" width={40} height={40} radius={20} />
           </Group>
 
           <Group className={classes.hiddenMobile}>
@@ -235,7 +235,7 @@ export default function HeaderMegaMenu() {
           <Link href="/contact-us" className={classes.link} onClick={toggleDrawer}>
             Contact Us
           </Link>
-
+          <Image src="/static/UNICORN_Logo.jpg" alt="Logo" width={40} height={40} radius={20} mx="auto" />
           <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
 
           <Group className={classes.hiddenMobile}>

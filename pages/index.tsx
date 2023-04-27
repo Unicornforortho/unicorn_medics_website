@@ -115,7 +115,7 @@ const Index = ({ userData, uploadsData }: { userData: any; uploadsData: any }) =
           {
             title: 'Users',
             stats: userData,
-            description: 'Total registed users on our platform',
+            description: 'Total registed users',
           },
           {
             title: 'Total Uploads',
