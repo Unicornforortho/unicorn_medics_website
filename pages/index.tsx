@@ -2,7 +2,7 @@
 
 // The component uses the Mantine UI library to render a container with some text inside it. The "greetByTime" function determines the time of day and greets the user accordingly. The "useEffect" hook is used to authenticate the user's session and store the session data in local storage. Finally, the component renders some text about the creator of the website and his work in the field of orthopedics and medical research.
 
-import { Text, Container } from '@mantine/core';
+import { Text, Container, Image } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import supabaseClient from '../supabase';
 import useStore from '../store/store';
@@ -94,6 +94,7 @@ const Index = ({ userData, uploadsData }: { userData: any; uploadsData: any }) =
 
   return (
     <Container fluid>
+      <Image src="/static/UNICORN_Logo.jpg" alt="Logo" width={100} height={100} radius={20} mx="auto" />
       {width > breakpoint ? (
         <Text fw={700} fz={36} mb="lg" align="center">
           {greetByTime()}

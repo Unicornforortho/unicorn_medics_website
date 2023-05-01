@@ -30,7 +30,6 @@ const useStyles = createStyles((theme) => ({
     fontSize: 24,
     lineHeight: 1,
     fontWeight: 700,
-    marginBottom: theme.spacing.md,
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
   },
 
@@ -41,6 +40,9 @@ const useStyles = createStyles((theme) => ({
   },
 
   stat: {
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
     '& + &': {
       paddingLeft: theme.spacing.xl,
       borderLeft: `1 solid ${theme.colors[theme.primaryColor][0]}`,
@@ -71,8 +73,7 @@ export default function StatsGroup({ statistics }: StatsGroupProps) {
     ) : (
       <div key={stat.title} className={classes.stat}>
         <Text className={classes.count}>{stat.stats}+</Text>
-        <Text className={classes.title}>{stat.title}</Text>
-        <Text className={classes.description}>{stat.description}</Text>
+        <Text mx={5} className={classes.title}>{stat.title}</Text>
       </div>
     ),
   );

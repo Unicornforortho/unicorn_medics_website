@@ -235,7 +235,6 @@ export default function HeaderMegaMenu() {
           <Link href="/contact-us" className={classes.link} onClick={toggleDrawer}>
             Contact Us
           </Link>
-          <Image src="/static/UNICORN_Logo.jpg" alt="Logo" width={40} height={40} radius={20} mx="auto" />
           <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
 
           <Group className={classes.hiddenMobile}>

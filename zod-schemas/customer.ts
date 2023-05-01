@@ -26,6 +26,7 @@ const customerSchema = z.object({
   speciality: z.enum(
     [
       'RESEARCHER',
+      'BIO_MEDICAL_ENGINEER',
       'HIP',
       'KNEE',
       'SHOULDER',
