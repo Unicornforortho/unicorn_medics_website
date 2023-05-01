@@ -25,7 +25,7 @@ const customerSchema = z.object({
     .max(64, 'Country can not be longer than 64 characters'),
   speciality: z.enum(
     [
-      'RESEARCHER',
+      'RESEARCH_ASSISTANT',
       'BIO_MEDICAL_ENGINEER',
       'HIP',
       'KNEE',

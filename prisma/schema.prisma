@@ -34,7 +34,7 @@ model CustomerActivity {
 
 // Speciality Enum
 enum SpecialityEnum {
-  RESEARCHER
+  RESEARCH_ASSISTANT
   BIO_MEDICAL_ENGINEER
   HIP
   KNEE

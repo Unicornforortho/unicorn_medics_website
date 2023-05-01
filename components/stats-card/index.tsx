@@ -72,7 +72,7 @@ export default function StatsGroup({ statistics }: StatsGroupProps) {
       </div>
     ) : (
       <div key={stat.title} className={classes.stat}>
-        <Text className={classes.count}>{stat.stats}+</Text>
+        <Text className={classes.count}>{stat.stats}</Text>
         <Text mx={5} className={classes.title}>{stat.title}</Text>
       </div>
     ),
