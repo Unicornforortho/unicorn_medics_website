@@ -31,6 +31,7 @@ import {
   IconCircleNumber1,
   IconCircleNumber2,
   IconCircleNumber3,
+  IconCircleNumber4,
   IconAlertCircle,
 } from '@tabler/icons';
 import { Dropzone, MIME_TYPES } from '@mantine/dropzone';
@@ -67,6 +68,12 @@ const mockdata = [
     icon: IconCircleNumber3,
     initiallyOpened: false,
     links: [{ label: 'Knee', value: 'knee' }],
+  },
+  {
+    label: 'Wrist',
+    icon: IconCircleNumber4,
+    initiallyOpened: false,
+    links: [{ label: 'Wrist', value: 'wrist' }],
   },
 ];
 
@@ -273,6 +280,11 @@ function NavbarNested() {
       2: 'Link Gemini SL',
       3: 'Microport Medialpivot',
       4: 'Zimmer LPS Flex Knee GSF',
+    },
+    wrist: {
+      0: 'Depuy Biax',
+      1: 'Integra Universal 2',
+      2: 'Zimmer Biomet Maestro',
     },
   };
 

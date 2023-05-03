@@ -26,30 +26,20 @@ export const getServerSideProps = async () => {
 
 const Index = ({ userData, uploadsData }: { userData: any; uploadsData: any }) => {
   const store = useStore();
-  const [width, setWidth] = useState(0);
   const [text, setText] = useState('knee');
-  const breakpoint = 768;
 
   function greetByTime(): string {
     const now = new Date();
     const hour = now.getHours();
 
     if (hour >= 6 && hour < 12) {
-      return 'Good morning. We appreciate your interest in visiting our website!';
+      return 'Good morning!';
     }
     if (hour >= 12 && hour < 18) {
-      return 'Good Afternoon. We appreciate your interest in visiting our website!';
+      return 'Good Afternoon!';
     }
-    return 'Good Evening. We appreciate your interest in visiting our website!';
+    return 'Good Evening!';
   }
-
-  useEffect(() => {
-    const handleResizeWindow = () => setWidth(window.innerWidth);
-    window.addEventListener('resize', handleResizeWindow);
-    return () => {
-      window.removeEventListener('resize', handleResizeWindow);
-    };
-  }, []);
 
   useEffect(() => {
     supabaseClient.auth.getSession().then((session) => {
@@ -94,16 +84,17 @@ const Index = ({ userData, uploadsData }: { userData: any; uploadsData: any }) =
 
   return (
     <Container fluid>
-      <Image src="/static/UNICORN_Logo.jpg" alt="Logo" width={100} height={100} radius={20} mx="auto" />
-      {width > breakpoint ? (
-        <Text fw={700} fz={36} mb="lg" align="center">
-          {greetByTime()}
-        </Text>
-      ) : (
-        <Text fw={600} fz={24} mb="lg" align="center">
-          {greetByTime().split('.')[0]}!
-        </Text>
-      )}
+      <Image
+        src="/static/UNICORN_Logo.jpg"
+        alt="Logo"
+        width={100}
+        height={100}
+        radius={20}
+        mx="auto"
+      />
+      <Text fw={700} fz={32} mb="lg" align="center">
+        {greetByTime()}
+      </Text>
       <h1
         style={{
           textAlign: 'center',
@@ -111,6 +102,7 @@ const Index = ({ userData, uploadsData }: { userData: any; uploadsData: any }) =
       >
         We detect {text} implants
       </h1>
+      <EmailBanner imageURL="/static/home-page/dr-vineet-batta.jpg" text="Dr. Vineet Batta" />
       <StatsGroup
         statistics={[
           {
@@ -125,7 +117,6 @@ const Index = ({ userData, uploadsData }: { userData: any; uploadsData: any }) =
           },
         ]}
       />
-      <EmailBanner imageURL="/static/home-page/dr-vineet-batta.jpg" text="Dr. Vineet Batta" />
     </Container>
   );
 };

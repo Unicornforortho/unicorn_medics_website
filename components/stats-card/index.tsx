@@ -1,20 +1,22 @@
-import { createStyles, Text } from '@mantine/core';
+import { createStyles, Text, Box } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
   root: {
     display: 'flex',
     textAlign: 'left',
-    width: 'max-content',
+    width: '50%',
     justifyContent: 'space-evenly',
     backgroundImage: `linear-gradient(-60deg, ${theme.colors[theme.primaryColor][4]} 0%, ${
       theme.colors[theme.primaryColor][7]
     } 100%)`,
     padding: 10,
-    margin: '20px 0px',
+    margin: '50px 25%',
     borderRadius: theme.radius.md,
 
     [theme.fn.smallerThan('sm')]: {
       flexDirection: 'column',
+      width: '90%',
+      margin: '20px 5%',
     },
   },
 
@@ -39,9 +41,16 @@ const useStyles = createStyles((theme) => ({
     marginTop: 2,
   },
 
+  statsDiv: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+
   stat: {
     display: 'flex',
-    justifyContent: 'space-evenly',
+    flexDirection: 'column',
+    justifyContent: 'center',
     alignItems: 'center',
     '& + &': {
       paddingLeft: theme.spacing.xl,
@@ -70,10 +79,24 @@ export default function StatsGroup({ statistics }: StatsGroupProps) {
       <div key={stat.title} className={classes.stat}>
         <Text className={classes.title}>Please wait while we fetch the latest data</Text>
       </div>
-    ) : (
+    ) : stat.stats === 0 ? (
       <div key={stat.title} className={classes.stat}>
         <Text className={classes.count}>{stat.stats}</Text>
-        <Text mx={5} className={classes.title}>{stat.title}</Text>
+        <Text mx={5} className={classes.title}>
+          {stat.title}
+        </Text>
+      </div>
+    ) : (
+      <div key={stat.title} className={classes.stat}>
+        <Box className={classes.statsDiv}>
+          <Text className={classes.count}>{stat.stats}+</Text>
+          <Text mx={5} className={classes.title}>
+            {stat.title}
+          </Text>
+        </Box>
+        <Text mx={5} fz={10} className={classes.title}>
+          ({stat.description})
+        </Text>
       </div>
     ),
   );
