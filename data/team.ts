@@ -62,12 +62,18 @@ const team = {
     },
     {
       id: 11,
-	  name: 'Ms Lavanaya',
+      name: 'Ms Lavanaya Govindan',
       linkedin: 'https://www.linkedin.com/mwlite/in/lavanya-govindan-88501687',
       image: '/static/team-photos/lavanaya.jpg',
     },
-	{
+    {
       id: 12,
+      name: 'Mr Aviroop Mukherjee',
+      linkedin: 'https://www.linkedin.com/mwlite/in/aviroop-mukherjee-4859b3148',
+      image: '/static/team-photos/Aviroop.png',
+    },
+    {
+      id: 13,
       name: 'Mr Ramanathan A',
       linkedin: 'https://in.linkedin.com/in/ramanathan-anandarama-krishnan-47b948144',
       image: '/static/team-photos/Ramanathan.jpg',
