@@ -64,7 +64,7 @@ const team = {
       id: 11,
 	  name: 'Ms Lavanaya',
       linkedin: 'https://www.linkedin.com/mwlite/in/lavanya-govindan-88501687',
-      image: '/static/team-photos/default_female.jpg',
+      image: '/static/team-photos/lavanaya.jpg',
     },
 	{
       id: 12,
@@ -149,14 +149,14 @@ const team = {
     {
       id: 113,
       name: 'Johny Samuael',
-      linkedin: '',
-      image: '/static/team-photos/default_male.png',
+      linkedin: 'https://www.linkedin.com/in/johnysamuael/',
+      image: '/static/team-photos/Johny.png',
     },
     {
       id: 114,
       name: 'Neil Begawadi',
-      linkedin: '',
-      image: '/static/team-photos/default_male.png',
+      linkedin: 'https://www.linkedin.com/in/neil-bagewadi-568843246',
+      image: '/static/team-photos/Neil.jpg',
     },
   ],
 };
