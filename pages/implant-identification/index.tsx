@@ -52,7 +52,10 @@ const mockdata = [
     label: 'Ankle',
     icon: IconCircleNumber1,
     initiallyOpened: false,
-    links: [{ label: 'Ankle', value: 'ankle' }],
+    links: [
+      { label: 'Ankle I', value: 'ankle' },
+      { label: 'Ankle II', value: 'ankle2' },
+    ],
   },
   {
     label: 'Shoulder',
@@ -260,6 +263,12 @@ function NavbarNested() {
       1: 'Stryker Star',
       2: 'Wright Inbone II',
       3: 'Zimmer Biomet Trabecular Model',
+    },
+    ankle2: {
+      0: 'Depuy Agility',
+      1: 'Integra Hintegra',
+      2: 'Tornier Salto',
+      3: 'Wright Infinity',
     },
     shoulder_reverse: {
       0: 'Depuy Delta Xtend',
