@@ -37,48 +37,12 @@ import {
 import { Dropzone, MIME_TYPES } from '@mantine/dropzone';
 import { showNotification } from '@mantine/notifications';
 import Link from 'next/link';
-import { Logo } from '../../components/Logo';
+// import { Logo } from '../../components/Logo';
 import useStore from '../../store/store';
 import getUserFromEmail from '../../helper-functions/get-user-from-email';
 import uploadToBucket from '../../helper-functions/upload-to-bucket';
 import uploadUserActivity from '../../helper-functions/upload-user-activity';
 import InfoCard from '../../components/info-card';
-
-/*
-  Holds information of the implant detection models with value
-*/
-const mockdata = [
-  {
-    label: 'Ankle',
-    icon: IconCircleNumber1,
-    initiallyOpened: false,
-    links: [
-      { label: 'Ankle I', value: 'ankle' },
-      { label: 'Ankle II', value: 'ankle2' },
-    ],
-  },
-  {
-    label: 'Shoulder',
-    icon: IconCircleNumber2,
-    initiallyOpened: false,
-    links: [
-      { label: 'Shoulder Reverse', value: 'shoulder_reverse' },
-      { label: 'Shoulder Total', value: 'shoulder_total' },
-    ],
-  },
-  {
-    label: 'Knee',
-    icon: IconCircleNumber3,
-    initiallyOpened: false,
-    links: [{ label: 'Knee', value: 'knee' }],
-  },
-  {
-    label: 'Wrist',
-    icon: IconCircleNumber4,
-    initiallyOpened: false,
-    links: [{ label: 'Wrist', value: 'wrist' }],
-  },
-];
 
 /*
   Styling for the entire page
@@ -202,6 +166,45 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
+/*
+  Holds information of the implant detection models with value
+*/
+const mockdata = [
+  {
+    label: 'Ankle',
+    icon: IconCircleNumber1,
+    initiallyOpened: false,
+    links: [
+      { label: 'Ankle I', value: 'ankle' },
+      { label: 'Ankle II', value: 'ankle2' },
+    ],
+  },
+  {
+    label: 'Shoulder',
+    icon: IconCircleNumber2,
+    initiallyOpened: false,
+    links: [
+      { label: 'Shoulder Reverse', value: 'shoulder_reverse' },
+      { label: 'Shoulder Total', value: 'shoulder_total' },
+    ],
+  },
+  {
+    label: 'Knee',
+    icon: IconCircleNumber3,
+    initiallyOpened: false,
+    links: [
+      { label: 'Knee', value: 'knee' },
+      { label: 'Knee LAT', value: 'knee2' },
+    ],
+  },
+  {
+    label: 'Wrist',
+    icon: IconCircleNumber4,
+    initiallyOpened: false,
+    links: [{ label: 'Wrist', value: 'wrist' }],
+  },
+];
+
 function getTitleForAlert(modelTitle: string) {
   return `'${modelTitle}' can be used for the following implants:`;
 }
@@ -289,6 +292,13 @@ function NavbarNested() {
       2: 'Link Gemini SL',
       3: 'Microport Medialpivot',
       4: 'Zimmer LPS Flex Knee GSF',
+    },
+    knee2: {
+      0: 'Exatech Opterak',
+      1: 'Smith Legion',
+      2: 'Stryker NRG',
+      3: 'Zimmer LPS',
+      4: 'Zimmer Persona',
     },
     wrist: {
       0: 'Depuy Biax',
@@ -484,7 +494,14 @@ function NavbarNested() {
         <Navbar height={800} width={{ sm: 300 }} p="md" className={classes.navbar}>
           <Navbar.Section className={classes.header}>
             <Group position="apart">
-              <Logo width={120} />
+              <Image
+                src="/static/UNICORN_Logo.jpg"
+                alt="Logo"
+                width={100}
+                height={100}
+                radius={20}
+                mx="auto"
+              />
             </Group>
           </Navbar.Section>
 
