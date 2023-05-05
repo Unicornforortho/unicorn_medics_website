@@ -48,11 +48,11 @@ const team = {
       linkedin: 'https://in.linkedin.com/in/kiruthika-mohan-308971134',
       image: '/static/team-photos/Kiruthika Mohan.jpg',
     },
-    {
+	{
       id: 9,
-      name: 'Mr Ramanathan A',
-      linkedin: 'https://in.linkedin.com/in/ramanathan-anandarama-krishnan-47b948144',
-      image: '/static/team-photos/Ramanathan.jpg',
+	  name: 'Ms Auxilia Jossie',
+      linkedin: 'https://www.linkedin.com/mwlite/in/auxilia-jossie-65099a1a2',
+      image: '/static/team-photos/Auxilia.jpeg',
     },
     {
       id: 10,
@@ -62,15 +62,15 @@ const team = {
     },
     {
       id: 11,
-      name: 'Ms Auxilia Jossie',
-      linkedin: 'https://www.linkedin.com/mwlite/in/auxilia-jossie-65099a1a2',
-      image: '/static/team-photos/Auxilia.jpeg',
-    },
-    {
-      id: 12,
-      name: 'Ms Lavanaya',
+	  name: 'Ms Lavanaya',
       linkedin: 'https://www.linkedin.com/mwlite/in/lavanya-govindan-88501687',
       image: '/static/team-photos/default_female.jpg',
+    },
+	{
+      id: 12,
+      name: 'Mr Ramanathan A',
+      linkedin: 'https://in.linkedin.com/in/ramanathan-anandarama-krishnan-47b948144',
+      image: '/static/team-photos/Ramanathan.jpg',
     },
   ],
   interns: [
