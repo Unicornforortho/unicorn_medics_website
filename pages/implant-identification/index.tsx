@@ -559,7 +559,7 @@ function NavbarNested() {
               className={classes.dropzone}
               radius="md"
               accept={[MIME_TYPES.png, MIME_TYPES.jpeg]}
-              maxSize={5 * 1024 ** 2}
+              maxSize={0.5 * 1024 ** 2}
             >
               <div style={{ pointerEvents: 'none' }}>
                 <Group position="center">
@@ -584,12 +584,12 @@ function NavbarNested() {
 
                 <Text align="center" weight={700} size="lg" mt="lg">
                   <Dropzone.Accept>Drop files here</Dropzone.Accept>
-                  <Dropzone.Reject>Image file less than 30mb</Dropzone.Reject>
+                  <Dropzone.Reject>Image file more than 512 KB</Dropzone.Reject>
                   <Dropzone.Idle>Upload</Dropzone.Idle>
                 </Text>
                 <Text align="center" size="sm" mt="xs" color="dimmed">
                   Drag & drop files here to upload. We can accept only <i>.png, .jpeg</i> files that
-                  are less than 5mb in size.
+                  are less than 512kb in size.
                 </Text>
               </div>
             </Dropzone>

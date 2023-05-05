@@ -44,6 +44,7 @@
     "@tabler/icons": "^1.107.0",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/nodemailer": "^6.4.7",
+    "axios": "^1.4.0",
     "cookies-next": "^2.1.1",
     "dayjs": "^1.11.6",
     "embla-carousel-react": "^7.0.3",
