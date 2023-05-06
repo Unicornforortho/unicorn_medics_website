@@ -355,9 +355,18 @@ function NavbarNested() {
             customerId,
             `${process.env.NEXT_PUBLIC_SUPABASE_URL}storage/v1/object/public/user-uploads/${URL}`,
             predictionMade,
-          );
+          )
+            .then((newData) => {
+              alert(JSON.stringify(newData, null, 2));
+            })
+            .catch((error) => {
+              alert('error in handle predict - 363');
+              alert(JSON.stringify(error, null, 2));
+            });
         })
-        .catch(() => {
+        .catch((error) => {
+          alert('error in handle predict - 368');
+          alert(JSON.stringify(error, null, 2));
           setFile(null);
           setPrediction(null);
           setImplantLink(null);
