@@ -37,12 +37,19 @@ import {
 import { Dropzone, MIME_TYPES } from '@mantine/dropzone';
 import { showNotification } from '@mantine/notifications';
 import Link from 'next/link';
-// import { Logo } from '../../components/Logo';
+// import axios from 'axios';
+import https from 'https';
 import useStore from '../../store/store';
 import getUserFromEmail from '../../helper-functions/get-user-from-email';
 import uploadToBucket from '../../helper-functions/upload-to-bucket';
 import uploadUserActivity from '../../helper-functions/upload-user-activity';
 import InfoCard from '../../components/info-card';
+
+// const axiosInstance = axios.create({
+//   httpsAgent: new https.Agent({
+//     rejectUnauthorized: false,
+//   }),
+// });
 
 /*
   Styling for the entire page
@@ -330,11 +337,18 @@ function NavbarNested() {
       const formData = new FormData();
       formData.append('modelName', store.currentImplantValue);
       formData.append('file', file, file.name);
+
+      const agent = new https.Agent({
+        rejectUnauthorized: false,
+      });
+
       const requestOptions = {
         method: 'POST',
         body: formData,
+        agent,
       };
       const url = `${process.env.NEXT_PUBLIC_AWS_BASE_URL}/predict/`;
+
       await fetch(url, requestOptions)
         .then((response) => response.json())
         .then(async (data) => {
@@ -350,29 +364,20 @@ function NavbarNested() {
           setPrediction(data.implantName);
           setImplantLink(data.implantLink);
           const resultObject = labelToImplant[store.currentImplantValue];
-          const predictionMade: any = resultObject[data.result];
+          const predictionMade: string = resultObject[data.result];
           await uploadUserActivity(
             customerId,
             `${process.env.NEXT_PUBLIC_SUPABASE_URL}storage/v1/object/public/user-uploads/${URL}`,
             predictionMade,
-          )
-            .then((newData) => {
-              alert(JSON.stringify(newData, null, 2));
-            })
-            .catch((error) => {
-              alert('error in handle predict - 363');
-              alert(JSON.stringify(error, null, 2));
-            });
+          );
         })
-        .catch((error) => {
-          alert('error in handle predict - 368');
-          alert(JSON.stringify(error, null, 2));
+        .catch(() => {
           setFile(null);
           setPrediction(null);
           setImplantLink(null);
           setImageURL('/static/default-images/no-img-uploaded.jpg');
           showNotification({
-            title: 'Internal Server Error',
+            title: 'Internal Server Error - SSL',
             message: 'Please try again later',
             color: 'red',
             autoClose: 5000,

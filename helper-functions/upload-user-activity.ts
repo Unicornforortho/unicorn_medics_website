@@ -15,7 +15,6 @@ const uploadUserActivity = async (customerId: string, supabaseURL: string, predi
     }),
   });
   const res = await response.json();
-  alert(JSON.stringify(res, null, 2));
   return res.response;
 };
 

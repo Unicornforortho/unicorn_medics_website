@@ -7,24 +7,26 @@ import { useEffect, useState } from 'react';
 import supabaseClient from '../supabase';
 import useStore from '../store/store';
 import EmailBanner from '../components/homepage-banner/index';
-import getRegisteredUsers from '../helper-functions/get-registered-users';
-import getNumberOfUserUploads from '../helper-functions/get-total-predictions';
-import StatsGroup from '../components/stats-card';
+// import getRegisteredUsers from '../helper-functions/get-registered-users';
+// import getNumberOfUserUploads from '../helper-functions/get-total-predictions';
+// import StatsGroup from '../components/stats-card';
 
-export const getServerSideProps = async () => {
-  const userData: any = await getRegisteredUsers();
+// export const getServerSideProps = async () => {
+//   const userData: any = await getRegisteredUsers();
 
-  const uploadsData: any = await getNumberOfUserUploads();
+//   const uploadsData: any = await getNumberOfUserUploads();
 
-  return {
-    props: {
-      userData,
-      uploadsData,
-    },
-  };
-};
+//   return {
+//     props: {
+//       userData,
+//       uploadsData,
+//     },
+//   };
+// };
 
-const Index = ({ userData, uploadsData }: { userData: any; uploadsData: any }) => {
+// { userData, uploadsData }: { userData: any; uploadsData: any }
+
+const Index = () => {
   const store = useStore();
   const [text, setText] = useState('knee');
 
@@ -103,7 +105,7 @@ const Index = ({ userData, uploadsData }: { userData: any; uploadsData: any }) =
         We detect {text} implants
       </h1>
       <EmailBanner imageURL="/static/home-page/dr-vineet-batta.jpg" text="Dr. Vineet Batta" />
-      <StatsGroup
+      {/* <StatsGroup
         statistics={[
           {
             title: 'Users',
@@ -116,7 +118,7 @@ const Index = ({ userData, uploadsData }: { userData: any; uploadsData: any }) =
             description: 'Total Predictions made',
           },
         ]}
-      />
+      /> */}
     </Container>
   );
 };
