@@ -18,7 +18,7 @@ import Head from 'next/head';
 import { Inter } from '@next/font/google';
 import { MantineProvider, ColorScheme, ColorSchemeProvider, AppShell } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
-import HeaderMegaMenu from '../components/header';
+import HeaderMenu from '../components/header-menu';
 import Layout from '../components/layout';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -46,7 +46,7 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
         <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
           <NotificationsProvider>
             <AppShell
-              header={<HeaderMegaMenu />}
+              header={<HeaderMenu />}
               style={{
                 minHeight: 'auto',
                 paddingBottom: '0px',
