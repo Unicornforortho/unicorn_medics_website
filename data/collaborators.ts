@@ -38,19 +38,24 @@ const Collaborators = [
     city: 'Columbus',
   },
   {
-    name: 'Tokyo Medical and Dental University, JAPAN',
+    name: 'Dr Glen Purnomo: St. Vincentius a Paulo Catholic Hospital, Surabaya, Indonesia',
     link: 'https://www.tmd.ac.jp/english/',
-    city: 'Tokyo',
+    city: 'Surabaya',
+  },
+  {
+    name: 'Dr. Asep Santoso: Universitas Sebelas Maret, Prof.Dr.R.Soeharso Orthopaedic Hospital, Surakarta, Indonesia',
+    link: 'https://www.linkedin.com/in/drqtnguyen?originalSubdomain=vn',
+    city: 'Surakarta',
+  },
+  {
+    name: 'Dr Nguyen Quang Ton Quyen: Tam Anh General Hospital, Hanoi, Vietnam.',
+    link: 'https://www.tmd.ac.jp/english/',
+    city: 'Hanoi',
   },
   {
     name: 'Flinders University, Australia',
     link: 'https://www.flinders.edu.au/',
     city: 'Adelaide',
-  },
-  {
-    name: 'Indonesia and Vietnam',
-    link: 'https://www.google.com/',
-    city: 'Indonesia and Vietnam',
   },
 ];
 
