@@ -39,17 +39,22 @@ const Collaborators = [
   },
   {
     name: 'Dr Glen Purnomo: St. Vincentius a Paulo Catholic Hospital, Surabaya, Indonesia',
-    link: 'https://www.tmd.ac.jp/english/',
+    link: 'https://id.linkedin.com/in/glen-purnomo-a2807115a',
     city: 'Surabaya',
   },
   {
-    name: 'Dr. Asep Santoso: Universitas Sebelas Maret, Prof.Dr.R.Soeharso Orthopaedic Hospital, Surakarta, Indonesia',
-    link: 'https://www.linkedin.com/in/drqtnguyen?originalSubdomain=vn',
+    name: 'Dr. Asep Santoso: Universitas Sebelas Maret',
+    link: 'https://www.linkedin.com/in/asep-santoso-aa524115?original_referer=https%3A%2F%2Fwww%2Egoogle%2Ecom%2F&originalSubdomain=id',
+    city: 'Surakarta',
+  },
+  {
+    name: 'Prof.Dr.R.Soeharso: Orthopaedic Hospital, Surakarta, Indonesia',
+    link: '',
     city: 'Surakarta',
   },
   {
     name: 'Dr Nguyen Quang Ton Quyen: Tam Anh General Hospital, Hanoi, Vietnam.',
-    link: 'https://www.tmd.ac.jp/english/',
+    link: 'https://www.linkedin.com/in/drqtnguyen?originalSubdomain=vn',
     city: 'Hanoi',
   },
   {
