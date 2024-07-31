@@ -94,9 +94,6 @@ const Index = () => {
         radius={20}
         mx="auto"
       />
-      <Text fw={700} fz={32} mb="lg" align="center">
-        {greetByTime()}
-      </Text>
       <h1
         style={{
           textAlign: 'center',
